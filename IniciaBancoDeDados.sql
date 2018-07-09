@@ -1,0 +1,1 @@
+CREATE TABLE associacao(nome varchar(255), sigla varchar(255), comprovante varchar(255), numeroOficio varchar(255), endereco varchar(255), telefone varchar(255), matricula varchar(255), senha varchar(255));
