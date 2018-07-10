@@ -24,9 +24,17 @@
                 Object value = res.getObject(i);
                 if(value != null){
         %>
+        <% if(meta.getColumnName(i).equals("MATRICULA")){%>
         <%=meta.getColumnName(i)%><br>
-        <input type="input" value="<%=value.toString()%>"><br>
+        <input type="input" name="<%=meta.getColumnName(i).toLowerCase()%>" value="<%=value.toString()%>" disabled="true"><br>
+        <input type="hidden" name="<%=meta.getColumnName(i).toLowerCase()%>" value="<%=value.toString()%>"> <br>
         <%
+                    }
+                    else{ %>
+        <%=meta.getColumnName(i)%><br>
+        <input type="input" name="<%=meta.getColumnName(i).toLowerCase()%>" value="<%=value.toString()%>"><br>
+        <%
+                    }
                 }
             }
         %>
