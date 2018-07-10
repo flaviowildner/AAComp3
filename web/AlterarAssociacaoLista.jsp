@@ -11,6 +11,9 @@
 <head>
     <title>Listar Associacao</title>
 </head>
+<script>
+
+</script>
 <body>
 <h2 style="text-align: center">Sistema SISFARJ</h2>
 <b>Lista de associações</b><br><br>
@@ -37,6 +40,14 @@
     %>
     </tbody>
 </table>
+<br>
+<form action="/dominio/AssociacaoMT" method="post">
+    Escreva uma matricula:<br>
+    <input type="text" name="matricula">
+    <input type="submit" value="Enviar">
+    <input type="hidden" name="acao" value="2">
+</form>
+<br><br>
 <a href="/">Voltar para página inicial</a>
 </body>
 </html>

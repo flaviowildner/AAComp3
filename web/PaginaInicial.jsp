@@ -22,9 +22,9 @@
             <tr><td><a href="">Listar balizamento competição</a></td></tr>
             <tr><td><a href="">Listar pontuação competição</a></td></tr>
             <tr><td><a href="">Listar pontuação final</a></td></tr>
-            <tr><td><a href="">Filiar Associação</a></td></tr>
-            <tr><td><a href="">Alterar filiação de associação</a></td></tr>
-            <tr><td><a href="AssociacaoMT">Listar associação</a></td></tr>
+            <tr><td><a href="/FiliarAssociacao.jsp">Filiar Associação</a></td></tr>
+            <tr><td><a href="/AlterarAssociacaoLista.jsp">Alterar filiação de associação</a></td></tr>
+            <tr><td><a href="/ListarAssociacao.jsp">Listar associação</a></td></tr>
             <tr><td><a href="">Cadastrar atleta</a></td></tr>
             <tr><td><a href="">Alterar cadastro de atleta</a></td></tr>
             <tr><td><a href="">Listar atleta</a></td></tr>
