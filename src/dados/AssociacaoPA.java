@@ -24,7 +24,5 @@ public class AssociacaoPA{
     public static ResultSet buscarAssociacaoDados(String matricula) throws SQLException, ClassNotFoundException{
         return Banco.executeReturn("SELECT numero_oficio, data_oficio, nome, sigla, endereco, telefone, comprovante_pagamento, matricula FROM associacao WHERE matricula = '" + matricula + "';");
     }
-    public static ResultSet buscarAssociacaoNO(String numero_oficio) throws SQLException, ClassNotFoundException{
-        return Banco.executeReturn("SELECT numero_oficio, data_oficio, nome, sigla, endereco, telefone, comprovante_pagamento, matricula FROM associacao WHERE numero_oficio = '" + numero_oficio + "';");
-    }
+
 }

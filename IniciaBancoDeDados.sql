@@ -18,7 +18,6 @@ data_oficio VARCHAR(255),
 data_nascimento VARCHAR(255),
 comprovante_pagamento VARCHAR(255),
 matricula_associacao VARCHAR(255),
-matricula VARCHAR(255),
 foreign key (matricula_associacao) references associacao(matricula));
 
 CREATE TABLE local(

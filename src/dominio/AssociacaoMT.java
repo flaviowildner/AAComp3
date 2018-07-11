@@ -35,7 +35,7 @@ public class AssociacaoMT extends HttpServlet {
             return null;
         }
     }
-    public static boolean cadastrarAssociacao(String numero_oficio, String data, String nome, String sigla, String endereco, String telefone, String comprovante_pagamento) throws SQLException, ClassNotFoundException, ExceptionDadosIncompletos {
+    public static void cadastrarAssociacao(String numero_oficio, String data, String nome, String sigla, String endereco, String telefone, String comprovante_pagamento) throws SQLException, ClassNotFoundException, ExceptionDadosIncompletos {
         if(numero_oficio.isEmpty() | data.isEmpty() | nome.isEmpty() | sigla.isEmpty() | endereco.isEmpty() | telefone.isEmpty() | comprovante_pagamento.isEmpty()){
             throw new ExceptionDadosIncompletos();
         }else {
@@ -44,15 +44,12 @@ public class AssociacaoMT extends HttpServlet {
                 senha = Integer.toString(new Random().nextInt(999999999) + 10000000);
                 while(AssociacaoPA.buscarAssociacao(matricula = Integer.toString(new Random().nextInt(999999999) + 1)).next()){}
                 AssociacaoPA.inserir(numero_oficio, data, nome, sigla, endereco, telefone, comprovante_pagamento, matricula, senha);
-                return true;
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
                 //ERRO NO BANCO DE DADOS
-                return false;
             } catch (ClassNotFoundException e) {
                 System.out.println("EXCEPTION CLASSNOTFOUND");
                 //ERRO NO BANCO DE DADOS
-                return false;
             }
         }
     }
@@ -70,12 +67,11 @@ public class AssociacaoMT extends HttpServlet {
         }
     }
 
-    public static boolean alterarAssociacaoDados(String numero_oficio, String data, String nome, String sigla, String endereco, String telefone, String comprovante_pagamento, String matricula) throws ExceptionDadosIncompletos, SQLException, ClassNotFoundException {
-        if(numero_oficio.isEmpty() | data == null | nome.isEmpty() | sigla.isEmpty() | endereco.isEmpty() | telefone.isEmpty() | comprovante_pagamento.isEmpty() | matricula.isEmpty()){
+    public static void alterarAssociacaoDados(String numero_oficio, String data, String nome, String sigla, String endereco, String telefone, String comprovante_pagamento, String matricula) throws ExceptionDadosIncompletos, SQLException, ClassNotFoundException {
+        if(numero_oficio.isEmpty() | data.isEmpty() | nome.isEmpty() | sigla.isEmpty() | endereco.isEmpty() | telefone.isEmpty() | comprovante_pagamento.isEmpty() | matricula.isEmpty()){
             throw new ExceptionDadosIncompletos();
         }else {
             AssociacaoPA.update(numero_oficio, data, nome, sigla, endereco, telefone, comprovante_pagamento, matricula);
-            return true;
         }
     }
 
