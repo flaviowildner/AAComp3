@@ -37,6 +37,8 @@
             <tr><td><a href="">Inserir resultado do atleta</a></td></tr>
             <tr><td><a href="">Listar competição</a></td></tr>
             <tr><td><a href="">Increver atleta em competição</a></td></tr>
+            <tr><td><a href="/CriarLocal.jsp">Cadastrar Local de Competição</a></td></tr>
+            <tr><td><a href="/ListarLocais.jsp">Listar Locais de Competição</a></td></tr>
         </tbody>
     </table>
 </body>
