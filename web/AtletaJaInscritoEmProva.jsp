@@ -8,10 +8,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Matricula de Associação Inválida</title>
+    <title>Atleta Já Inscrito Em Prova</title>
 </head>
 <body>
-    <h2>Matricula de Associação Inválida</h2>
+    <h2>O Atleta já se encontra inscrito na prova</h2>
     <br>
     <button type="button" name="back" onclick="history.back()">back</button>
 </body>

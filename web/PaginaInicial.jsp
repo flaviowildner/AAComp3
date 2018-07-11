@@ -28,16 +28,15 @@
             <tr><td><a href="/CadastrarAtleta.jsp">Cadastrar atleta</a></td></tr>
             <tr><td><a href="/AlterarAtletaLista.jsp">Alterar cadastro de atleta</a></td></tr>
             <tr><td><a href="/TransferirAtletaLista.jsp">Transferir atleta</a></td></tr>
-            <tr><td><a href="">Incluir locais de competição</a></td></tr>
+            <tr><td><a href="/InscreverAtletaListaCompeticoes.jsp">Increver atleta em competição</a></td></tr>
+            <tr><td><a href="/CriarLocal.jsp">Incluir locais de competição</a></td></tr>
             <tr><td><a href="">Alterar locais de competição</a></td></tr>
-            <tr><td><a href="">Listar locais de competição</a></td></tr>
+            <tr><td><a href="/ListarLocais.jsp">Listar locais de competição</a></td></tr>
             <tr><td><a href="">Criar competição</a></td></tr>
             <tr><td><a href="">Alterar competição</a></td></tr>
             <tr><td><a href="">Inserir resultado do atleta</a></td></tr>
             <tr><td><a href="">Listar competição</a></td></tr>
-            <tr><td><a href="">Increver atleta em competição</a></td></tr>
-            <tr><td><a href="/CriarLocal.jsp">Cadastrar Local de Competição</a></td></tr>
-            <tr><td><a href="/ListarLocais.jsp">Listar Locais de Competição</a></td></tr>
+
         </tbody>
     </table>
 </body>

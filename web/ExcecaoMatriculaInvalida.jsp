@@ -8,10 +8,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Dados incompletos</title>
+    <title>Matricula Inválida</title>
 </head>
 <body>
-    <h2>Dados incompletos</h2>
+    <h2>Matricula Inválida</h2>
     <br>
     <button type="button" name="back" onclick="history.back()">voltar</button>
 </body>

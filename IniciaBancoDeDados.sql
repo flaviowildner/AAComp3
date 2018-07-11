@@ -20,3 +20,30 @@ comprovante_pagamento VARCHAR(255),
 matricula_associacao VARCHAR(255),
 matricula VARCHAR(255),
 foreign key (matricula_associacao) references associacao(matricula));
+
+CREATE TABLE local(
+nomelocal varchar(255) primary key,
+logradouro varchar(255),
+piscina varchar(255));
+
+CREATE TABLE competicao(
+nome VARCHAR(255) primary key,
+data VARCHAR(255),
+nomelocal VARCHAR(255),
+foreign key (nomelocal) references local(nomelocal));
+
+CREATE TABLE prova(
+nome VARCHAR(255) primary key,
+categoria VARCHAR(255),
+classe VARCHAR(255),
+nome_competicao VARCHAR(255),
+foreign key (nome_competicao) references competicao(nome));
+
+
+CREATE TABLE atletaprova(
+nome_prova VARCHAR(255),
+matricula_atleta VARCHAR(255),
+ponto VARCHAR(255),
+tempo VARCHAR(255),
+primary key (matricula_atleta, nome_prova),
+foreign key (nome_prova) references prova(nome));

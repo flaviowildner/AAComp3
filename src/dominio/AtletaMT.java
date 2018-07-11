@@ -6,7 +6,7 @@ import dados.AssociacaoPA;
 import dados.AtletaPA;
 import java.sql.SQLException;
 import exceptions.ExceptionDadosIncompletos;
-import exceptions.MatriculaAssociacaoInvalidaException;
+import exceptions.MatriculaInvalidaException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -38,9 +38,9 @@ public class AtletaMT extends HttpServlet {
         }
     }
 
-    public static void transferirAtleta(String numero, String data_oficio, String comprovante, String data_entrada, String matricula, String matricula_associacao) throws ExceptionDadosIncompletos, SQLException, ClassNotFoundException, MatriculaAssociacaoInvalidaException {
+    public static void transferirAtleta(String numero, String data_oficio, String comprovante, String data_entrada, String matricula, String matricula_associacao) throws ExceptionDadosIncompletos, SQLException, ClassNotFoundException, MatriculaInvalidaException {
         if(AssociacaoPA.buscarAssociacao(matricula_associacao).next() == false){
-            throw new MatriculaAssociacaoInvalidaException();
+            throw new MatriculaInvalidaException();
         }
         if(comprovante.isEmpty() | numero.isEmpty() | data_entrada.isEmpty() | data_oficio.isEmpty() | matricula.isEmpty() | matricula_associacao.isEmpty() ){
             throw new ExceptionDadosIncompletos();
@@ -62,11 +62,11 @@ public class AtletaMT extends HttpServlet {
         }
     }
 
-    public static void cadastrarAtleta(String nome, String numero, String data_entrada, String data_oficio, String data_nascimento, String comprovante, String matricula_associacao) throws SQLException, ClassNotFoundException, ExceptionDadosIncompletos, MatriculaAssociacaoInvalidaException {
+    public static void cadastrarAtleta(String nome, String numero, String data_entrada, String data_oficio, String data_nascimento, String comprovante, String matricula_associacao) throws SQLException, ClassNotFoundException, ExceptionDadosIncompletos, MatriculaInvalidaException {
         if(nome.isEmpty() | numero.isEmpty() | data_entrada.isEmpty() | data_oficio.isEmpty() | data_nascimento.isEmpty() | comprovante.isEmpty() | matricula_associacao.isEmpty()){
             throw new ExceptionDadosIncompletos();
         }else if(AssociacaoPA.buscarAssociacao(matricula_associacao).next() == false){
-            throw new MatriculaAssociacaoInvalidaException();
+            throw new MatriculaInvalidaException();
         }else {
             try {
                 String matricula;
@@ -108,8 +108,8 @@ public class AtletaMT extends HttpServlet {
                     e.printStackTrace();
                 } catch (ExceptionDadosIncompletos exceptionDadosIncompletos) {
                     request.getRequestDispatcher("/ExcecaoDadosIncompletos.jsp").forward(request, response);
-                } catch (MatriculaAssociacaoInvalidaException e) {
-                    request.getRequestDispatcher("/ExcecaoMatriculaAssociacaoInvalida.jsp").forward(request, response);
+                } catch (MatriculaInvalidaException e) {
+                    request.getRequestDispatcher("/ExcecaoMatriculaInvalida.jsp").forward(request, response);
                 }
                 request.getRequestDispatcher("/PaginaInicial.jsp").forward(request, response);
             case 2:
@@ -149,8 +149,8 @@ public class AtletaMT extends HttpServlet {
                     e.printStackTrace();
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
-                } catch (MatriculaAssociacaoInvalidaException e){
-                    request.getRequestDispatcher("/ExcecaoMatriculaAssociacaoInvalida.jsp").forward(request, response);
+                } catch (MatriculaInvalidaException e){
+                    request.getRequestDispatcher("/ExcecaoMatriculaInvalida.jsp").forward(request, response);
                 }
                 request.getRequestDispatcher("/PaginaInicial.jsp").forward(request, response);
         }
