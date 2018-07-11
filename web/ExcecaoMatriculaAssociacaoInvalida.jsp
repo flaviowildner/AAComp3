@@ -13,6 +13,6 @@
 <body>
     <h2>Matricula de Associação Inválida</h2>
     <br>
-    <a href="/CadastrarAtleta.jsp">Voltar</a>
+    <button type="button" name="back" onclick="history.back()">back</button>
 </body>
 </html>

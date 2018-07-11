@@ -27,10 +27,10 @@
         <% if(meta.getColumnName(i).equals("MATRICULA") | meta.getColumnName(i).equals("NOME")){%>
         <%=meta.getColumnName(i)%><br>
         <input type="input" name="<%=meta.getColumnName(i).toLowerCase()%>" value="<%=value.toString()%>" disabled="true"><br>
-        <input type="hidden" name="<%=meta.getColumnName(i).toLowerCase()%>" value="<%=value.toString()%>"> <br>
+        <input type="hidden" name="<%=meta.getColumnName(i).toLowerCase()%>" value="<%=value.toString()%>">
         <%
                     }
-                    else if(meta.getColumnName(i).equals("MATRICULA_ASSOCIACAO") | meta.getColumnName(i).equals("NUMERO") | meta.getColumnName(i).equals("DATA_OFICIO") | meta.getColumnName(i).equals("COMPROVANTE_PAGAMENTO") | meta.getColumnName(i).equals("DATA_ENTRADA")){ %>
+                    else if(meta.getColumnName(i).equals("MATRICULA_ASSOCIACAO") | meta.getColumnName(i).equals("NUMERO") |  meta.getColumnName(i).equals("DATA_OFICIO") | meta.getColumnName(i).equals("COMPROVANTE_PAGAMENTO") | meta.getColumnName(i).equals("DATA_ENTRADA")){ %>
         <%=meta.getColumnName(i)%><br>
         <input type="input" name="<%=meta.getColumnName(i).toLowerCase()%>" value="<%=value.toString()%>"><br>
         <%
@@ -40,7 +40,7 @@
         %>
         <br>
         <input type="submit" value="Enviar">
-        <input type="hidden" name="acao" value="3">
+        <input type="hidden" name="acao" value="5">
     </form>
     <br><br>
     <a href="/">Voltar para página inicial</a>

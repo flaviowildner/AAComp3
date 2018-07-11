@@ -38,6 +38,17 @@ public class AtletaMT extends HttpServlet {
         }
     }
 
+    public static void transferirAtleta(String numero, String data_oficio, String comprovante, String data_entrada, String matricula, String matricula_associacao) throws ExceptionDadosIncompletos, SQLException, ClassNotFoundException, MatriculaAssociacaoInvalidaException {
+        if(AssociacaoPA.buscarAssociacao(matricula_associacao).next() == false){
+            throw new MatriculaAssociacaoInvalidaException();
+        }
+        if(comprovante.isEmpty() | numero.isEmpty() | data_entrada.isEmpty() | data_oficio.isEmpty() | matricula.isEmpty() | matricula_associacao.isEmpty() ){
+            throw new ExceptionDadosIncompletos();
+        }else {
+            AtletaPA.transferir(numero, data_oficio, comprovante, data_entrada, matricula_associacao, matricula);
+        }
+    }
+
     public static ResultSet getDadosAtleta(String matricula){
         try {
             return AtletaPA.buscarAtletaDados(matricula);
@@ -124,6 +135,24 @@ public class AtletaMT extends HttpServlet {
                 resultSet = getDadosAtleta(request.getParameter("matricula"));
                 request.setAttribute("atleta", resultSet);
                 request.getRequestDispatcher("/TransferirAtletaDados.jsp").forward(request, response);
+            case 5:
+                try {
+                    transferirAtleta(request.getParameter("numero"),
+                            request.getParameter("data_oficio"),
+                            request.getParameter("comprovante_pagamento"),
+                            request.getParameter("data_entrada"),
+                            request.getParameter("matricula"),
+                            request.getParameter("matricula_associacao"));
+                } catch (ExceptionDadosIncompletos exceptionDadosIncompletos) {
+                    request.getRequestDispatcher("/ExcecaoDadosIncompletos.jsp").forward(request, response);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                } catch (MatriculaAssociacaoInvalidaException e){
+                    request.getRequestDispatcher("/ExcecaoMatriculaAssociacaoInvalida.jsp").forward(request, response);
+                }
+                request.getRequestDispatcher("/PaginaInicial.jsp").forward(request, response);
         }
     }
 

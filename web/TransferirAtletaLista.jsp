@@ -22,6 +22,7 @@
     <tr>
         <th>Matrícula</th>
         <th>Nome</th>
+        <th>Matrícula da Associação</th>
     </tr>
     </thead>
     <tbody>
@@ -33,6 +34,7 @@
     <tr>
         <td><%=res.getString("matricula") %></td>
         <td><%=res.getString("nome") %></td>
+        <td><%=res.getString("matricula_associacao") %></td>
     </tr>
     <%
             }
