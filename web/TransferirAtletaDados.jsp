@@ -10,12 +10,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Alterar Associacao Dados</title>
+    <title>Fazer Transferência de Atleta</title>
 </head>
 <body>
-    <form action="/dominio/AssociacaoMT" method="post">
+    <form action="/dominio/AtletaMT" method="post">
         <%
-            ResultSet res = (ResultSet)request.getAttribute("associacao");
+            ResultSet res = (ResultSet)request.getAttribute("atleta");
             ResultSetMetaData meta = res.getMetaData();
             int count = meta.getColumnCount();
             res.next();
@@ -24,13 +24,13 @@
                 Object value = res.getObject(i);
                 if(value != null){
         %>
-        <% if(meta.getColumnName(i).equals("MATRICULA")){%>
+        <% if(meta.getColumnName(i).equals("MATRICULA") | meta.getColumnName(i).equals("NOME")){%>
         <%=meta.getColumnName(i)%><br>
         <input type="input" name="<%=meta.getColumnName(i).toLowerCase()%>" value="<%=value.toString()%>" disabled="true"><br>
-        <input type="hidden" name="<%=meta.getColumnName(i).toLowerCase()%>" value="<%=value.toString()%>"> <br>
+        <input type="hidden" name="<%=meta.getColumnName(i).toLowerCase()%>" value="<%=value.toString()%>">
         <%
                     }
-                    else{ %>
+                    else if(meta.getColumnName(i).equals("MATRICULA_ASSOCIACAO") | meta.getColumnName(i).equals("NUMERO") |  meta.getColumnName(i).equals("DATA_OFICIO") | meta.getColumnName(i).equals("COMPROVANTE_PAGAMENTO") | meta.getColumnName(i).equals("DATA_ENTRADA")){ %>
         <%=meta.getColumnName(i)%><br>
         <input type="input" name="<%=meta.getColumnName(i).toLowerCase()%>" value="<%=value.toString()%>"><br>
         <%
@@ -40,7 +40,7 @@
         %>
         <br>
         <input type="submit" value="Enviar">
-        <input type="hidden" name="acao" value="3">
+        <input type="hidden" name="acao" value="5">
     </form>
     <br><br>
     <a href="/">Voltar para página inicial</a>
