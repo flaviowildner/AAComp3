@@ -22,6 +22,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 @WebServlet(name = "AssociacaoMT", urlPatterns = {"/dominio/AssociacaoMT"})
 public class AssociacaoMT extends HttpServlet {
+
     public static ResultSet listarAssociacao() {
         try {
             return AssociacaoPA.buscarTodasAssociacoes();
@@ -35,13 +36,13 @@ public class AssociacaoMT extends HttpServlet {
         }
     }
     public static void cadastrarAssociacao(String numero_oficio, String data, String nome, String sigla, String endereco, String telefone, String comprovante_pagamento) throws SQLException, ClassNotFoundException, ExceptionDadosIncompletos {
-        if(numero_oficio.isEmpty() | data == null | nome.isEmpty() | sigla.isEmpty() | endereco.isEmpty() | telefone.isEmpty() | comprovante_pagamento.isEmpty()){
+        if(numero_oficio.isEmpty() | data.isEmpty() | nome.isEmpty() | sigla.isEmpty() | endereco.isEmpty() | telefone.isEmpty() | comprovante_pagamento.isEmpty()){
             throw new ExceptionDadosIncompletos();
         }else {
             try {
                 String matricula, senha;
                 senha = Integer.toString(new Random().nextInt(999999999) + 10000000);
-                while(AssociacaoPA.buscarAssociacao(matricula = Integer.toString(new Random().nextInt(999999999) + 1)).next()){System.out.println("Estou no while");}
+                while(AssociacaoPA.buscarAssociacao(matricula = Integer.toString(new Random().nextInt(999999999) + 1)).next()){}
                 AssociacaoPA.inserir(numero_oficio, data, nome, sigla, endereco, telefone, comprovante_pagamento, matricula, senha);
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
@@ -73,8 +74,6 @@ public class AssociacaoMT extends HttpServlet {
             AssociacaoPA.update(numero_oficio, data, nome, sigla, endereco, telefone, comprovante_pagamento, matricula);
         }
     }
-
-
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int acao;
