@@ -22,6 +22,6 @@ public class AssociacaoPA{
         return Banco.executeReturn("SELECT * FROM associacao WHERE matricula = '" + matricula + "';");
     }
     public static ResultSet buscarAssociacaoDados(String matricula) throws SQLException, ClassNotFoundException{
-        return Banco.executeReturn("SELECT numero_oficio, data_oficio, nome, sigla, endereco, telefone, comprovante_pagamento, matricula FROM associacao;");
+        return Banco.executeReturn("SELECT numero_oficio, data_oficio, nome, sigla, endereco, telefone, comprovante_pagamento, matricula FROM associacao WHERE matricula = '" + matricula + "';");
     }
 }

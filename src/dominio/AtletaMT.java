@@ -31,11 +31,6 @@ public class AtletaMT extends HttpServlet {
     }
 
     public static void alterarAtletaDados(String nome, String numero, String data_entrada, String data_oficio, String matricula) throws ExceptionDadosIncompletos, SQLException, ClassNotFoundException {
-        System.out.println(nome);
-        System.out.println(numero);
-        System.out.println(data_entrada);
-        System.out.println(data_oficio);
-        System.out.println(matricula);
         if(nome.isEmpty() | numero.isEmpty() | data_entrada.isEmpty() | data_oficio.isEmpty() | matricula.isEmpty()){
             throw new ExceptionDadosIncompletos();
         }else {
