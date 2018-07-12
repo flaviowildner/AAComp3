@@ -30,4 +30,14 @@ public class CompeticaoTeste {
         }
         assertFalse(sucesso);
     }
+    @Test
+    public void testeAlterarCompeticao() throws SQLException, ClassNotFoundException {
+        boolean sucesso = true;
+        try {
+            CompeticaoMT.alterarCompeticaoDados("teste","", "teste");
+        } catch (ExceptionDadosIncompletos exceptionDadosIncompletos) {
+            sucesso = false;
+        }
+        assertFalse(sucesso);
+    }
 }
