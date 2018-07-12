@@ -24,5 +24,7 @@ public class CompeticaoPA {
     public static ResultSet buscarCompeticaoDados(String nome) throws SQLException, ClassNotFoundException{
         return Banco.executeReturn("SELECT nome, data FROM competicao WHERE nome = '" + nome + "';");
     }
-
+    public static ResultSet buscarCompeticaoLocal(String nome) throws SQLException, ClassNotFoundException{
+        return Banco.executeReturn("SELECT nome, nomelocal FROM competicao WHERE nome = '" + nome + "';");
+    }
 }
