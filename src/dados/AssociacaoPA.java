@@ -12,9 +12,7 @@ public class AssociacaoPA{
         Banco.execute("INSERT INTO associacao(numero_oficio, data_oficio, nome, sigla, endereco, telefone, comprovante_pagamento, matricula, senha)" +
                             " VALUES('" + numero_oficio + "', '" + data_oficio + "', '" + nome + "', '" + sigla + "', '" + endereco + "', '" + telefone + "', '" + comprovante_pagamento + "', '" + matricula + "', '" + senha + "');");
     }
-    public static void remover(int id) throws SQLException, ClassNotFoundException {
-        Banco.execute("DELETE FROM associacao WHERE id = '" + id + "';");
-    }
+
     public static ResultSet buscarTodasAssociacoes() throws SQLException, ClassNotFoundException {
         return Banco.executeReturn("SELECT matricula, nome FROM associacao ORDER BY nome ASC;");
     }
@@ -24,4 +22,5 @@ public class AssociacaoPA{
     public static ResultSet buscarAssociacaoDados(String matricula) throws SQLException, ClassNotFoundException{
         return Banco.executeReturn("SELECT numero_oficio, data_oficio, nome, sigla, endereco, telefone, comprovante_pagamento, matricula FROM associacao WHERE matricula = '" + matricula + "';");
     }
+
 }

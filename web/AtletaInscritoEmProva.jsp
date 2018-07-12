@@ -8,11 +8,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Dados incompletos</title>
+    <title>Atleta Inscrito</title>
 </head>
 <body>
-    <h2>Dados incompletos</h2>
+    <h2>Atleta Inscrito com Sucesso</h2>
     <br>
-    <button type="button" name="back" onclick="history.back()">voltar</button>
+    <button type="button" name="back" onclick="history.back()">Inscrever outro atleta</button>
 </body>
 </html>

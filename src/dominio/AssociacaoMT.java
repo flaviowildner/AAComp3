@@ -68,7 +68,7 @@ public class AssociacaoMT extends HttpServlet {
     }
 
     public static void alterarAssociacaoDados(String numero_oficio, String data, String nome, String sigla, String endereco, String telefone, String comprovante_pagamento, String matricula) throws ExceptionDadosIncompletos, SQLException, ClassNotFoundException {
-        if(numero_oficio.isEmpty() | data == null | nome.isEmpty() | sigla.isEmpty() | endereco.isEmpty() | telefone.isEmpty() | comprovante_pagamento.isEmpty() | matricula.isEmpty()){
+        if(numero_oficio.isEmpty() | data.isEmpty() | nome.isEmpty() | sigla.isEmpty() | endereco.isEmpty() | telefone.isEmpty() | comprovante_pagamento.isEmpty() | matricula.isEmpty()){
             throw new ExceptionDadosIncompletos();
         }else {
             AssociacaoPA.update(numero_oficio, data, nome, sigla, endereco, telefone, comprovante_pagamento, matricula);

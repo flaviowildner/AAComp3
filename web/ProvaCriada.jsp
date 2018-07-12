@@ -8,11 +8,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Matricula de Associação Inválida</title>
+    <title>Prova criada com sucesso</title>
 </head>
 <body>
-    <h2>Matricula de Associação Inválida</h2>
+    <h2>Prova criada com sucesso</h2>
     <br>
-    <button type="button" name="back" onclick="history.back()">back</button>
+    <button type="button" name="back" onclick="history.back()">Criar outra prova</button>
 </body>
 </html>
