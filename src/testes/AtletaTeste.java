@@ -1,5 +1,6 @@
 package testes;
 
+import dominio.AtletaMT;
 import exceptions.ExceptionDadosIncompletos;
 import exceptions.MatriculaInvalidaException;
 import org.junit.jupiter.api.Test;
@@ -11,15 +12,14 @@ import static dominio.AtletaMT.cadastrarAtleta;
 import static dominio.AtletaMT.listarAtletas;
 import static dominio.AtletaMT.transferirAtleta;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AtletaTeste {
     //EXPECTED DADOSINCOMPLETOS
     @Test
     public void testeCadastrarAtletasNull() throws ClassNotFoundException, SQLException, ExceptionDadosIncompletos, MatriculaInvalidaException {
         boolean sucesso = true;
-        cadastrarAtleta("teste", "teste", "teste", "", "", "", "teste");
-        ResultSet res = listarAtletas();
+        AtletaMT.cadastrarAtleta("teste", "teste", "teste", "", "", "", "teste");
+        ResultSet res = AtletaMT.listarAtletas();
         while(res.next()){
             if(res.getString("nome") == "teste") sucesso = false;
             break;
@@ -30,8 +30,8 @@ public class AtletaTeste {
     @Test
     public void testeTransferirAtleta() throws ClassNotFoundException, SQLException, ExceptionDadosIncompletos, MatriculaInvalidaException {
         boolean sucesso = true;
-        transferirAtleta("teste", "teste", "teste","","teste","teste");
-        ResultSet res = listarAtletas();
+        AtletaMT.transferirAtleta("teste", "teste", "teste","","teste","teste");
+        ResultSet res = AtletaMT.listarAtletas();
         while(res.next()){
             if(res.getString("matricula_associacao") == "teste") sucesso = false;
             break;
@@ -42,8 +42,8 @@ public class AtletaTeste {
     @Test
     public void testeTransferirAtletaMat() throws ClassNotFoundException, SQLException, ExceptionDadosIncompletos, MatriculaInvalidaException {
         boolean sucesso = true;
-        transferirAtleta("teste", "teste", "teste","teste","","teste");
-        ResultSet res = listarAtletas();
+        AtletaMT.transferirAtleta("teste", "teste", "teste","teste","","teste");
+        ResultSet res = AtletaMT.listarAtletas();
         while(res.next()){
             if(res.getString("matricula_associacao") == "teste") sucesso = false;
             break;
