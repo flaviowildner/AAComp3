@@ -42,7 +42,7 @@
 
 <br>
 <form action="/dominio/ProvaMT" method="post">
-    Escreva o nome da prova:<br>
+    Escreva o nome da competicao:<br>
     <input type="text" name="nome">
     <input type="submit" value="Enviar">
     <input type="hidden" name="acao" value="1">
