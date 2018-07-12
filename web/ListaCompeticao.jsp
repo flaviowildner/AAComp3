@@ -1,23 +1,21 @@
-<%@ page import="dominio.AssociacaoMT" %>
 <%@ page import="java.sql.ResultSet" %>
-<%@ page import="dominio.CompeticaoMT" %><%--
+<%@ page import="dominio.LocalMT"%>
+<%@ page import="dominio.CompeticaoMT" %>
+<%--
   Created by IntelliJ IDEA.
-  User: flavi
-  Date: 7/8/2018
-  Time: 6:39 PM
+  User: renan
+  Date: 10/07/2018
+  Time: 23:54
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Lista de Competicoes</title>
+    <title>Competições</title>
 </head>
-<script>
-
-</script>
 <body>
 <h2 style="text-align: center">Sistema SISFARJ</h2>
-<b>Lista de competicoes</b><br><br>
+<b>Lista de Competições</b><br><br>
 <table border="1px">
     <thead>
     <tr>
@@ -41,14 +39,22 @@
     %>
     </tbody>
 </table>
-<br>
-<form action="/dominio/CompeticaoMT" method="post">
-    Escreva o nome da competição que deseja alterar:<br>
+
+<form action="/dominio/ProvaMT" method="post">
+    <br>
+    Escreva o nome da competição que deseja ver as provas:<br>
     <input type="text" name="nome">
     <input type="submit" value="Enviar">
-    <input type="hidden" name="acao" value="2">
+    <% if(request.getParameter("id").equals("2")){
+    %>
+        <input type="hidden" name="acao" value="5">
+    <% }else if(request.getParameter("id").equals("3")){%>
+        <input type="hidden" name="acao" value="6">
+    <% }else{ %>
+        <input type="hidden" name="acao" value="4">
+    <% } %>
 </form>
-<br><br>
+
 <a href="/">Voltar para página inicial</a>
 </body>
 </html>

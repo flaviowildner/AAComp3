@@ -24,28 +24,80 @@ import java.util.concurrent.ThreadLocalRandom;
 public class LocalMT extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int acao;
         try{
-            this.cadastrarLocal(request.getParameter("nome_local"),
-                                request.getParameter("endereco"),
-                                request.getParameter("piscina"));
-        } catch(SQLException e){
-            e.printStackTrace();
-        } catch(ClassNotFoundException e){
-            e.printStackTrace();
-        } catch(ExceptionDadosIncompletos exceptionDadosIncompletos){
-            request.getRequestDispatcher("/ExcecaoDadosIncompletos.jsp").forward(request, response);
+            acao = Integer.parseInt(request.getParameter("acao"));
+        } catch (NumberFormatException e){
+            acao = 0;
         }
-        request.getRequestDispatcher("/PaginaInicial.jsp").forward(request, response);
 
+        switch(acao){
+            case 1:
+                try{
+                    this.cadastrarLocal(request.getParameter("nome_local"),
+                            request.getParameter("endereco"),
+                            request.getParameter("piscina"));
+                } catch(SQLException e){
+                    e.printStackTrace();
+                } catch(ClassNotFoundException e){
+                    e.printStackTrace();
+                } catch(ExceptionDadosIncompletos exceptionDadosIncompletos){
+                    request.getRequestDispatcher("/ExcecaoDadosIncompletos.jsp").forward(request, response);
+                }
+                request.getRequestDispatcher("/PaginaInicial.jsp").forward(request, response);
+                break;
+            case 2:
+                String local = request.getParameter("local");
+                System.out.println(local);
+                ResultSet res = this.getDadosLocal(local);
+                request.setAttribute("local", res);
+                request.getRequestDispatcher("/MudarLocal.jsp").forward(request, response);
+                break;
+            case 3:
+                try{
+                    this.setNewLocalData(request.getParameter("nomelocal"),
+                                        request.getParameter("logradouro"),
+                                        request.getParameter("piscina"));
+                } catch(SQLException e){
+                    e.printStackTrace();
+                } catch(ClassNotFoundException e){
+                    e.printStackTrace();
+                } catch(ExceptionDadosIncompletos exceptionDadosIncompletos){
+                    request.getRequestDispatcher("/ExcecaoDadosIncompletos.jsp").forward(request, response);
+                }
+                request.getRequestDispatcher("/PaginaInicial.jsp").forward(request, response);
+        }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doPost(request, response);
     }
 
     public static ResultSet listarLocais(){
         try{
             return LocalPA.buscarTodosLocais();
+        } catch(SQLException e){
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+            return null;
+        } catch(ClassNotFoundException e){
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
+
+    public static void setNewLocalData(String nomelocal, String logradouro, String piscina) throws ExceptionDadosIncompletos, SQLException, ClassNotFoundException{
+        if(logradouro.isEmpty() | piscina.isEmpty()){
+            throw new ExceptionDadosIncompletos();
+        } else{
+            LocalPA.update(nomelocal, logradouro, piscina);
+        }
+    }
+
+    public static ResultSet getDadosLocal(String nomeLocal){
+        try{
+            return LocalPA.buscarLocal(nomeLocal);
         } catch(SQLException e){
             System.out.println(e.getMessage());
             e.printStackTrace();
