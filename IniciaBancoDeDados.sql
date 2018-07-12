@@ -36,7 +36,7 @@ nome VARCHAR(255) primary key,
 categoria VARCHAR(255),
 classe VARCHAR(255),
 nome_competicao VARCHAR(255),
-foreign key (nome_competicao) references competicao(nome));
+foreign key (nome_competicao) references competicao(nome) ON UPDATE CASCADE);
 
 
 CREATE TABLE atletaprova(

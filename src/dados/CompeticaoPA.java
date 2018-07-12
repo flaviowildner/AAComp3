@@ -16,4 +16,13 @@ public class CompeticaoPA {
     public static void updateLocal(String nome, String local) throws SQLException, ClassNotFoundException {
         Banco.execute("UPDATE competicao SET nomelocal = '" + local + "' WHERE nome = '" + nome + "';");
     }
+
+    public static void update(String nome, String data, String nome_antigo) throws SQLException, ClassNotFoundException {
+        Banco.execute("UPDATE competicao SET nome = '" + nome + "', data = '" + data + "' WHERE nome = '" + nome_antigo + "';");
+    }
+
+    public static ResultSet buscarCompeticaoDados(String nome) throws SQLException, ClassNotFoundException{
+        return Banco.executeReturn("SELECT nome, data FROM competicao WHERE nome = '" + nome + "';");
+    }
+
 }
