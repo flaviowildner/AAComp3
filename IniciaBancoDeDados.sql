@@ -1,3 +1,11 @@
+CREATE TABLE usuario(
+  login VARCHAR(255),
+  senha VARCHAR(255),
+  nivel_acesso VARCHAR(255)
+);
+INSERT INTO usuario(login, senha, nivel_acesso) VALUES ('secretario', 'secretario', 1);
+INSERT INTO usuario(login, senha, nivel_acesso) VALUES ('diretor', 'diretor', 1);
+
 CREATE TABLE associacao(
 numero_oficio VARCHAR(255),
 data_oficio VARCHAR(255),
