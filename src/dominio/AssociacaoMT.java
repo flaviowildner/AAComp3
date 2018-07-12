@@ -45,7 +45,7 @@ public class AssociacaoMT extends HttpServlet {
                 senha = Integer.toString(new Random().nextInt(999999999) + 10000000);
                 while(AssociacaoPA.buscarAssociacao(matricula = Integer.toString(new Random().nextInt(999999999) + 1)).next()){}
                 AssociacaoPA.inserir(numero_oficio, data, nome, sigla, endereco, telefone, comprovante_pagamento, matricula, senha);
-                UsuarioPA.inserir(matricula, senha, "3");
+                UsuarioPA.inserir(matricula, senha, "1");
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
                 //ERRO NO BANCO DE DADOS

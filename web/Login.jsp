@@ -7,9 +7,9 @@
 <br>
 <form action="/dominio/UsuarioMT" method="post">
     Matricula:<br>
-    <input type="text" name="matricula"><br>
+    <input type="text" name="matricula" required><br>
     Senha:<br>
-    <input type="text" name="senha">
+    <input type="password" name="senha" required>
     <br>
     <% String erro = (String) request.getAttribute("erro");
     if(erro != null && erro.equals("1")){ %>

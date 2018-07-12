@@ -11,8 +11,8 @@
     Senha:<br>
     <input type="text" name="senha"><br><br>
     <select name="nivel_acesso">
-        <option value="1">Secretário</option>
-        <option value="2">Diretor técnico</option>
+        <option value="2">Secretário</option>
+        <option value="3">Diretor técnico</option>
     </select>
     <input type="submit" value="Cadastrar">
     <input type="hidden" name="acao" value="2">
