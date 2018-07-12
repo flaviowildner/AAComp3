@@ -13,7 +13,7 @@ public class LocalTeste {
     public void testeCadastrarLocal() throws SQLException, ClassNotFoundException {
         boolean sucesso = true;
         try {
-            LocalMT.cadastrarLocal("teste2", "adfa ", " ");
+            LocalMT.cadastrarLocal("teste2", "", "");
         }catch (ExceptionDadosIncompletos exceptionDadosIncompletos) {
             sucesso = false;
         }
