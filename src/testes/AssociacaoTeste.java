@@ -54,9 +54,9 @@ public class AssociacaoTeste {
         }
         Collections.sort(nomes);
         int i = 0;
-        ResultSet babum = AssociacaoMT.listarAssociacao();
-        while(babum.next()){
-           if(!babum.getString("nome").equals(nomes.get(i))) {
+        res.beforeFirst();
+        while(res.next()){
+           if(!res.getString("nome").equals(nomes.get(i))) {
                 sucesso = false;
                 break;
             }
