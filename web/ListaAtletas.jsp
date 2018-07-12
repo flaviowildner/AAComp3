@@ -21,6 +21,10 @@
     <tr>
         <th>Matricula</th>
         <th>Nome</th>
+        <% if(request.getAttribute("id").equals("3")){
+        %>
+        <th>Tempo</th>
+        <% } %>
     </tr>
     </thead>
     <tbody>
@@ -32,6 +36,11 @@
     <tr>
         <td><%=res.getString("matricula") %></td>
         <td><%=res.getString("nome") %></td>
+        <% if(request.getAttribute("id").equals("3")){
+        %>
+        <td><%=res.getString("tempo") %></td>
+        <% } %>
+
     </tr>
     <%
             }
@@ -39,7 +48,10 @@
     %>
     </tbody>
 </table>
-
+<% if(request.getAttribute("id").equals("3")){
+%>
+<br>
+<% } else {%>
 <form action="/dominio/AtletaProvaMT" method="post">
     <br>
      Matrícula do Atleta:<br>
@@ -50,7 +62,7 @@
     <input type="submit" value="Enviar">
     <input type="hidden" name="acao" value="2">
 </form>
-
+<% } %>
 <a href="/">Voltar para página inicial</a>
 </body>
 </html>

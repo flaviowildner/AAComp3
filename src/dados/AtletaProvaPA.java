@@ -14,7 +14,7 @@ public class AtletaProvaPA {
     }
 
     public static ResultSet findAtletasProva(String nome_prova) throws SQLException, ClassNotFoundException {
-        return Banco.executeReturn("SELECT a.matricula, a.nome from atleta as a JOIN atletaprova as b on" +
+        return Banco.executeReturn("SELECT a.matricula, a.nome, b.tempo from atleta as a JOIN atletaprova as b on" +
                 " b.matricula_atleta = a.matricula WHERE b.nome_prova = '"+ nome_prova +"';");
     }
 

@@ -62,6 +62,7 @@ public class AtletaProvaMT extends HttpServlet {
             case 1:
                 resultSet = getAtletasProva(request.getParameter("nome"));
                 request.setAttribute("nome_prova", request.getParameter("nome"));
+                request.setAttribute("id", "1");
                 request.setAttribute("atleta", resultSet);
                 request.getRequestDispatcher("/ListaAtletas.jsp").forward(request, response);
             case 2:
@@ -73,6 +74,12 @@ public class AtletaProvaMT extends HttpServlet {
                     request.getRequestDispatcher("/ExcecaoDadosIncompletos.jsp").forward(request, response);
                 }
                 request.getRequestDispatcher("/DadosLancadosSucesso.jsp").forward(request, response);
+            case 3:
+                resultSet = getAtletasProva(request.getParameter("nome"));
+                request.setAttribute("nome_prova", request.getParameter("nome"));
+                request.setAttribute("id", "3");
+                request.setAttribute("atleta", resultSet);
+                request.getRequestDispatcher("/ListaAtletas.jsp").forward(request, response);
         }
     }
 

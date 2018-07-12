@@ -70,7 +70,6 @@ public class ProvaMT extends HttpServlet {
         } catch (NumberFormatException e){
             acao = 0;
         }
-
         switch(acao) {
             case 1:
                 resultSet = getProvasCompeticao(request.getParameter("nome"));
@@ -110,8 +109,14 @@ public class ProvaMT extends HttpServlet {
                 request.getRequestDispatcher("/ProvaCriada.jsp").forward(request, response);
             case 4:
                 resultSet = getProvasCompeticao(request.getParameter("nome"));
+                request.setAttribute("id", "1");
                 request.setAttribute("prova", resultSet);
                 request.getRequestDispatcher("/ListaProva.jsp").forward(request, response);
+            case 5:
+                resultSet = getProvasCompeticao(request.getParameter("nome"));
+                request.setAttribute("id", "3");
+                request.setAttribute("prova", resultSet);
+                request.getRequestDispatcher("/ListaProva.jsp?").forward(request, response);
         }
     }
 

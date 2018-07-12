@@ -34,14 +34,14 @@
             <tr><td><a class="feito" href="/ListarLocais.jsp">Listar locais de competição</a></td></tr>
             <tr><td><a class="feito" href="/CriarCompeticao.jsp">Criar competição</a></td></tr>
             <tr><td><a class="feito" href="/AlterarCompeticaoLista.jsp">Alterar competição</a></td></tr>
-            <tr><td><a class="feito" href="/ListaCompeticao.jsp">Inserir resultado do atleta</a></td></tr>
-            <tr><td><a href="">Listar competição</a></td></tr>
+            <tr><td><a class="feito" href="/ListaCompeticao.jsp?id=1">Inserir resultado do atleta</a></td></tr>
+            <tr><td><a href="/ListaCompeticao.jsp?id=2">Listar competição</a></td></tr>
         </tbody>
     </table>
 </body>
 </html>
 
-<<style>
+<style>
 
 .feito{
     font-weight: bold;

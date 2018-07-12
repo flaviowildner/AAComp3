@@ -15,7 +15,7 @@
 </head>
 <body>
 <h2 style="text-align: center">Sistema SISFARJ</h2>
-<b>Lista de Competicoes</b><br><br>
+<b>Lista de Competições</b><br><br>
 <table border="1px">
     <thead>
     <tr>
@@ -45,7 +45,13 @@
     Escreva o nome da competição que deseja ver as provas:<br>
     <input type="text" name="nome">
     <input type="submit" value="Enviar">
-    <input type="hidden" name="acao" value="4">
+    <% if(request.getParameter("id").equals("2")){
+    %>
+        <input type="hidden" name="acao" value="5">
+    <% } else {%>
+        <input type="hidden" name="acao" value="4">
+    <% } %>
+
 </form>
 
 <a href="/">Voltar para página inicial</a>

@@ -42,14 +42,24 @@
     </tbody>
 </table>
 
+<% if(request.getAttribute("id").equals("3")){
+%>
 <form action="/dominio/AtletaProvaMT" method="post">
     <br>
-    Escreva o nome da prova que deseja inserir resultados:<br>
+    Escreva o nome da prova que deseja ver os resultados:<br>
+    <input type="text" name="nome">
+    <input type="submit" value="Enviar">
+    <input type="hidden" name="acao" value="3">
+</form>
+<% } else {%>
+<form action="/dominio/AtletaProvaMT" method="post">
+    <br>
+    Escreva o nome da prova para inserir os resultados:<br>
     <input type="text" name="nome">
     <input type="submit" value="Enviar">
     <input type="hidden" name="acao" value="1">
 </form>
-
+<% } %>
 <a href="/">Voltar para página inicial</a>
 </body>
 </html>
