@@ -9,6 +9,8 @@ public class ProvaPA {
         return Banco.executeReturn("SELECT nome, categoria, classe FROM prova WHERE nome_competicao = '" + nome_competicao + "';");
     }
 
-
-
+    public static void inserir(String nome, String classe, String categoria, String nome_competicao) throws SQLException, ClassNotFoundException {
+        Banco.execute("INSERT INTO prova(nome, classe, categoria, nome_competicao)" +
+                " VALUES('" + nome + "', '" + classe + "' , '" + categoria + "', '" + nome_competicao + "');");
+    }
 }
