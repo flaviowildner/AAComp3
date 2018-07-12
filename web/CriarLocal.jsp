@@ -21,6 +21,7 @@
         <br><input type="submit" value="Enviar">
     </form>
     <br><br>
+    <input type="hidden" name="acao" value="1">
     <a href="/">Voltar para página inicial</a>
 </body>
 </html>

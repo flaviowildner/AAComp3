@@ -1,3 +1,5 @@
+<%@ page import="java.sql.ResultSet" %>
+<%@ page import="dominio.LocalMT"%>
 <%--
   Created by IntelliJ IDEA.
   User: renan
@@ -11,6 +13,22 @@
     <title>Alterar Local</title>
 </head>
 <body>
-
+    <form action="/MudarLocal.jsp" method="post">
+        <select name="local">
+            <%
+                ResultSet res = LocalMT.listarLocais();
+                if(!res.isClosed()){
+                    while(res.next()){
+            %>
+            <option name="local" value="Campinho"><%=res.getString("nomelocal") %></option>
+            <%
+                    }
+                }
+            %>
+        </select>
+        <br><br>
+        <input type="hidden" name="acao" value="2">
+        <input type="submit">
+    </form>
 </body>
 </html>
