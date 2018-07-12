@@ -4,7 +4,6 @@ import dominio.CompeticaoMT;
 import exceptions.ExceptionDadosIncompletos;
 import org.junit.jupiter.api.Test;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
