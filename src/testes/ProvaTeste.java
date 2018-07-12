@@ -9,10 +9,11 @@ import org.junit.jupiter.api.Test;
 import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ProvaTeste {
     @Test
-    public void testeCadastrarProva(){
+    public void testeCadastrarProvaNull(){
         boolean sucesso = true;
         try {
             ProvaMT.cadastrarProva("teste", "", "", "");
