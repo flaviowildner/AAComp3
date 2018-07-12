@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 
 import dados.AtletaPA;
 import dados.AtletaProvaPA;
+import dados.CompeticaoPA;
 import dados.ProvaPA;
 import java.sql.SQLException;
 import exceptions.AtletaJaInscritoEmProvaException;
@@ -30,6 +31,19 @@ public class ProvaMT extends HttpServlet {
         } catch (ClassNotFoundException e) {
             System.out.println(e.getMessage());
             return null;
+        }
+    }
+
+    public static void cadastrarProva(String nome, String classe, String categoria, String nome_competicao) throws ExceptionDadosIncompletos {
+        if(nome.isEmpty() | classe.isEmpty() | categoria.isEmpty()){
+            throw new ExceptionDadosIncompletos();
+        }else try {
+            ProvaPA.inserir(nome, classe, categoria, nome_competicao);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -77,6 +91,22 @@ public class ProvaMT extends HttpServlet {
                     request.getRequestDispatcher("/AtletaJaInscritoEmProva.jsp").forward(request, response);
                 }
                 request.getRequestDispatcher("/AtletaInscritoEmProva.jsp").forward(request, response);
+            case 3:
+                try {
+                    cadastrarProva(request.getParameter("nome_prova"),
+                            request.getParameter("classe"),
+                            request.getParameter("categoria"),
+                            request.getParameter("nome_competicao"));
+                    CompeticaoMT.updateLocal(request.getParameter("nome_competicao"),
+                            request.getParameter("nome_local"));
+                }catch (ExceptionDadosIncompletos e){
+                    request.getRequestDispatcher("/ExcecaoDadosIncompletos.jsp").forward(request, response);
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }catch (ClassNotFoundException e){
+                    e.printStackTrace();
+                }
+                request.getRequestDispatcher("/ProvaCriada.jsp").forward(request, response);
         }
     }
 
