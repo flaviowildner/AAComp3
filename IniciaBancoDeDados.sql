@@ -3,8 +3,8 @@ CREATE TABLE usuario(
   senha VARCHAR(255),
   nivel_acesso VARCHAR(255)
 );
-INSERT INTO usuario(matricula, senha, nivel_acesso) VALUES ('secretario', 'secretario', 1);
-INSERT INTO usuario(matricula, senha, nivel_acesso) VALUES ('diretor', 'diretor', 2);
+INSERT INTO usuario(matricula, senha, nivel_acesso) VALUES ('secretario', 'secretario', 2);
+INSERT INTO usuario(matricula, senha, nivel_acesso) VALUES ('diretor', 'diretor', 3);
 
 CREATE TABLE associacao(
 numero_oficio VARCHAR(255),
