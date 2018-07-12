@@ -30,7 +30,7 @@
             <tr><td><a class="feito" a href="/TransferirAtletaLista.jsp">Transferir atleta</a></td></tr>
             <tr><td><a class="feito" href="/InscreverAtletaListaCompeticoes.jsp">Increver atleta em competição</a></td></tr>
             <tr><td><a class="feito" href="/CriarLocal.jsp">Incluir locais de competição</a></td></tr>
-            <tr><td><a href="">Alterar locais de competição</a></td></tr>
+            <tr><td><a class="feito" href="/AlterarLocal.jsp">Alterar locais de competição</a></td></tr>
             <tr><td><a class="feito" href="/ListarLocais.jsp">Listar locais de competição</a></td></tr>
             <tr><td><a class="feito" href="/CriarCompeticao.jsp">Criar competição</a></td></tr>
             <tr><td><a class="feito" href="/AlterarCompeticaoLista.jsp">Alterar competição</a></td></tr>

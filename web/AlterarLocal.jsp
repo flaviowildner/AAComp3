@@ -14,22 +14,41 @@
     <title>Alterar Local</title>
 </head>
 <body>
-    <form action="/MudarLocal.jsp" method="post">
-        <select name="local">
-            <%
-                ResultSet res = LocalMT.listarLocais();
-                if(!res.isClosed()){
-                    while(res.next()){
-            %>
-            <option name="local" value="Campinho"><%=res.getString("nomelocal") %></option>
-            <%
-                    }
-                }
-            %>
-        </select>
-        <br><br>
-        <input type="hidden" name="acao" value="2">
-        <input type="submit">
-    </form>
+<h2 style="text-align: center">Sistema SISFARJ</h2>
+<b>Lista de Locais</b><br><br>
+<table border="1px">
+    <thead>
+    <tr>
+        <th>Nome do Local</th>
+        <th>Logradouro</th>
+        <th>Piscina</th>
+    </tr>
+    </thead>
+    <tbody>
+    <%
+        ResultSet res = LocalMT.listarLocais();
+        if(!res.isClosed()){
+            while(res.next()){
+    %>
+    <tr>
+        <td><%=res.getString("nomelocal") %></td>
+        <td><%=res.getString("logradouro") %></td>
+        <td><%=res.getString("piscina") %></td>
+    </tr>
+    <%
+            }
+        }
+    %>
+    </tbody>
+</table>
+<br>
+<form action="/dominio/LocalMT" method="post">
+    Escreva um local:<br>
+    <input type="text" name="local">
+    <input type="submit" value="Enviar">
+    <input type="hidden" name="acao" value="2">
+</form>
+<br><br>
+<a href="/">Voltar para página inicial</a>
 </body>
 </html>
