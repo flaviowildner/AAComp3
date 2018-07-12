@@ -1,10 +1,10 @@
 CREATE TABLE usuario(
-  login VARCHAR(255),
+  matricula VARCHAR(255),
   senha VARCHAR(255),
   nivel_acesso VARCHAR(255)
 );
-INSERT INTO usuario(login, senha, nivel_acesso) VALUES ('secretario', 'secretario', 1);
-INSERT INTO usuario(login, senha, nivel_acesso) VALUES ('diretor', 'diretor', 1);
+INSERT INTO usuario(matricula, senha, nivel_acesso) VALUES ('secretario', 'secretario', 1);
+INSERT INTO usuario(matricula, senha, nivel_acesso) VALUES ('diretor', 'diretor', 2);
 
 CREATE TABLE associacao(
 numero_oficio VARCHAR(255),
@@ -50,7 +50,7 @@ foreign key (nome_competicao) references competicao(nome) ON UPDATE CASCADE);
 CREATE TABLE atletaprova(
 nome_prova VARCHAR(255),
 matricula_atleta VARCHAR(255),
-ponto VARCHAR(255),
+ponto INT,
 tempo VARCHAR(255),
 primary key (matricula_atleta, nome_prova),
 foreign key (nome_prova) references prova(nome));
