@@ -34,7 +34,7 @@ public class CompeticaoTeste {
     public void testeAlterarCompeticao() throws SQLException, ClassNotFoundException {
         boolean sucesso = true;
         try {
-            CompeticaoMT.alterarCompeticaoDados("teste","", "teste");
+            CompeticaoMT.alterarCompeticaoDados("","", "teste");
         } catch (ExceptionDadosIncompletos exceptionDadosIncompletos) {
             sucesso = false;
         }
