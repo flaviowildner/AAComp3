@@ -14,7 +14,6 @@ import java.util.Comparator;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AssociacaoTeste {
-    //EXPECTED DADOSINCOMPLETOS
     @Test
     public void testeCadastrarAssociacaoNull() throws  SQLException, ClassNotFoundException {
         boolean sucesso = true;
@@ -26,18 +25,17 @@ public class AssociacaoTeste {
         }
         assertFalse(sucesso);
     }
-    //EXCEPTION CLASSNOTFOUND
     @Test
     public void testeCadastrarAssociacao() throws SQLException, ClassNotFoundException {
         boolean sucesso = false;
         try {
-            AssociacaoMT.cadastrarAssociacao("teste", "teste", "teste", "teste", "teste", "teste", "teste");
+            AssociacaoMT.cadastrarAssociacao("testeAssociacao", "testeAssociacao", "testeAssociacao", "testeAssociacao", "testeAssociacao", "testeAssociacao", "testeAssociacao");
         }catch (ExceptionDadosIncompletos exceptionDadosIncompletos) {
             sucesso = false;
         }
         ResultSet res = AssociacaoMT.listarAssociacao();
         while(res.next()){
-            if(res.getString("nome").equals("teste")) {
+            if(res.getString("nome").equals("testeAssociacao")) {
                 sucesso = true;
                 break;
             }
@@ -65,9 +63,8 @@ public class AssociacaoTeste {
         }
         assertTrue(sucesso);
     }
-    //EXPECTED DADOSINCOMPLETOS
     @Test
-    public void testeAlterAssociacaoDados() throws ClassNotFoundException, SQLException{
+    public void testeAlterarAssociacaoDadosNull() throws ClassNotFoundException, SQLException{
         boolean sucesso = true;
         try {
             AssociacaoMT.alterarAssociacaoDados("teste","teste", "teste", "", "", "", "teste","362019432");
@@ -75,5 +72,22 @@ public class AssociacaoTeste {
             sucesso = false;
         }
         assertFalse(sucesso);
+    }
+    @Test
+    public void testeAlterarAssociacaoDados() throws ClassNotFoundException, SQLException{
+        boolean sucesso = false;
+        try {
+            AssociacaoMT.alterarAssociacaoDados("testeAssociacaoAlterar","testeAssociacaoAlterar", "testeAssociacaoAlterar", "testeAssociacaoAlterar", "testeAssociacaoAlterar", "testeAssociacaoAlterar", "testeAssociacaoAlterar","362019432");
+        } catch (ExceptionDadosIncompletos exceptionDadosIncompletos) {
+            sucesso = false;
+        }
+        ResultSet res = AssociacaoMT.listarAssociacao();
+        while(res.next()){
+            if(res.getString("nome").equals("testeAssociacaoAlterar")) {
+                sucesso = true;
+                break;
+            }
+        }
+        assertTrue(sucesso);
     }
 }
