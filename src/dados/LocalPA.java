@@ -17,6 +17,7 @@ public class LocalPA {
         return Banco.executeReturn("SELECT nomeLocal, logradouro, piscina FROM local ORDER BY nomeLocal ASC;");
     }
 
+
     public static ResultSet buscarLocal(String nomeLocal) throws SQLException, ClassNotFoundException{
         return Banco.executeReturn("SELECT * FROM local WHERE nomelocal = '" + nomeLocal + "';");
     }

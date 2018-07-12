@@ -86,6 +86,7 @@ public class LocalMT extends HttpServlet {
         }
     }
 
+
     public static void setNewLocalData(String nomelocal, String logradouro, String piscina) throws ExceptionDadosIncompletos, SQLException, ClassNotFoundException{
         if(logradouro.isEmpty() | piscina.isEmpty()){
             throw new ExceptionDadosIncompletos();
