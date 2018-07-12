@@ -11,24 +11,22 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class CompeticaoTeste {
     @Test
-    public void testeCadastrarCompeticao() throws SQLException, ExceptionDadosIncompletos, ClassNotFoundException {
+    public void testeCadastrarCompeticao() throws SQLException, ClassNotFoundException {
         boolean sucesso = true;
-        CompeticaoMT.cadastrarCompeticao("teste", "");
-        ResultSet res = CompeticaoMT.listarCompeticoes();
-        while (res.next()) {
-            if (res.getString("nome") == "teste") sucesso = false;
-            break;
+        try {
+            CompeticaoMT.cadastrarCompeticao("teste", "");
+        } catch (ExceptionDadosIncompletos exceptionDadosIncompletos) {
+            sucesso = false;
         }
         assertFalse(sucesso);
     }
     @Test
-    public void testeUpdateLocal() throws ExceptionDadosIncompletos, SQLException, ClassNotFoundException {
+    public void testeUpdateLocal() throws SQLException, ClassNotFoundException {
         boolean sucesso = true;
-        CompeticaoMT.updateLocal("teste", "");
-        ResultSet res = CompeticaoMT.listarCompeticoes();
-        while (res.next()) {
-            if (res.getString("nome") == "teste") sucesso = false;
-            break;
+        try {
+            CompeticaoMT.updateLocal("teste", "");
+        } catch (ExceptionDadosIncompletos exceptionDadosIncompletos) {
+            sucesso = false;
         }
         assertFalse(sucesso);
     }
