@@ -13,7 +13,7 @@ public class Banco {
     public static ResultSet executeReturn(String sql) throws ClassNotFoundException, SQLException{
         Class.forName(driver);
         conn = DriverManager.getConnection(url, user, password);
-        PreparedStatement stmt = conn.prepareStatement(sql);
+        PreparedStatement stmt = conn.prepareStatement(sql,ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
         ResultSet res = stmt.executeQuery();
         return res;
     }

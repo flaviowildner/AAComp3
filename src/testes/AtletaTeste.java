@@ -16,37 +16,36 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 public class AtletaTeste {
     //EXPECTED DADOSINCOMPLETOS
     @Test
-    public void testeCadastrarAtletasNull() throws ClassNotFoundException, SQLException, ExceptionDadosIncompletos, MatriculaInvalidaException {
+    public void testeCadastrarAtletasNull() throws ClassNotFoundException, SQLException, MatriculaInvalidaException {
         boolean sucesso = true;
-        AtletaMT.cadastrarAtleta("teste", "teste", "teste", "", "", "", "teste");
-        ResultSet res = AtletaMT.listarAtletas();
-        while(res.next()){
-            if(res.getString("nome") == "teste") sucesso = false;
-            break;
+        try {
+            AtletaMT.cadastrarAtleta("teste", "teste", "teste", "", "", "", "teste");
+        }catch (ExceptionDadosIncompletos exceptionDadosIncompletos){
+            sucesso = false;
         }
+    }
+    //EXPECTED DADOSINCOMPLETOS
+    @Test
+    public void testeTransferirAtleta() throws ClassNotFoundException, SQLException {
+        boolean sucesso = true;
+        try {
+            AtletaMT.transferirAtleta("teste", "teste", "teste","","teste","teste");
+        }catch (ExceptionDadosIncompletos exceptionDadosIncompletos) {
+            sucesso = false;
+        }catch (MatriculaInvalidaException MatriculaInvalidaException) {
+            sucesso = false;
+        }
+
         assertFalse(sucesso);
     }
     //EXPECTED DADOSINCOMPLETOS
     @Test
-    public void testeTransferirAtleta() throws ClassNotFoundException, SQLException, ExceptionDadosIncompletos, MatriculaInvalidaException {
+    public void testeTransferirAtletaMat() throws ClassNotFoundException, SQLException, ExceptionDadosIncompletos {
         boolean sucesso = true;
-        AtletaMT.transferirAtleta("teste", "teste", "teste","","teste","teste");
-        ResultSet res = AtletaMT.listarAtletas();
-        while(res.next()){
-            if(res.getString("matricula_associacao") == "teste") sucesso = false;
-            break;
-        }
-        assertFalse(sucesso);
-    }
-    //EXPECTED DADOSINCOMPLETOS
-    @Test
-    public void testeTransferirAtletaMat() throws ClassNotFoundException, SQLException, ExceptionDadosIncompletos, MatriculaInvalidaException {
-        boolean sucesso = true;
-        AtletaMT.transferirAtleta("teste", "teste", "teste","teste","","teste");
-        ResultSet res = AtletaMT.listarAtletas();
-        while(res.next()){
-            if(res.getString("matricula_associacao") == "teste") sucesso = false;
-            break;
+        try {
+            AtletaMT.transferirAtleta("teste", "teste", "teste","teste","","teste");
+        } catch (MatriculaInvalidaException e) {
+            sucesso = false;
         }
         assertFalse(sucesso);
     }

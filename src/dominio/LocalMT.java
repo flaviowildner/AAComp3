@@ -57,7 +57,7 @@ public class LocalMT extends HttpServlet {
     }
 
     public static void cadastrarLocal(String nomeLocal, String logradouro, String piscina) throws SQLException, ClassNotFoundException, ExceptionDadosIncompletos{
-        if(nomeLocal.isEmpty() | logradouro.isEmpty() | piscina == null){
+        if(nomeLocal.isEmpty() | logradouro.isEmpty() | piscina.isEmpty()){
             throw new ExceptionDadosIncompletos();
         } else{
             try{
