@@ -41,7 +41,7 @@
             }
         %>
             <tr><td><a href="">Listar balizamento competição</a></td></tr>
-            <tr><td><a href="">Listar pontuação competição</a></td></tr>
+            <tr><td><a class="feito" href="/ListaCompeticao.jsp?id=3">Listar pontuação competição</a></td></tr>
             <tr><td><a href="">Listar pontuação final</a></td></tr>
         <% if (nivel_acesso >= 1){ %>
             <tr><td><a class="feito" href="/FiliarAssociacao.jsp">Filiar Associação</a></td></tr>

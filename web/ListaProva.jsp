@@ -51,7 +51,15 @@
     <input type="submit" value="Enviar">
     <input type="hidden" name="acao" value="3">
 </form>
-<% } else {%>
+<% } else if(request.getAttribute("id").equals("4")){%>
+<form action="/dominio/AtletaProvaMT" method="post">
+    <br>
+    Escreva o nome da prova para ver a pontuação:<br>
+    <input type="text" name="nome">
+    <input type="submit" value="Enviar">
+    <input type="hidden" name="acao" value="4">
+</form>
+<% } else{%>
 <form action="/dominio/AtletaProvaMT" method="post">
     <br>
     Escreva o nome da prova para inserir os resultados:<br>

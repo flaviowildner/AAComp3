@@ -48,10 +48,11 @@
     <% if(request.getParameter("id").equals("2")){
     %>
         <input type="hidden" name="acao" value="5">
-    <% } else {%>
+    <% }else if(request.getParameter("id").equals("3")){%>
+        <input type="hidden" name="acao" value="6">
+    <% }else{ %>
         <input type="hidden" name="acao" value="4">
     <% } %>
-
 </form>
 
 <a href="/">Voltar para página inicial</a>

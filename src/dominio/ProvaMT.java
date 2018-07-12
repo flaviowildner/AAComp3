@@ -117,6 +117,11 @@ public class ProvaMT extends HttpServlet {
                 request.setAttribute("id", "3");
                 request.setAttribute("prova", resultSet);
                 request.getRequestDispatcher("/ListaProva.jsp?").forward(request, response);
+            case 6:
+                resultSet = getProvasCompeticao(request.getParameter("nome"));
+                request.setAttribute("id", "4");
+                request.setAttribute("prova", resultSet);
+                request.getRequestDispatcher("/ListaProva.jsp?").forward(request, response);
         }
     }
 

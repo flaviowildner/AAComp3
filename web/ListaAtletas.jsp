@@ -21,9 +21,13 @@
     <tr>
         <th>Matricula</th>
         <th>Nome</th>
-        <% if(request.getAttribute("id").equals("3")){
+        <% if(request.getAttribute("id").equals("3") | request.getAttribute("id").equals("4")){
         %>
         <th>Tempo</th>
+        <% } %>
+        <% if(request.getAttribute("id").equals("4")){
+        %>
+        <th>Pontos</th>
         <% } %>
     </tr>
     </thead>
@@ -36,11 +40,12 @@
     <tr>
         <td><%=res.getString("matricula") %></td>
         <td><%=res.getString("nome") %></td>
-        <% if(request.getAttribute("id").equals("3")){
+        <% if(request.getAttribute("id").equals("3") | request.getAttribute("id").equals("4")){
         %>
         <td><%=res.getString("tempo") %></td>
+        <% }if(request.getAttribute("id").equals("4")){%>
+        <td><%=res.getString("ponto") %></td>
         <% } %>
-
     </tr>
     <%
             }
@@ -48,7 +53,7 @@
     %>
     </tbody>
 </table>
-<% if(request.getAttribute("id").equals("3")){
+<% if(request.getAttribute("id").equals("3") | request.getAttribute("id").equals("4")){
 %>
 <br>
 <% } else {%>
