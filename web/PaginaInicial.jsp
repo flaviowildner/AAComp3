@@ -27,16 +27,15 @@
             <tr><td><a class="feito" href="/ListarAssociacao.jsp">Listar associação</a></td></tr>
             <tr><td><a class="feito" href="/CadastrarAtleta.jsp">Cadastrar atleta</a></td></tr>
             <tr><td><a class="feito" href="/AlterarAtletaLista.jsp">Alterar cadastro de atleta</a></td></tr>
-            <tr><td><a class="feito" a href="/TransferirAtletaLista.jsp">Transferir atleta</a></td></tr>
+            <tr><td><a class="feito" href="/TransferirAtletaLista.jsp">Transferir atleta</a></td></tr>
             <tr><td><a class="feito" href="/InscreverAtletaListaCompeticoes.jsp">Increver atleta em competição</a></td></tr>
             <tr><td><a class="feito" href="/CriarLocal.jsp">Incluir locais de competição</a></td></tr>
             <tr><td><a class="feito" href="/AlterarLocal.jsp">Alterar locais de competição</a></td></tr>
             <tr><td><a class="feito" href="/ListarLocais.jsp">Listar locais de competição</a></td></tr>
             <tr><td><a class="feito" href="/CriarCompeticao.jsp">Criar competição</a></td></tr>
             <tr><td><a class="feito" href="/AlterarCompeticaoLista.jsp">Alterar competição</a></td></tr>
-            <tr><td><a href="">Inserir resultado do atleta</a></td></tr>
+            <tr><td><a class="feito" href="/ListaCompeticao.jsp">Inserir resultado do atleta</a></td></tr>
             <tr><td><a href="">Listar competição</a></td></tr>
-
         </tbody>
     </table>
 </body>

@@ -1,39 +1,37 @@
-<%@ page import="dominio.AssociacaoMT" %>
 <%@ page import="java.sql.ResultSet" %>
-<%@ page import="dominio.CompeticaoMT" %><%--
+<%@ page import="dominio.LocalMT"%>
+<%@ page import="dominio.CompeticaoMT" %>
+<%--
   Created by IntelliJ IDEA.
-  User: flavi
-  Date: 7/8/2018
-  Time: 6:39 PM
+  User: renan
+  Date: 10/07/2018
+  Time: 23:54
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Lista de Competicoes</title>
+    <title>Atletas</title>
 </head>
-<script>
-
-</script>
 <body>
 <h2 style="text-align: center">Sistema SISFARJ</h2>
-<b>Lista de competicoes</b><br><br>
+<b>Lista de Atletas da prova escolhida</b><br><br>
 <table border="1px">
     <thead>
     <tr>
+        <th>Matricula</th>
         <th>Nome</th>
-        <th>Data</th>
     </tr>
     </thead>
     <tbody>
     <%
-        ResultSet res = CompeticaoMT.listarCompeticoes();
+        ResultSet res = (ResultSet)request.getAttribute("atleta");
         if(!res.isClosed()){
             while(res.next()){
     %>
     <tr>
+        <td><%=res.getString("matricula") %></td>
         <td><%=res.getString("nome") %></td>
-        <td><%=res.getString("data") %></td>
     </tr>
     <%
             }
@@ -41,14 +39,18 @@
     %>
     </tbody>
 </table>
-<br>
-<form action="/dominio/CompeticaoMT" method="post">
-    Escreva o nome da competição que deseja alterar:<br>
-    <input type="text" name="nome">
+
+<form action="/dominio/AtletaProvaMT" method="post">
+    <br>
+     Matrícula do Atleta:<br>
+    <input type="text" name="matricula_atleta"><br>
+     Tempo do Atleta na Prova:<br>
+    <input type="text" name="tempo">
+    <input type="hidden" name="nome_prova" value="<%=request.getAttribute("nome_prova")%>"><br>
     <input type="submit" value="Enviar">
     <input type="hidden" name="acao" value="2">
 </form>
-<br><br>
+
 <a href="/">Voltar para página inicial</a>
 </body>
 </html>

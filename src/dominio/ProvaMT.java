@@ -64,6 +64,7 @@ public class ProvaMT extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         int acao;
+        ResultSet resultSet;
         try{
             acao = Integer.parseInt(request.getParameter("acao"));
         } catch (NumberFormatException e){
@@ -72,7 +73,7 @@ public class ProvaMT extends HttpServlet {
 
         switch(acao) {
             case 1:
-                ResultSet resultSet = getProvasCompeticao(request.getParameter("nome"));
+                resultSet = getProvasCompeticao(request.getParameter("nome"));
                 request.setAttribute("prova", resultSet);
                 request.getRequestDispatcher("/InscreverAtletaListaProvas.jsp").forward(request, response);
             case 2:
@@ -90,7 +91,7 @@ public class ProvaMT extends HttpServlet {
                 }catch (AtletaJaInscritoEmProvaException e){
                     request.getRequestDispatcher("/AtletaJaInscritoEmProva.jsp").forward(request, response);
                 }
-                request.getRequestDispatcher("/AtletaInscritoEmProva.jsp").forward(request, response);
+                request.getRequestDispatcher("/DadosLancadosSucesso.jsp").forward(request, response);
             case 3:
                 try {
                     cadastrarProva(request.getParameter("nome_prova"),
@@ -107,6 +108,10 @@ public class ProvaMT extends HttpServlet {
                     e.printStackTrace();
                 }
                 request.getRequestDispatcher("/ProvaCriada.jsp").forward(request, response);
+            case 4:
+                resultSet = getProvasCompeticao(request.getParameter("nome"));
+                request.setAttribute("prova", resultSet);
+                request.getRequestDispatcher("/ListaProva.jsp").forward(request, response);
         }
     }
 
