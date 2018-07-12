@@ -33,7 +33,7 @@
             <tr><td><a href="">Alterar locais de competição</a></td></tr>
             <tr><td><a class="feito" href="/ListarLocais.jsp">Listar locais de competição</a></td></tr>
             <tr><td><a class="feito" href="/CriarCompeticao.jsp">Criar competição</a></td></tr>
-            <tr><td><a href="/AlterarCompeticaoLista.jsp">Alterar competição</a></td></tr>
+            <tr><td><a class="feito" href="/AlterarCompeticaoLista.jsp">Alterar competição</a></td></tr>
             <tr><td><a href="">Inserir resultado do atleta</a></td></tr>
             <tr><td><a href="">Listar competição</a></td></tr>
 
