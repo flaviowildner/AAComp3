@@ -13,6 +13,9 @@ public class AssociacaoPA{
                             " VALUES('" + numero_oficio + "', '" + data_oficio + "', '" + nome + "', '" + sigla + "', '" + endereco + "', '" + telefone + "', '" + comprovante_pagamento + "', '" + matricula + "', '" + senha + "');");
     }
 
+    public static ResultSet buscarSigla(String matricula) throws SQLException, ClassNotFoundException{
+        return Banco.executeReturn("SELECT sigla FROM associacao WHERE matricula = (SELECT matricula_associacao FROM atleta WHERE matricula = '" + matricula + "');");
+    }
     public static ResultSet buscarTodasAssociacoes() throws SQLException, ClassNotFoundException {
         return Banco.executeReturn("SELECT matricula, nome FROM associacao ORDER BY nome ASC;");
     }
@@ -22,5 +25,6 @@ public class AssociacaoPA{
     public static ResultSet buscarAssociacaoDados(String matricula) throws SQLException, ClassNotFoundException{
         return Banco.executeReturn("SELECT numero_oficio, data_oficio, nome, sigla, endereco, telefone, comprovante_pagamento, matricula FROM associacao WHERE matricula = '" + matricula + "';");
     }
+
 
 }

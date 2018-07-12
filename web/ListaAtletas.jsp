@@ -1,6 +1,7 @@
 <%@ page import="java.sql.ResultSet" %>
 <%@ page import="dominio.LocalMT"%>
 <%@ page import="dominio.CompeticaoMT" %>
+<%@ page import="dados.AssociacaoPA" %>
 <%--
   Created by IntelliJ IDEA.
   User: renan
@@ -28,6 +29,7 @@
         <% if(request.getAttribute("id").equals("4")){
         %>
         <th>Pontos</th>
+        <th>Sigla Associação</th>
         <% } %>
     </tr>
     </thead>
@@ -45,9 +47,15 @@
         <td><%=res.getString("tempo") %></td>
         <% }if(request.getAttribute("id").equals("4")){%>
         <td><%=res.getString("ponto") %></td>
+        <%
+            ResultSet res2 = AssociacaoPA.buscarSigla(res.getString("matricula"));
+            while(res2.next()){
+            %>
+        <td><%=res2.getString("sigla") %></td>
         <% } %>
     </tr>
     <%
+                }
             }
         }
     %>

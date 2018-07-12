@@ -3,6 +3,7 @@ CREATE TABLE usuario(
   senha VARCHAR(255),
   nivel_acesso VARCHAR(255)
 );
+INSERT INTO usuario(matricula, senha, nivel_acesso) VALUES ('tecnico', 'tecnico', 1);
 INSERT INTO usuario(matricula, senha, nivel_acesso) VALUES ('secretario', 'secretario', 2);
 INSERT INTO usuario(matricula, senha, nivel_acesso) VALUES ('diretor', 'diretor', 3);
 
