@@ -1,5 +1,6 @@
 <%@ page import="dominio.UsuarioMT" %><% UsuarioMT.idenficarUsuario(request, response); %>
 <%@ page import="java.sql.ResultSet" %>
+<%@ page import="dados.AssociacaoPA" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
