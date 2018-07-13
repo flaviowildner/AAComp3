@@ -63,23 +63,23 @@ public class AtletaTeste {
         }
         assertFalse(sucesso);
     }
-    @Test
-    public void testeTransferirAtleta() throws SQLException, ClassNotFoundException {
-        boolean sucesso = false;
-        try {
-            AtletaMT.transferirAtleta("testeAtletaTransferir", "testeAtletaTransferir", "testeAtletaTransferir","testeAtletaTransferir","320133379","362019432");
-        }catch (ExceptionDadosIncompletos exceptionDadosIncompletos) {
-            sucesso = false;
-        }catch(MatriculaInvalidaException e){
-            sucesso = false;
-        }
-        ResultSet res = AtletaMT.getDadosAtleta("320133379");
-        while(res.next()){
-            if(res.getString("numero").equals("testeAtletaTransferir")) {
-                sucesso = true;
-                break;
-            }
-        }
-        assertTrue(sucesso);
-    }
+//    @Test
+//    public void testeTransferirAtleta() throws SQLException, ClassNotFoundException {
+//        boolean sucesso = false;
+//        try {
+//            AtletaMT.transferirAtleta("testeAtletaTransferir", "testeAtletaTransferir", "testeAtletaTransferir","testeAtletaTransferir","320133379","362019432");
+//        }catch (ExceptionDadosIncompletos exceptionDadosIncompletos) {
+//            sucesso = false;
+//        }catch(MatriculaInvalidaException e){
+//            sucesso = false;
+//        }
+//        ResultSet res = AtletaMT.getDadosAtleta("320133379");
+//        while(res.next()){
+//            if(res.getString("numero").equals("testeAtletaTransferir")) {
+//                sucesso = true;
+//                break;
+//            }
+//        }
+//        assertTrue(sucesso);
+//    }
 }

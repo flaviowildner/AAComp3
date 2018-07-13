@@ -2,6 +2,7 @@ package dominio;
 
 import dados.AssociacaoPA;
 import dados.UsuarioPA;
+import exceptions.DadoNaoExisteException;
 import exceptions.ExceptionDadosIncompletos;
 
 import javax.servlet.RequestDispatcher;
@@ -23,6 +24,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 @WebServlet(name = "AssociacaoMT", urlPatterns = {"/dominio/AssociacaoMT"})
 public class AssociacaoMT extends HttpServlet {
+
     public static ResultSet listarAssociacao() {
         try {
             return AssociacaoPA.buscarTodasAssociacoes();
@@ -39,42 +41,33 @@ public class AssociacaoMT extends HttpServlet {
         if(numero_oficio.isEmpty() | data.isEmpty() | nome.isEmpty() | sigla.isEmpty() | endereco.isEmpty() | telefone.isEmpty() | comprovante_pagamento.isEmpty()){
             throw new ExceptionDadosIncompletos();
         }else {
-            try {
-                String matricula, senha;
-                senha = Integer.toString(new Random().nextInt(999999999) + 10000000);
-                while(AssociacaoPA.buscarAssociacao(matricula = Integer.toString(new Random().nextInt(999999999) + 1)).next()){}
-                AssociacaoPA.inserir(numero_oficio, data, nome, sigla, endereco, telefone, comprovante_pagamento, matricula, senha);
-                UsuarioPA.inserir(matricula, senha, "1");
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-                //ERRO NO BANCO DE DADOS
-            } catch (ClassNotFoundException e) {
-                System.out.println("EXCEPTION CLASSNOTFOUND");
-                //ERRO NO BANCO DE DADOS
-            }
+            String matricula, senha;
+            senha = Integer.toString(new Random().nextInt(999999999) + 10000000);
+            while(AssociacaoPA.buscarAssociacao(matricula = Integer.toString(new Random().nextInt(999999999) + 1)).next()){}
+            AssociacaoPA.inserir(numero_oficio, data, nome, sigla, endereco, telefone, comprovante_pagamento, matricula, senha);
+            UsuarioPA.inserir(matricula, senha, "1");
         }
     }
 
-    public static ResultSet getDadosAssociacao(String matricula){
-        try {
+    public static ResultSet getDadosAssociacao(String matricula) throws SQLException, ClassNotFoundException, DadoNaoExisteException {
+        if(AssociacaoPA.buscarAssociacao(matricula).next() == false)
+            throw new DadoNaoExisteException();
+        else {
             return AssociacaoPA.buscarAssociacaoDados(matricula);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-            return null;
-        } catch (ClassNotFoundException e) {
-            System.out.println(e.getMessage());
-            return null;
         }
     }
 
-    public static void alterarAssociacaoDados(String numero_oficio, String data, String nome, String sigla, String endereco, String telefone, String comprovante_pagamento, String matricula) throws ExceptionDadosIncompletos, SQLException, ClassNotFoundException {
-        if(numero_oficio.isEmpty() | data.isEmpty() | nome.isEmpty() | sigla.isEmpty() | endereco.isEmpty() | telefone.isEmpty() | comprovante_pagamento.isEmpty() | matricula.isEmpty()){
+    public static void alterarAssociacaoDados(String numero_oficio, String data, String nome, String sigla, String endereco, String telefone, String comprovante_pagamento, String matricula) throws ExceptionDadosIncompletos, DadoNaoExisteException,SQLException, ClassNotFoundException {
+        if(AssociacaoPA.buscarAssociacao(matricula).next() == false){
+            throw new DadoNaoExisteException();
+        }
+        else if(numero_oficio.isEmpty() | data.isEmpty() | nome.isEmpty() | sigla.isEmpty() | endereco.isEmpty() | telefone.isEmpty() | comprovante_pagamento.isEmpty() | matricula.isEmpty()){
             throw new ExceptionDadosIncompletos();
         }else {
             AssociacaoPA.update(numero_oficio, data, nome, sigla, endereco, telefone, comprovante_pagamento, matricula);
         }
     }
+
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int acao;
@@ -103,7 +96,17 @@ public class AssociacaoMT extends HttpServlet {
                 }
                 request.getRequestDispatcher("/PaginaInicial.jsp").forward(request, response);
             case 2:
-                ResultSet resultSet = getDadosAssociacao(request.getParameter("matricula"));
+                ResultSet resultSet = null;
+                try {
+                    resultSet = getDadosAssociacao(request.getParameter("matricula"));
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                } catch (DadoNaoExisteException e) {
+                    request.setAttribute("dado", "Matrícula da Associação");
+                    request.getRequestDispatcher("/ExcecaoDadoNaoExiste.jsp").forward(request, response);
+                }
                 request.setAttribute("associacao", resultSet);
                 request.getRequestDispatcher("/AlterarAssociacaoDados.jsp").forward(request, response);
             case 3:
@@ -122,6 +125,8 @@ public class AssociacaoMT extends HttpServlet {
                     e.printStackTrace();
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
+                } catch (DadoNaoExisteException e) {
+                    request.getRequestDispatcher("/ExcecaoDadoNaoExiste.jsp").forward(request, response);
                 }
                 request.getRequestDispatcher("/PaginaInicial.jsp").forward(request, response);
         }

@@ -5,6 +5,8 @@ import java.util.Random;
 import dados.AssociacaoPA;
 import dados.AtletaPA;
 import java.sql.SQLException;
+
+import exceptions.DadoNaoExisteException;
 import exceptions.ExceptionDadosIncompletos;
 import exceptions.MatriculaInvalidaException;
 import javax.servlet.ServletException;
@@ -49,16 +51,12 @@ public class AtletaMT extends HttpServlet {
         }
     }
 
-    public static ResultSet getDadosAtleta(String matricula){
-        try {
+    public static ResultSet getDadosAtleta(String matricula) throws SQLException, ClassNotFoundException, DadoNaoExisteException {
+        if(AtletaPA.buscarAtleta(matricula).next() == false){
+            throw new DadoNaoExisteException();
+        }
+        else {
             return AtletaPA.buscarAtletaDados(matricula);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-            return null;
-        } catch (ClassNotFoundException e) {
-            System.out.println(e.getMessage());
-            return null;
         }
     }
 
@@ -68,24 +66,16 @@ public class AtletaMT extends HttpServlet {
         }else if(AssociacaoPA.buscarAssociacao(matricula_associacao).next() == false){
             throw new MatriculaInvalidaException();
         }else {
-            try {
-                String matricula;
-                while(AtletaPA.buscarAtleta(matricula = Integer.toString(new Random().nextInt(999999999) + 1)).next()){}
-                System.out.println(matricula);
-                AtletaPA.inserir(nome, numero, data_entrada, data_oficio, data_nascimento, comprovante, matricula_associacao, matricula);
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-                //ERRO NO BANCO DE DADOS
-            } catch (ClassNotFoundException e) {
-                System.out.println("EXCEPTION CLASSNOTFOUND");
-                //ERRO NO BANCO DE DADOS
-            }
+            String matricula;
+            while(AtletaPA.buscarAtleta(matricula = Integer.toString(new Random().nextInt(999999999) + 1)).next()){}
+            System.out.println(matricula);
+            AtletaPA.inserir(nome, numero, data_entrada, data_oficio, data_nascimento, comprovante, matricula_associacao, matricula);
         }
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int acao;
-        ResultSet resultSet;
+        ResultSet resultSet = null;
         try{
             acao = Integer.parseInt(request.getParameter("acao"));
         } catch (NumberFormatException e){
@@ -113,7 +103,16 @@ public class AtletaMT extends HttpServlet {
                 }
                 request.getRequestDispatcher("/PaginaInicial.jsp").forward(request, response);
             case 2:
-                resultSet = getDadosAtleta(request.getParameter("matricula"));
+                try {
+                    resultSet = getDadosAtleta(request.getParameter("matricula"));
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                } catch (DadoNaoExisteException e) {
+                    request.setAttribute("dado", "Matrícula de Atleta");
+                    request.getRequestDispatcher("/ExcecaoDadoNaoExiste.jsp").forward(request, response);
+                }
                 request.setAttribute("atleta", resultSet);
                 request.getRequestDispatcher("/AlterarAtletaDados.jsp").forward(request, response);
             case 3:
@@ -132,7 +131,16 @@ public class AtletaMT extends HttpServlet {
                 }
                 request.getRequestDispatcher("/PaginaInicial.jsp").forward(request, response);
             case 4:
-                resultSet = getDadosAtleta(request.getParameter("matricula"));
+                try {
+                    resultSet = getDadosAtleta(request.getParameter("matricula"));
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                } catch (DadoNaoExisteException e) {
+                    request.setAttribute("dado", "Matrícula de Atleta");
+                    request.getRequestDispatcher("/ExcecaoDadoNaoExiste.jsp").forward(request, response);
+                }
                 request.setAttribute("atleta", resultSet);
                 request.getRequestDispatcher("/TransferirAtletaDados.jsp").forward(request, response);
             case 5:

@@ -1,6 +1,7 @@
 package dominio;
 
 import dados.LocalPA;
+import exceptions.DadoNaoExisteException;
 import exceptions.ExceptionDadosIncompletos;
 
 import javax.servlet.RequestDispatcher;
@@ -22,6 +23,42 @@ import java.util.concurrent.ThreadLocalRandom;
 
 @WebServlet(name = "LocalMT", urlPatterns = {"/dominio/LocalMT"})
 public class LocalMT extends HttpServlet {
+
+    public static ResultSet listarLocais(){
+        try{
+            return LocalPA.buscarTodosLocais();
+        } catch(SQLException e){
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+            return null;
+        } catch(ClassNotFoundException e){
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
+    public static void setNewLocalData(String nomelocal, String logradouro, String piscina) throws ExceptionDadosIncompletos, SQLException, ClassNotFoundException{
+        if(logradouro.isEmpty() | piscina.isEmpty()){
+            throw new ExceptionDadosIncompletos();
+        } else{
+            LocalPA.update(nomelocal, logradouro, piscina);
+        }
+    }
+
+    public static ResultSet getDadosLocal(String nomeLocal) throws DadoNaoExisteException, SQLException, ClassNotFoundException {
+        if(LocalPA.buscarLocal(nomeLocal).next() == false){
+            throw new DadoNaoExisteException();
+        }
+        return LocalPA.buscarLocal(nomeLocal);
+    }
+
+    public static void cadastrarLocal(String nomeLocal, String logradouro, String piscina) throws SQLException, ClassNotFoundException, ExceptionDadosIncompletos{
+        if(nomeLocal.isEmpty() | logradouro.isEmpty() | piscina == null){
+            throw new ExceptionDadosIncompletos();
+        } else{
+            LocalPA.inserir(nomeLocal, logradouro, piscina);
+        }
+    }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int acao;
@@ -47,9 +84,17 @@ public class LocalMT extends HttpServlet {
                 request.getRequestDispatcher("/PaginaInicial.jsp").forward(request, response);
                 break;
             case 2:
-                String local = request.getParameter("local");
-                System.out.println(local);
-                ResultSet res = this.getDadosLocal(local);
+                ResultSet res = null;
+                try {
+                    res = this.getDadosLocal(request.getParameter("local"));
+                } catch (DadoNaoExisteException e) {
+                    request.setAttribute("dado", "Local informado");
+                    request.getRequestDispatcher("/ExcecaoDadoNaoExiste.jsp").forward(request, response);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
                 request.setAttribute("local", res);
                 request.getRequestDispatcher("/MudarLocal.jsp").forward(request, response);
                 break;
@@ -71,54 +116,5 @@ public class LocalMT extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
-    }
-
-    public static ResultSet listarLocais(){
-        try{
-            return LocalPA.buscarTodosLocais();
-        } catch(SQLException e){
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-            return null;
-        } catch(ClassNotFoundException e){
-            System.out.println(e.getMessage());
-            return null;
-        }
-    }
-
-
-    public static void setNewLocalData(String nomelocal, String logradouro, String piscina) throws ExceptionDadosIncompletos, SQLException, ClassNotFoundException{
-        if(logradouro.isEmpty() | piscina.isEmpty()){
-            throw new ExceptionDadosIncompletos();
-        } else{
-            LocalPA.update(nomelocal, logradouro, piscina);
-        }
-    }
-
-    public static ResultSet getDadosLocal(String nomeLocal){
-        try{
-            return LocalPA.buscarLocal(nomeLocal);
-        } catch(SQLException e){
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-            return null;
-        } catch(ClassNotFoundException e){
-            System.out.println(e.getMessage());
-            return null;
-        }
-    }
-
-    public static void cadastrarLocal(String nomeLocal, String logradouro, String piscina) throws SQLException, ClassNotFoundException, ExceptionDadosIncompletos{
-        if(nomeLocal.isEmpty() | logradouro.isEmpty() | piscina == null){
-            throw new ExceptionDadosIncompletos();
-        } else{
-            try{
-                LocalPA.inserir(nomeLocal, logradouro, piscina);
-            } catch(SQLException e){
-                System.out.println(e.getMessage());
-            } catch(ClassNotFoundException e){
-                System.out.println("EXCEPTION CLASSNOTFOUND");
-            }
-        }
     }
 }
