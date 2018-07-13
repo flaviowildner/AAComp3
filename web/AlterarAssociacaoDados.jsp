@@ -1,6 +1,7 @@
+<%@ page import="dominio.UsuarioMT" %><% UsuarioMT.idenficarUsuario(request, response); %>
 <%@ page import="java.sql.ResultSet" %>
-<%@ page import="dominio.AssociacaoMT" %>
-<%@ page import="java.sql.ResultSetMetaData" %><%--
+<%@ page import="java.sql.ResultSetMetaData" %>
+<%@ page import="dominio.UsuarioMT" %><%--
   Created by IntelliJ IDEA.
   User: flavi
   Date: 7/9/2018
@@ -42,6 +43,6 @@
         <input type="hidden" name="acao" value="3">
     </form>
     <br><br>
-    <a href="/">Voltar para página inicial</a>
+    <a href="/PaginaInicial.jsp">Voltar para página inicial</a>
 </body>
 </html>
