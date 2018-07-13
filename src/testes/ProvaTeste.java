@@ -6,6 +6,7 @@ import exceptions.ExceptionDadosIncompletos;
 import exceptions.MatriculaInvalidaException;
 import org.junit.jupiter.api.Test;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -23,6 +24,23 @@ public class ProvaTeste {
         assertFalse(sucesso);
     }
     @Test
+    public void testeCadastrarProva() throws SQLException {
+        boolean sucesso = false;
+        try {
+            ProvaMT.cadastrarProva("testeProva", "testeProva", "testeProva", "testeCompeticaoAlterar");
+        } catch (ExceptionDadosIncompletos exceptionDadosIncompletos) {
+            sucesso = false;
+        }
+        ResultSet res = ProvaMT.getProvasCompeticao("testeCompeticaoAlterar");
+        while(res.next()){
+            if(res.getString("nome").equals("testeProva")) {
+                sucesso = true;
+                break;
+            }
+        }
+        assertTrue(sucesso);
+    }
+    @Test
     public void testeInscreverAtletaProvaMat() throws ClassNotFoundException, SQLException, AtletaJaInscritoEmProvaException, ExceptionDadosIncompletos {
         boolean sucesso = true;
         try {
@@ -32,7 +50,8 @@ public class ProvaTeste {
         }
         assertFalse(sucesso);
     }
-    @Test void testeInscreverAtletaProvaNull() throws ClassNotFoundException, SQLException, AtletaJaInscritoEmProvaException, MatriculaInvalidaException {
+    @Test
+    public void testeInscreverAtletaProvaNull() throws ClassNotFoundException, SQLException, AtletaJaInscritoEmProvaException, MatriculaInvalidaException {
         boolean sucesso = true;
         try {
             ProvaMT.inscreverAtletaProva("682705664","");
@@ -40,5 +59,22 @@ public class ProvaTeste {
             sucesso = false;
         }
         assertFalse(sucesso);
+    }
+    @Test
+    public void testeInscreverAtletaProva() throws ClassNotFoundException, SQLException, AtletaJaInscritoEmProvaException, MatriculaInvalidaException {
+        boolean sucesso = false;
+        try {
+            ProvaMT.inscreverAtletaProva("682705664","testeProva");
+        } catch (ExceptionDadosIncompletos exceptionDadosIncompletos) {
+            sucesso = false;
+        }
+        ResultSet res = ProvaMT.getProvasCompeticao("testeCompeticaoAlterar");
+        while(res.next()){
+            if(res.getString("nome").equals("testeProva")) {
+                sucesso = true;
+                break;
+            }
+        }
+        assertTrue(sucesso);
     }
 }
