@@ -38,4 +38,31 @@ public class LocalTeste {
         }
         assertTrue(sucesso);
     }
+    @Test
+    public void testeSetNewLocalDataNull() throws SQLException, ClassNotFoundException {
+        boolean sucesso = true;
+        try {
+            LocalMT.setNewLocalData("","","");
+        } catch (ExceptionDadosIncompletos exceptionDadosIncompletos) {
+            sucesso = false;
+        }
+        assertFalse(sucesso);
+    }
+    @Test
+    public void testeSetNewLocalData() throws SQLException, ClassNotFoundException {
+        boolean sucesso = false;
+        try {
+            LocalMT.setNewLocalData("testeLocal", "SetNewLocalData", "50");
+        }catch (ExceptionDadosIncompletos exceptionDadosIncompletos) {
+            sucesso = false;
+        }
+        ResultSet res = LocalMT.listarLocais();
+        while(res.next()){
+            if(res.getString("logradouro").equals("SetNewLocalData")) {
+                sucesso = true;
+                break;
+            }
+        }
+        assertTrue(sucesso);
+    }
 }

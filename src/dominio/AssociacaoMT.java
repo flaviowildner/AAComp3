@@ -23,7 +23,6 @@ import java.util.concurrent.ThreadLocalRandom;
 
 @WebServlet(name = "AssociacaoMT", urlPatterns = {"/dominio/AssociacaoMT"})
 public class AssociacaoMT extends HttpServlet {
-
     public static ResultSet listarAssociacao() {
         try {
             return AssociacaoPA.buscarTodasAssociacoes();
