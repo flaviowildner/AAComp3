@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: flavi
-  Date: 7/8/2018
-  Time: 9:07 PM
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="dominio.UsuarioMT" %><% UsuarioMT.idenficarUsuario(request, response); %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -23,6 +17,6 @@
         <br><input type="submit" value="Enviar">
     </form>
     <br><br>
-    <a href="/">Voltar para página inicial</a>
+    <a href="/PaginaInicial.jsp">Voltar para página inicial</a>
 </body>
 </html>

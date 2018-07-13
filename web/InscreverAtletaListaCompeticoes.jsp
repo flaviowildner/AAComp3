@@ -1,13 +1,6 @@
+<%@ page import="dominio.UsuarioMT" %><% UsuarioMT.idenficarUsuario(request, response); %>
 <%@ page import="java.sql.ResultSet" %>
-<%@ page import="dominio.LocalMT"%>
 <%@ page import="dominio.CompeticaoMT" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: renan
-  Date: 10/07/2018
-  Time: 23:54
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -49,6 +42,6 @@
 </form>
 <br><br>
 
-<a href="/">Voltar para página inicial</a>
+<a href="/PaginaInicial.jsp">Voltar para página inicial</a>
 </body>
 </html>

@@ -1,3 +1,4 @@
+<%@ page import="dominio.UsuarioMT" %><%@ page import="dominio.UsuarioMT" %><% UsuarioMT.idenficarUsuario(request, response); %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -7,13 +8,15 @@
 <br>
 <form action="/dominio/UsuarioMT" method="post">
     Matricula:<br>
-    <input type="text" name="matricula"><br>
+    <input type="text" name="matricula" required><br>
     Senha:<br>
-    <input type="text" name="senha"><br><br>
+    <input type="password" name="senha" required><br><br>
+    Selecione o nível do usuário:<br>
     <select name="nivel_acesso">
         <option value="2">Secretário</option>
         <option value="3">Diretor técnico</option>
     </select>
+    <br><br>
     <input type="submit" value="Cadastrar">
     <input type="hidden" name="acao" value="2">
 </form>
