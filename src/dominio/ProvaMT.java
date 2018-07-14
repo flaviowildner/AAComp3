@@ -7,10 +7,8 @@ import dados.AtletaProvaPA;
 import dados.CompeticaoPA;
 import dados.ProvaPA;
 import java.sql.SQLException;
-import exceptions.AtletaJaInscritoEmProvaException;
-import exceptions.DadoNaoExisteException;
-import exceptions.ExceptionDadosIncompletos;
-import exceptions.MatriculaInvalidaException;
+import exceptions.*;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,16 +27,13 @@ public class ProvaMT extends HttpServlet {
         return ProvaPA.buscarProvasporCompeticao(nome);
     }
 
-    public static void cadastrarProva(String nome, String classe, String categoria, String nome_competicao) throws ExceptionDadosIncompletos {
-        if(nome.isEmpty() | classe.isEmpty() | categoria.isEmpty()){
+    public static void cadastrarProva(String nome, String classe, String categoria, String nome_competicao) throws ExceptionDadosIncompletos, JaExisteException, SQLException, ClassNotFoundException {
+        if(ProvaPA.buscarProva(nome).next() == true){
+            throw new JaExisteException();
+        } else if(nome.isEmpty() | classe.isEmpty() | categoria.isEmpty()){
             throw new ExceptionDadosIncompletos();
-        }else try {
+        } else{
             ProvaPA.inserir(nome, classe, categoria, nome_competicao);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            System.out.println(e.getMessage());
         }
     }
 
@@ -113,6 +108,12 @@ public class ProvaMT extends HttpServlet {
                     e.printStackTrace();
                 }catch (ClassNotFoundException e){
                     e.printStackTrace();
+                } catch (JaExisteException e) {
+                    request.setAttribute("dado", "Nome de prova");
+                    request.getRequestDispatcher("/ExcecaoJaExiste.jsp").forward(request, response);
+                } catch (DadoNaoExisteException e) {
+                    request.setAttribute("dado", "Local informado");
+                    request.getRequestDispatcher("/ExcecaoDadoNaoExiste.jsp").forward(request, response);
                 }
                 request.getRequestDispatcher("/ProvaCriada.jsp").forward(request, response);
             case 4:

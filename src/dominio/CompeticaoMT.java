@@ -3,6 +3,9 @@ package dominio;
 import exceptions.DadoNaoExisteException;
 import exceptions.ExceptionDadosIncompletos;
 import dados.CompeticaoPA;
+import dados.LocalPA;
+import exceptions.JaExisteException;
+
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -29,15 +32,19 @@ public class CompeticaoMT extends HttpServlet {
         }
     }
 
-    public static void cadastrarCompeticao(String nome, String data) throws SQLException, ClassNotFoundException, ExceptionDadosIncompletos {
-        if(nome.isEmpty() | data.isEmpty()){
+    public static void cadastrarCompeticao(String nome, String data) throws SQLException, ClassNotFoundException, ExceptionDadosIncompletos, JaExisteException {
+        if(CompeticaoPA.buscarCompeticaoDados(nome).next() == true){
+            throw new JaExisteException();
+        } else if(nome.isEmpty() | data.isEmpty()){
             throw new ExceptionDadosIncompletos();
         }else
             CompeticaoPA.inserir(nome, data);
     }
 
-    public static void updateLocal(String nome, String local) throws SQLException, ClassNotFoundException, ExceptionDadosIncompletos {
-        if(nome.isEmpty() | local.isEmpty()){
+    public static void updateLocal(String nome, String local) throws SQLException, ClassNotFoundException, ExceptionDadosIncompletos, DadoNaoExisteException {
+        if(LocalPA.buscarLocal(local).next() == false){
+            throw new DadoNaoExisteException();
+        } else if(nome.isEmpty() | local.isEmpty()){
             throw new ExceptionDadosIncompletos();
         }else
             CompeticaoPA.updateLocal(nome, local);
@@ -76,8 +83,11 @@ public class CompeticaoMT extends HttpServlet {
                     e.printStackTrace();
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
-                } catch (ExceptionDadosIncompletos exceptionDadosIncompletos) {
+                } catch (ExceptionDadosIncompletos e) {
                     request.getRequestDispatcher("/ExcecaoDadosIncompletos.jsp").forward(request, response);
+                } catch (JaExisteException e) {
+                    request.setAttribute("dado", "Nome de Competição");
+                    request.getRequestDispatcher("/ExcecaoJaExiste.jsp").forward(request, response);
                 }
                 request.setAttribute("nome_competicao", request.getParameter("nome"));
                 request.getRequestDispatcher("/ListarLocaisCadastroCompeticao.jsp").forward(request, response);

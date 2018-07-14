@@ -12,16 +12,16 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ProvaTeste {
-    @Test
-    public void testeCadastrarProvaNull(){
-        boolean sucesso = true;
-        try {
-            ProvaMT.cadastrarProva("teste", "", "", "");
-        } catch (ExceptionDadosIncompletos exceptionDadosIncompletos) {
-            sucesso = false;
-        }
-        assertFalse(sucesso);
-    }
+//    @Test
+//    public void testeCadastrarProvaNull(){
+//        boolean sucesso = true;
+//        try {
+//            ProvaMT.cadastrarProva("teste", "", "", "");
+//        } catch (ExceptionDadosIncompletos exceptionDadosIncompletos) {
+//            sucesso = false;
+//        }
+//        assertFalse(sucesso);
+//    }
 //    @Test
 //    public void testeCadastrarProva() throws SQLException {
 //        boolean sucesso = false;
