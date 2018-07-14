@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class ProvaTeste {
+public class ProvaTesteUnitario {
     @Test
     public void testeCadastrarProvaNull(){
         boolean sucesso = true;

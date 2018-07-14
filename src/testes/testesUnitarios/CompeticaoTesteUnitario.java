@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class CompeticaoTeste {
+public class CompeticaoTesteUnitario {
     @Test
     public void testeCadastrarCompeticaoNull() throws SQLException, ClassNotFoundException {
         boolean sucesso = true;

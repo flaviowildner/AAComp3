@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class LocalTeste {
+public class LocalTesteUnitario {
     @Test
     public void testeCadastrarLocalNull() throws SQLException, ClassNotFoundException {
         boolean sucesso = true;

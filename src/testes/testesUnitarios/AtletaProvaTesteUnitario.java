@@ -3,7 +3,7 @@ package testes.testesUnitarios;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class AtletaProvaTeste {
+public class AtletaProvaTesteUnitario {
 //    @Test
 //    public void testePontuarAtletaNull() throws ExceptionDadosIncompletos {
 //        boolean sucesso = true;
