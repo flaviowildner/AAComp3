@@ -71,7 +71,7 @@
     <br>
      Matrícula do Atleta:<br>
     <input type="text" name="matricula_atleta"><br>
-     Tempo do Atleta na Prova:<br>
+     Tempo do Atleta na Prova: (HH:MM.SS)<br>
     <input type="text" name="tempo">
     <input type="hidden" name="nome_prova" value="<%=request.getAttribute("nome_prova")%>"><br>
     <input type="submit" value="Enviar">

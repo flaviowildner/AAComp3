@@ -5,7 +5,6 @@ import java.util.Random;
 import dados.AssociacaoPA;
 import dados.AtletaPA;
 import java.sql.SQLException;
-
 import exceptions.DadoNaoExisteException;
 import exceptions.ExceptionDadosIncompletos;
 import exceptions.MatriculaInvalidaException;

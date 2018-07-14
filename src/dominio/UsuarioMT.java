@@ -40,7 +40,7 @@ public class UsuarioMT extends HttpServlet {
                     ResultSet res = GatewayUsuario.getDadosUsuario(matricula, senha);
                     if(res.next()){
                         Cookie cookie_acesso = new Cookie("nivel_acesso", res.getString("nivel_acesso"));
-                        cookie_acesso.setMaxAge(300);
+                        cookie_acesso.setMaxAge(900);
                         cookie_acesso.setPath("/");
                         response.addCookie(cookie_acesso);
                         response.sendRedirect("/PaginaInicial.jsp");

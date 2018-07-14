@@ -1,20 +1,17 @@
 package dominio;
 
 import java.sql.ResultSet;
-
 import dados.AtletaPA;
 import dados.AtletaProvaPA;
 import dados.CompeticaoPA;
 import dados.ProvaPA;
 import java.sql.SQLException;
 import exceptions.*;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.sound.midi.SysexMessage;
 import java.io.IOException;
 
 @WebServlet(name = "ProvaMT", urlPatterns = {"/dominio/ProvaMT"})
