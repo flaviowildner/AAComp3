@@ -41,6 +41,7 @@
             <tr><td><a class="feito" href="/AlterarAssociacaoLista.jsp">Alterar filiação de associação</a></td></tr>
             <tr><td><a class="feito" href="/ListarAssociacao.jsp">Listar associação</a></td></tr>
             <tr><td><a class="feito" href="/CadastrarAtleta.jsp">Cadastrar atleta</a></td></tr>
+            <tr><td><a class="feito" href="/ListaAtletas.jsp?id=5">Listar atletas</a></td></tr>
             <tr><td><a class="feito" href="/AlterarAtletaLista.jsp">Alterar cadastro de atleta</a></td></tr>
             <tr><td><a class="feito" href="/TransferirAtletaLista.jsp">Transferir atleta</a></td></tr>
         <% } %>
