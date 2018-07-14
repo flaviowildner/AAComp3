@@ -1,4 +1,4 @@
-package testes.testesUnitarios;
+package testes;
 
 import dominio.AssociacaoMT;
 import exceptions.ExceptionDadosIncompletos;
@@ -60,31 +60,31 @@ public class AssociacaoTeste {
         }
         assertTrue(sucesso);
     }
-//    @Test
-//    public void testeAlterarAssociacaoDadosNull() throws ClassNotFoundException, SQLException{
-//        boolean sucesso = true;
-//        try {
-//            AssociacaoMT.alterarAssociacaoDados("teste","teste", "teste", "", "", "", "teste","362019432");
-//        } catch (ExceptionDadosIncompletos exceptionDadosIncompletos) {
-//            sucesso = false;
-//        }
-//        assertFalse(sucesso);
-//    }
-//    @Test
-//    public void testeAlterarAssociacaoDados() throws ClassNotFoundException, SQLException{
-//        boolean sucesso = false;
-//        try {
-//            AssociacaoMT.alterarAssociacaoDados("testeAssociacaoAlterar","testeAssociacaoAlterar", "testeAssociacaoAlterar", "testeAssociacaoAlterar", "testeAssociacaoAlterar", "testeAssociacaoAlterar", "testeAssociacaoAlterar","362019432");
-//        } catch (ExceptionDadosIncompletos exceptionDadosIncompletos) {
-//            sucesso = false;
-//        }
-//        ResultSet res = AssociacaoMT.listarAssociacao();
-//        while(res.next()){
-//            if(res.getString("nome").equals("testeAssociacaoAlterar")) {
-//                sucesso = true;
-//                break;
-//            }
-//        }
-//        assertTrue(sucesso);
-//    }
+    @Test
+    public void testeAlterarAssociacaoDadosNull() throws ClassNotFoundException, SQLException{
+        boolean sucesso = true;
+        try {
+            AssociacaoMT.alterarAssociacaoDados("teste","teste", "teste", "", "", "", "teste","teste");
+        } catch (ExceptionDadosIncompletos exceptionDadosIncompletos) {
+            sucesso = false;
+        }
+        assertFalse(sucesso);
+    }
+    @Test
+    public void testeAlterarAssociacaoDados() throws ClassNotFoundException, SQLException{
+        boolean sucesso = false;
+        try {
+            AssociacaoMT.alterarAssociacaoDados("testeAssociacaoAlterar","testeAssociacaoAlterar", "testeAssociacaoAlterar", "testeAssociacaoAlterar", "testeAssociacaoAlterar", "testeAssociacaoAlterar", "testeAssociacaoAlterar","teste");
+        } catch (ExceptionDadosIncompletos exceptionDadosIncompletos) {
+            sucesso = false;
+        }
+        ResultSet res = AssociacaoMT.listarAssociacao();
+        while(res.next()){
+            if(res.getString("nome").equals("testeAssociacaoAlterar")) {
+                sucesso = true;
+                break;
+            }
+        }
+        assertTrue(sucesso);
+    }
 }

@@ -53,13 +53,13 @@ public class CompeticaoTeste {
     public void testeUpdateLocal() throws SQLException, ClassNotFoundException {
         boolean sucesso = false;
         try {
-            CompeticaoMT.updateLocal("testeCompeticao", "teste");
+            CompeticaoMT.updateLocal("teste", "testeLocal");
         } catch (ExceptionDadosIncompletos exceptionDadosIncompletos) {
             sucesso = false;
         }
-        ResultSet res = CompeticaoPA.buscarCompeticaoLocal("testeCompeticao");
+        ResultSet res = CompeticaoPA.buscarCompeticaoLocal("teste");
         while(res.next()){
-            if(res.getString("nomelocal").equals("teste")) {
+            if(res.getString("nomelocal").equals("testeLocal")) {
                 sucesso = true;
                 break;
             }
@@ -82,6 +82,8 @@ public class CompeticaoTeste {
         try {
             CompeticaoMT.alterarCompeticaoDados("testeCompeticaoAlterar","testeCompeticaoAlterar", "testeCompeticao");
         } catch (ExceptionDadosIncompletos exceptionDadosIncompletos) {
+            sucesso = false;
+        }catch(SQLException SQLException){
             sucesso = false;
         }
         ResultSet res = CompeticaoMT.listarCompeticoes();

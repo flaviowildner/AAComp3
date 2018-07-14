@@ -17,6 +17,7 @@ telefone VARCHAR(255),
 comprovante_pagamento VARCHAR(255),
 matricula VARCHAR(255),
 senha VARCHAR(255));
+INSERT INTO associacao(numero_oficio, data_oficio, nome, sigla, endereco, telefone, comprovante_pagamento, matricula, senha) VALUES ('teste','teste','teste','teste','teste','teste','teste','teste','teste')
 
 CREATE TABLE atleta(
 matricula VARCHAR(255) primary key,
@@ -28,6 +29,7 @@ data_nascimento VARCHAR(255),
 comprovante_pagamento VARCHAR(255),
 matricula_associacao VARCHAR(255),
 foreign key (matricula_associacao) references associacao(matricula));
+INSERT INTO atleta(matricula, nome, numero, data_entrada, data_oficio, data_nascimento, comprovante_pagamento, matricula_associacao) VALUES ('teste','teste','teste','teste','teste','teste','teste','teste')
 
 CREATE TABLE local(
 nomelocal varchar(255) primary key,
