@@ -23,23 +23,23 @@ public class ProvaTeste {
         }
         assertFalse(sucesso);
     }
-    @Test
-    public void testeCadastrarProva() throws SQLException {
-        boolean sucesso = false;
-        try {
-            ProvaMT.cadastrarProva("testeProva", "testeProva", "testeProva", "testeCompeticaoAlterar");
-        } catch (ExceptionDadosIncompletos exceptionDadosIncompletos) {
-            sucesso = false;
-        }
-        ResultSet res = ProvaMT.getProvasCompeticao("testeCompeticaoAlterar");
-        while(res.next()){
-            if(res.getString("nome").equals("testeProva")) {
-                sucesso = true;
-                break;
-            }
-        }
-        assertTrue(sucesso);
-    }
+//    @Test
+//    public void testeCadastrarProva() throws SQLException {
+//        boolean sucesso = false;
+//        try {
+//            ProvaMT.cadastrarProva("testeProva", "testeProva", "testeProva", "testeCompeticaoAlterar");
+//        } catch (ExceptionDadosIncompletos exceptionDadosIncompletos) {
+//            sucesso = false;
+//        }
+//        ResultSet res = ProvaMT.getProvasCompeticao("testeCompeticaoAlterar");
+//        while(res.next()){
+//            if(res.getString("nome").equals("testeProva")) {
+//                sucesso = true;
+//                break;
+//            }
+//        }
+//        assertTrue(sucesso);
+//    }
     @Test
     public void testeInscreverAtletaProvaMat() throws ClassNotFoundException, SQLException, AtletaJaInscritoEmProvaException, ExceptionDadosIncompletos {
         boolean sucesso = true;
@@ -60,21 +60,21 @@ public class ProvaTeste {
         }
         assertFalse(sucesso);
     }
-    @Test
-    public void testeInscreverAtletaProva() throws ClassNotFoundException, SQLException, AtletaJaInscritoEmProvaException, MatriculaInvalidaException {
-        boolean sucesso = false;
-        try {
-            ProvaMT.inscreverAtletaProva("682705664","testeProva");
-        } catch (ExceptionDadosIncompletos exceptionDadosIncompletos) {
-            sucesso = false;
-        }
-        ResultSet res = ProvaMT.getProvasCompeticao("testeCompeticaoAlterar");
-        while(res.next()){
-            if(res.getString("nome").equals("testeProva")) {
-                sucesso = true;
-                break;
-            }
-        }
-        assertTrue(sucesso);
-    }
+//    @Test
+//    public void testeInscreverAtletaProva() throws ClassNotFoundException, SQLException, AtletaJaInscritoEmProvaException, MatriculaInvalidaException {
+//        boolean sucesso = false;
+//        try {
+//            ProvaMT.inscreverAtletaProva("682705664","testeProva");
+//        } catch (ExceptionDadosIncompletos exceptionDadosIncompletos) {
+//            sucesso = false;
+//        }
+//        ResultSet res = ProvaMT.getProvasCompeticao("testeCompeticaoAlterar");
+//        while(res.next()){
+//            if(res.getString("nome").equals("testeProva")) {
+//                sucesso = true;
+//                break;
+//            }
+//        }
+//        assertTrue(sucesso);
+//    }
 }

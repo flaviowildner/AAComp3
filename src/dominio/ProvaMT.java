@@ -8,6 +8,7 @@ import dados.CompeticaoPA;
 import dados.ProvaPA;
 import java.sql.SQLException;
 import exceptions.AtletaJaInscritoEmProvaException;
+import exceptions.DadoNaoExisteException;
 import exceptions.ExceptionDadosIncompletos;
 import exceptions.MatriculaInvalidaException;
 import javax.servlet.ServletException;
@@ -21,17 +22,11 @@ import java.io.IOException;
 @WebServlet(name = "ProvaMT", urlPatterns = {"/dominio/ProvaMT"})
 public class ProvaMT extends HttpServlet {
 
-    public static ResultSet getProvasCompeticao(String nome){
-        try {
-            return ProvaPA.buscarProvasporCompeticao(nome);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-            return null;
-        } catch (ClassNotFoundException e) {
-            System.out.println(e.getMessage());
-            return null;
+    public static ResultSet getProvasCompeticao(String nome) throws DadoNaoExisteException, SQLException, ClassNotFoundException {
+        if(CompeticaoPA.buscarCompeticaoDados(nome).next() == false){
+            throw new DadoNaoExisteException();
         }
+        return ProvaPA.buscarProvasporCompeticao(nome);
     }
 
     public static void cadastrarProva(String nome, String classe, String categoria, String nome_competicao) throws ExceptionDadosIncompletos {
@@ -64,15 +59,28 @@ public class ProvaMT extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         int acao;
-        ResultSet resultSet;
+        ResultSet resultSet = null;
         try{
             acao = Integer.parseInt(request.getParameter("acao"));
         } catch (NumberFormatException e){
             acao = 0;
         }
+
+        if(acao == 1| acao == 4 | acao == 5 | acao == 6){
+            try {
+                resultSet = getProvasCompeticao(request.getParameter("nome"));
+            } catch (DadoNaoExisteException e) {
+                request.setAttribute("dado", "Competição informada");
+                request.getRequestDispatcher("/ExcecaoDadoNaoExiste.jsp").forward(request, response);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+
         switch(acao) {
             case 1:
-                resultSet = getProvasCompeticao(request.getParameter("nome"));
                 request.setAttribute("prova", resultSet);
                 request.getRequestDispatcher("/InscreverAtletaListaProvas.jsp").forward(request, response);
             case 2:
@@ -108,17 +116,14 @@ public class ProvaMT extends HttpServlet {
                 }
                 request.getRequestDispatcher("/ProvaCriada.jsp").forward(request, response);
             case 4:
-                resultSet = getProvasCompeticao(request.getParameter("nome"));
                 request.setAttribute("id", "1");
                 request.setAttribute("prova", resultSet);
                 request.getRequestDispatcher("/ListaProva.jsp").forward(request, response);
             case 5:
-                resultSet = getProvasCompeticao(request.getParameter("nome"));
                 request.setAttribute("id", "3");
                 request.setAttribute("prova", resultSet);
                 request.getRequestDispatcher("/ListaProva.jsp?").forward(request, response);
             case 6:
-                resultSet = getProvasCompeticao(request.getParameter("nome"));
                 request.setAttribute("id", "4");
                 request.setAttribute("prova", resultSet);
                 request.getRequestDispatcher("/ListaProva.jsp?").forward(request, response);

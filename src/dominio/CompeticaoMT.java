@@ -1,5 +1,6 @@
 package dominio;
 
+import exceptions.DadoNaoExisteException;
 import exceptions.ExceptionDadosIncompletos;
 import dados.CompeticaoPA;
 import java.sql.ResultSet;
@@ -15,36 +16,6 @@ import java.io.IOException;
 @WebServlet(name = "CompeticaoMT", urlPatterns = {"/dominio/CompeticaoMT"})
 public class CompeticaoMT extends HttpServlet {
 
-    public static void cadastrarCompeticao(String nome, String data) throws SQLException, ClassNotFoundException, ExceptionDadosIncompletos {
-        if(nome.isEmpty() | data.isEmpty()){
-            throw new ExceptionDadosIncompletos();
-        }else {
-            try {
-                CompeticaoPA.inserir(nome, data);
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-                //ERRO NO BANCO DE DADOS
-            } catch (ClassNotFoundException e) {
-                System.out.println("EXCEPTION CLASSNOTFOUND");
-                //ERRO NO BANCO DE DADOS
-            }
-        }
-    }
-
-    public static void updateLocal(String nome, String local) throws SQLException, ClassNotFoundException, ExceptionDadosIncompletos {
-        if(nome.isEmpty() | local.isEmpty()){
-            throw new ExceptionDadosIncompletos();
-        }else {
-            try {
-                CompeticaoPA.updateLocal(nome, local);
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-            } catch (ClassNotFoundException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-    }
-
     public static ResultSet listarCompeticoes(){
         try{
             return CompeticaoPA.buscarTodasCompeticoes();
@@ -58,17 +29,25 @@ public class CompeticaoMT extends HttpServlet {
         }
     }
 
-    public static ResultSet getDadosCompeticao(String nome){
-        try {
-            return CompeticaoPA.buscarCompeticaoDados(nome);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-            return null;
-        } catch (ClassNotFoundException e) {
-            System.out.println(e.getMessage());
-            return null;
+    public static void cadastrarCompeticao(String nome, String data) throws SQLException, ClassNotFoundException, ExceptionDadosIncompletos {
+        if(nome.isEmpty() | data.isEmpty()){
+            throw new ExceptionDadosIncompletos();
+        }else
+            CompeticaoPA.inserir(nome, data);
+    }
+
+    public static void updateLocal(String nome, String local) throws SQLException, ClassNotFoundException, ExceptionDadosIncompletos {
+        if(nome.isEmpty() | local.isEmpty()){
+            throw new ExceptionDadosIncompletos();
+        }else
+            CompeticaoPA.updateLocal(nome, local);
+    }
+
+    public static ResultSet getDadosCompeticao(String nome) throws DadoNaoExisteException, SQLException, ClassNotFoundException {
+        if(CompeticaoPA.buscarCompeticaoDados(nome).next() == false){
+            throw new DadoNaoExisteException();
         }
+        return CompeticaoPA.buscarCompeticaoDados(nome);
     }
 
     public static void alterarCompeticaoDados(String nome, String data, String nome_antigo) throws ExceptionDadosIncompletos, SQLException, ClassNotFoundException {
@@ -78,6 +57,7 @@ public class CompeticaoMT extends HttpServlet {
             CompeticaoPA.update(nome, data, nome_antigo);
         }
     }
+
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int acao;
@@ -102,7 +82,17 @@ public class CompeticaoMT extends HttpServlet {
                 request.setAttribute("nome_competicao", request.getParameter("nome"));
                 request.getRequestDispatcher("/ListarLocaisCadastroCompeticao.jsp").forward(request, response);
             case 2:
-                ResultSet resultSet = getDadosCompeticao(request.getParameter("nome"));
+                ResultSet resultSet = null;
+                try {
+                    resultSet = getDadosCompeticao(request.getParameter("nome"));
+                } catch (DadoNaoExisteException e) {
+                    request.setAttribute("dado", "Competição informada");
+                    request.getRequestDispatcher("/ExcecaoDadoNaoExiste.jsp").forward(request, response);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
                 request.setAttribute("competicao", resultSet);
                 request.getRequestDispatcher("/AlterarCompeticaoDados.jsp").forward(request, response);
             case 3:
