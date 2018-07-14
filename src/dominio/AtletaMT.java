@@ -104,7 +104,7 @@ public class AtletaMT extends HttpServlet {
                 } catch (MatriculaInvalidaException e) {
                     request.getRequestDispatcher("/ExcecaoMatriculaInvalida.jsp").forward(request, response);
                 }
-                request.getRequestDispatcher("/PaginaInicial.jsp").forward(request, response);
+                request.getRequestDispatcher("/AcaoConcluida.jsp").forward(request, response);
             case 2:
                 try {
                     resultSet = getDadosAtleta(request.getParameter("matricula"));
@@ -132,7 +132,7 @@ public class AtletaMT extends HttpServlet {
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 }
-                request.getRequestDispatcher("/PaginaInicial.jsp").forward(request, response);
+                request.getRequestDispatcher("/AcaoConcluida.jsp").forward(request, response);
             case 4:
                 try {
                     resultSet = getDadosAtleta(request.getParameter("matricula"));
@@ -163,7 +163,7 @@ public class AtletaMT extends HttpServlet {
                 } catch (MatriculaInvalidaException e){
                     request.getRequestDispatcher("/ExcecaoMatriculaInvalida.jsp").forward(request, response);
                 }
-                request.getRequestDispatcher("/PaginaInicial.jsp").forward(request, response);
+                request.getRequestDispatcher("/AcaoConcluida.jsp").forward(request, response);
         }
     }
 

@@ -122,7 +122,7 @@ public class CompeticaoMT extends HttpServlet {
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 }
-                request.getRequestDispatcher("/PaginaInicial.jsp").forward(request, response);
+                request.getRequestDispatcher("/AcaoConcluida.jsp").forward(request, response);
         }
     }
 

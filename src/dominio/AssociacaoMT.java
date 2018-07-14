@@ -97,7 +97,7 @@ public class AssociacaoMT extends HttpServlet {
                 } catch (ExceptionDadosIncompletos exceptionDadosIncompletos) {
                     request.getRequestDispatcher("/ExcecaoDadosIncompletos.jsp").forward(request, response);
                 }
-                request.getRequestDispatcher("/PaginaInicial.jsp").forward(request, response);
+                request.getRequestDispatcher("/AcaoConcluida.jsp").forward(request, response);
             case 2:
                 ResultSet resultSet = null;
                 try {
@@ -131,7 +131,7 @@ public class AssociacaoMT extends HttpServlet {
                 } catch (DadoNaoExisteException e) {
                     request.getRequestDispatcher("/ExcecaoDadoNaoExiste.jsp").forward(request, response);
                 }
-                request.getRequestDispatcher("/PaginaInicial.jsp").forward(request, response);
+                request.getRequestDispatcher("/AcaoConcluida.jsp").forward(request, response);
         }
     }
 
