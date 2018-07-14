@@ -3,6 +3,7 @@ package dominio;
 import dados.LocalPA;
 import exceptions.DadoNaoExisteException;
 import exceptions.ExceptionDadosIncompletos;
+import exceptions.JaExisteException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -52,8 +53,10 @@ public class LocalMT extends HttpServlet {
         return LocalPA.buscarLocal(nomeLocal);
     }
 
-    public static void cadastrarLocal(String nomeLocal, String logradouro, String piscina) throws SQLException, ClassNotFoundException, ExceptionDadosIncompletos{
-        if(nomeLocal.isEmpty() | logradouro.isEmpty() | piscina == null){
+    public static void cadastrarLocal(String nomeLocal, String logradouro, String piscina) throws SQLException, ClassNotFoundException, ExceptionDadosIncompletos, JaExisteException {
+        if(LocalPA.buscarLocal(nomeLocal).next() == true){
+            throw new JaExisteException();
+        } else if(nomeLocal.isEmpty() | logradouro.isEmpty() | piscina == null){
             throw new ExceptionDadosIncompletos();
         } else{
             LocalPA.inserir(nomeLocal, logradouro, piscina);
@@ -80,6 +83,9 @@ public class LocalMT extends HttpServlet {
                     e.printStackTrace();
                 } catch(ExceptionDadosIncompletos exceptionDadosIncompletos){
                     request.getRequestDispatcher("/ExcecaoDadosIncompletos.jsp").forward(request, response);
+                } catch (JaExisteException e) {
+                    request.setAttribute("dado", "Nome de local");
+                    request.getRequestDispatcher("/ExcecaoJaExiste.jsp").forward(request, response);
                 }
                 request.getRequestDispatcher("/PaginaInicial.jsp").forward(request, response);
                 break;
