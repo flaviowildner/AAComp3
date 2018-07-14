@@ -25,9 +25,11 @@ import java.util.concurrent.ThreadLocalRandom;
 @WebServlet(name = "LocalMT", urlPatterns = {"/dominio/LocalMT"})
 public class LocalMT extends HttpServlet {
 
+    private static LocalPA GatewayLocal= new LocalPA();
+
     public static ResultSet listarLocais(){
         try{
-            return LocalPA.buscarTodosLocais();
+            return GatewayLocal.buscarTodosLocais();
         } catch(SQLException e){
             System.out.println(e.getMessage());
             e.printStackTrace();
@@ -42,24 +44,24 @@ public class LocalMT extends HttpServlet {
         if(logradouro.isEmpty() | piscina.isEmpty()){
             throw new ExceptionDadosIncompletos();
         } else{
-            LocalPA.update(nomelocal, logradouro, piscina);
+            GatewayLocal.update(nomelocal, logradouro, piscina);
         }
     }
 
     public static ResultSet getDadosLocal(String nomeLocal) throws DadoNaoExisteException, SQLException, ClassNotFoundException {
-        if(LocalPA.buscarLocal(nomeLocal).next() == false){
+        if(GatewayLocal.buscarLocal(nomeLocal).next() == false){
             throw new DadoNaoExisteException();
         }
-        return LocalPA.buscarLocal(nomeLocal);
+        return GatewayLocal.buscarLocal(nomeLocal);
     }
 
     public static void cadastrarLocal(String nomeLocal, String logradouro, String piscina) throws SQLException, ClassNotFoundException, ExceptionDadosIncompletos, JaExisteException {
-        if(LocalPA.buscarLocal(nomeLocal).next() == true){
+        if(GatewayLocal.buscarLocal(nomeLocal).next() == true){
             throw new JaExisteException();
         } else if(nomeLocal.isEmpty() | logradouro.isEmpty() | piscina == null){
             throw new ExceptionDadosIncompletos();
         } else{
-            LocalPA.inserir(nomeLocal, logradouro, piscina);
+            GatewayLocal.inserir(nomeLocal, logradouro, piscina);
         }
     }
 
