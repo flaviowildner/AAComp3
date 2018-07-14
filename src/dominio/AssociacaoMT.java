@@ -5,7 +5,6 @@ import dados.UsuarioPA;
 import exceptions.DadoNaoExisteException;
 import exceptions.ExceptionDadosIncompletos;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,21 +12,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
 
 @WebServlet(name = "AssociacaoMT", urlPatterns = {"/dominio/AssociacaoMT"})
 public class AssociacaoMT extends HttpServlet {
-
+    static AssociacaoPA GatewayAssociacao = new AssociacaoPA();
+    static UsuarioPA GatwayUsuario = new UsuarioPA();
     public static ResultSet listarAssociacao() {
         try {
-            return AssociacaoPA.buscarTodasAssociacoes();
+            return GatewayAssociacao.buscarTodasAssociacoes();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
@@ -43,28 +37,28 @@ public class AssociacaoMT extends HttpServlet {
         }else {
             String matricula, senha;
             senha = Integer.toString(new Random().nextInt(999999999) + 10000000);
-            while(AssociacaoPA.buscarAssociacao(matricula = Integer.toString(new Random().nextInt(999999999) + 1)).next()){}
-            AssociacaoPA.inserir(numero_oficio, data, nome, sigla, endereco, telefone, comprovante_pagamento, matricula, senha);
-            UsuarioPA.inserir(matricula, senha, "1");
+            while(GatewayAssociacao.buscarAssociacao(matricula = Integer.toString(new Random().nextInt(999999999) + 1)).next()){}
+            GatewayAssociacao.inserir(numero_oficio, data, nome, sigla, endereco, telefone, comprovante_pagamento, matricula, senha);
+            GatwayUsuario.inserir(matricula, senha, "1");
         }
     }
 
     public static ResultSet getDadosAssociacao(String matricula) throws SQLException, ClassNotFoundException, DadoNaoExisteException {
-        if(AssociacaoPA.buscarAssociacao(matricula).next() == false)
+        if(GatewayAssociacao.buscarAssociacao(matricula).next() == false)
             throw new DadoNaoExisteException();
         else {
-            return AssociacaoPA.buscarAssociacaoDados(matricula);
+            return GatewayAssociacao.buscarAssociacaoDados(matricula);
         }
     }
 
     public static void alterarAssociacaoDados(String numero_oficio, String data, String nome, String sigla, String endereco, String telefone, String comprovante_pagamento, String matricula) throws ExceptionDadosIncompletos, DadoNaoExisteException,SQLException, ClassNotFoundException {
-        if(AssociacaoPA.buscarAssociacao(matricula).next() == false){
+        if(GatewayAssociacao.buscarAssociacao(matricula).next() == false){
             throw new DadoNaoExisteException();
         }
         else if(numero_oficio.isEmpty() | data.isEmpty() | nome.isEmpty() | sigla.isEmpty() | endereco.isEmpty() | telefone.isEmpty() | comprovante_pagamento.isEmpty() | matricula.isEmpty()){
             throw new ExceptionDadosIncompletos();
         }else {
-            AssociacaoPA.update(numero_oficio, data, nome, sigla, endereco, telefone, comprovante_pagamento, matricula);
+            GatewayAssociacao.update(numero_oficio, data, nome, sigla, endereco, telefone, comprovante_pagamento, matricula);
         }
     }
 

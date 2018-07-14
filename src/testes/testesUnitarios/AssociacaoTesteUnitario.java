@@ -2,6 +2,7 @@ package testes.testesUnitarios;
 
 import org.junit.jupiter.api.Test;
 import testes.Mocks.MockAssociacao;
+import testes.Mocks.MockAtleta;
 
 import java.sql.SQLException;
 
@@ -24,6 +25,12 @@ public class AssociacaoTesteUnitario {
     public void testeAlterarAssociacaoMatriculaInvalida() throws ClassNotFoundException, SQLException{
         MockAssociacao associacaoTeste = new MockAssociacao();
         associacaoTeste.alterarAssociacaoDados("testeAssociacao", "testeAssociacao", "testeAssociacao", "testeAssociacao", "testeAssociacao", "testeAssociacao", "testeAssociacao", "matriculaInvalida");
+        associacaoTeste.validateFail();
+    }
+    @Test
+    public void testeGetDadosAssociacao(){
+        MockAssociacao associacaoTeste = new MockAssociacao();
+        associacaoTeste.getDadosAssociacao("matriculaInvalida");
         associacaoTeste.validateFail();
     }
 }

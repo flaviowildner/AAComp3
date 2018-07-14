@@ -2,7 +2,9 @@ package testes.testesUnitarios;
 
 import dados.CompeticaoPA;
 import dominio.CompeticaoMT;
+import exceptions.DadoNaoExisteException;
 import exceptions.ExceptionDadosIncompletos;
+import exceptions.JaExisteException;
 import org.junit.jupiter.api.Test;
 
 import java.sql.ResultSet;
@@ -12,8 +14,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CompeticaoTesteUnitario {
+    CompeticaoPA GatewayCompeticao = new CompeticaoPA();
     @Test
-    public void testeCadastrarCompeticaoNull() throws SQLException, ClassNotFoundException {
+    public void testeCadastrarCompeticaoNull() throws SQLException, ClassNotFoundException, JaExisteException {
         boolean sucesso = true;
         try {
             CompeticaoMT.cadastrarCompeticao("teste", "");
@@ -23,7 +26,7 @@ public class CompeticaoTesteUnitario {
         assertFalse(sucesso);
     }
     @Test
-    public void testeCadastrarCompeticao() throws SQLException, ClassNotFoundException {
+    public void testeCadastrarCompeticao() throws SQLException, ClassNotFoundException, JaExisteException {
         boolean sucesso = false;
         try {
             CompeticaoMT.cadastrarCompeticao("testeCompeticao", "testeCompeticao");
@@ -40,7 +43,7 @@ public class CompeticaoTesteUnitario {
         assertTrue(sucesso);
     }
     @Test
-    public void testeUpdateLocalNull() throws SQLException, ClassNotFoundException {
+    public void testeUpdateLocalNull() throws SQLException, ClassNotFoundException, DadoNaoExisteException {
         boolean sucesso = true;
         try {
             CompeticaoMT.updateLocal("teste", "");
@@ -50,14 +53,14 @@ public class CompeticaoTesteUnitario {
         assertFalse(sucesso);
     }
     @Test
-    public void testeUpdateLocal() throws SQLException, ClassNotFoundException {
+    public void testeUpdateLocal() throws SQLException, ClassNotFoundException, DadoNaoExisteException {
         boolean sucesso = false;
         try {
             CompeticaoMT.updateLocal("testeCompeticao", "teste");
         } catch (ExceptionDadosIncompletos exceptionDadosIncompletos) {
             sucesso = false;
         }
-        ResultSet res = CompeticaoPA.buscarCompeticaoLocal("testeCompeticao");
+        ResultSet res = GatewayCompeticao.buscarCompeticaoLocal("testeCompeticao");
         while(res.next()){
             if(res.getString("nomelocal").equals("teste")) {
                 sucesso = true;

@@ -19,36 +19,39 @@ import java.io.IOException;
 
 @WebServlet(name = "ProvaMT", urlPatterns = {"/dominio/ProvaMT"})
 public class ProvaMT extends HttpServlet {
-
+    static ProvaPA GatewayProva = new ProvaPA();
+    static CompeticaoPA GatewayCompeticao = new CompeticaoPA();
+    static  AtletaPA GatewayAtleta = new AtletaPA();
+    static AtletaProvaPA GatewayAtletaProva = new AtletaProvaPA();
     public static ResultSet getProvasCompeticao(String nome) throws DadoNaoExisteException, SQLException, ClassNotFoundException {
-        if(CompeticaoPA.buscarCompeticaoDados(nome).next() == false){
+        if(GatewayCompeticao.buscarCompeticaoDados(nome).next() == false){
             throw new DadoNaoExisteException();
         }
-        return ProvaPA.buscarProvasporCompeticao(nome);
+        return GatewayProva.buscarProvasporCompeticao(nome);
     }
 
     public static void cadastrarProva(String nome, String classe, String categoria, String nome_competicao) throws ExceptionDadosIncompletos, JaExisteException, SQLException, ClassNotFoundException {
-        if(ProvaPA.buscarProva(nome).next() == true){
+        if(GatewayProva.buscarProva(nome).next() == true){
             throw new JaExisteException();
         } else if(nome.isEmpty() | classe.isEmpty() | categoria.isEmpty()){
             throw new ExceptionDadosIncompletos();
         } else{
-            ProvaPA.inserir(nome, classe, categoria, nome_competicao);
+            GatewayProva.inserir(nome, classe, categoria, nome_competicao);
         }
     }
 
     public static void inscreverAtletaProva(String matricula_atleta, String nome_prova) throws SQLException, ClassNotFoundException, ExceptionDadosIncompletos, MatriculaInvalidaException, AtletaJaInscritoEmProvaException{
-        if(AtletaPA.buscarAtleta(matricula_atleta).next() == false){
+        if(GatewayAtleta.buscarAtleta(matricula_atleta).next() == false){
             throw new MatriculaInvalidaException();
         }
         else if(matricula_atleta.isEmpty() | nome_prova.isEmpty()){
             throw new ExceptionDadosIncompletos();
         }
-        else if(AtletaProvaPA.findAtletaProva(matricula_atleta,nome_prova).next() == true){
+        else if(GatewayAtletaProva.findAtletaProva(matricula_atleta,nome_prova).next() == true){
             throw new AtletaJaInscritoEmProvaException();
         }
         else{
-            AtletaProvaPA.cadastrarAtletaProva(matricula_atleta,nome_prova);
+            GatewayAtletaProva.cadastrarAtletaProva(matricula_atleta,nome_prova);
         }
     }
 

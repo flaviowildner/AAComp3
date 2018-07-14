@@ -14,6 +14,7 @@ import java.sql.SQLException;
 
 @WebServlet(name = "UsuarioMT", urlPatterns = {"/dominio/UsuarioMT"})
 public class UsuarioMT extends HttpServlet {
+    static UsuarioPA GatewayUsuario = new UsuarioPA();
     public static int idenficarUsuario(HttpServletRequest request, HttpServletResponse response) throws SQLException, ClassNotFoundException, ServletException, IOException {
         Cookie cookies[] = request.getCookies();
 
@@ -34,7 +35,7 @@ public class UsuarioMT extends HttpServlet {
         try {
             switch (acao) {
                 case 1:
-                    ResultSet res = UsuarioPA.getDadosUsuario(matricula, senha);
+                    ResultSet res = GatewayUsuario.getDadosUsuario(matricula, senha);
                     if(res.next()){
                         Cookie cookie_acesso = new Cookie("nivel_acesso", res.getString("nivel_acesso"));
                         cookie_acesso.setMaxAge(300);
@@ -47,7 +48,7 @@ public class UsuarioMT extends HttpServlet {
                     }
                     break;
                 case 2:
-                    UsuarioPA.inserir(matricula, senha, nivel_acesso);
+                    GatewayUsuario.inserir(matricula, senha, nivel_acesso);
                     request.getRequestDispatcher("/Login.jsp").forward(request, response);
                     break;
                 default:

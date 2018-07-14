@@ -18,10 +18,11 @@ import java.io.IOException;
 
 @WebServlet(name = "CompeticaoMT", urlPatterns = {"/dominio/CompeticaoMT"})
 public class CompeticaoMT extends HttpServlet {
-
+    static CompeticaoPA GatewayCompeticao = new CompeticaoPA();
+    static LocalPA GatewayLocal = new LocalPA();
     public static ResultSet listarCompeticoes(){
         try{
-            return CompeticaoPA.buscarTodasCompeticoes();
+            return GatewayCompeticao.buscarTodasCompeticoes();
         } catch(SQLException e){
             System.out.println(e.getMessage());
             e.printStackTrace();
@@ -33,35 +34,35 @@ public class CompeticaoMT extends HttpServlet {
     }
 
     public static void cadastrarCompeticao(String nome, String data) throws SQLException, ClassNotFoundException, ExceptionDadosIncompletos, JaExisteException {
-        if(CompeticaoPA.buscarCompeticaoDados(nome).next() == true){
+        if(GatewayCompeticao.buscarCompeticaoDados(nome).next() == true){
             throw new JaExisteException();
         } else if(nome.isEmpty() | data.isEmpty()){
             throw new ExceptionDadosIncompletos();
         }else
-            CompeticaoPA.inserir(nome, data);
+            GatewayCompeticao.inserir(nome, data);
     }
 
     public static void updateLocal(String nome, String local) throws SQLException, ClassNotFoundException, ExceptionDadosIncompletos, DadoNaoExisteException {
-        if(LocalPA.buscarLocal(local).next() == false){
+        if(GatewayLocal.buscarLocal(local).next() == false){
             throw new DadoNaoExisteException();
         } else if(nome.isEmpty() | local.isEmpty()){
             throw new ExceptionDadosIncompletos();
         }else
-            CompeticaoPA.updateLocal(nome, local);
+            GatewayCompeticao.updateLocal(nome, local);
     }
 
     public static ResultSet getDadosCompeticao(String nome) throws DadoNaoExisteException, SQLException, ClassNotFoundException {
-        if(CompeticaoPA.buscarCompeticaoDados(nome).next() == false){
+        if(GatewayCompeticao.buscarCompeticaoDados(nome).next() == false){
             throw new DadoNaoExisteException();
         }
-        return CompeticaoPA.buscarCompeticaoDados(nome);
+        return GatewayCompeticao.buscarCompeticaoDados(nome);
     }
 
     public static void alterarCompeticaoDados(String nome, String data, String nome_antigo) throws ExceptionDadosIncompletos, SQLException, ClassNotFoundException {
         if(nome.isEmpty() | data.isEmpty()){
             throw new ExceptionDadosIncompletos();
         }else {
-            CompeticaoPA.update(nome, data, nome_antigo);
+            GatewayCompeticao.update(nome, data, nome_antigo);
         }
     }
 

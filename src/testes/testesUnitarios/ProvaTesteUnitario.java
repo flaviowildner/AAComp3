@@ -3,6 +3,7 @@ package testes.testesUnitarios;
 import dominio.ProvaMT;
 import exceptions.AtletaJaInscritoEmProvaException;
 import exceptions.ExceptionDadosIncompletos;
+import exceptions.JaExisteException;
 import exceptions.MatriculaInvalidaException;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ProvaTesteUnitario {
     @Test
-    public void testeCadastrarProvaNull(){
+    public void testeCadastrarProvaNull() throws ClassNotFoundException, SQLException, JaExisteException {
         boolean sucesso = true;
         try {
             ProvaMT.cadastrarProva("teste", "", "", "");

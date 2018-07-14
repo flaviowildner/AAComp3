@@ -2,6 +2,7 @@ package testes.testesUnitarios;
 
 import dominio.LocalMT;
 import exceptions.ExceptionDadosIncompletos;
+import exceptions.JaExisteException;
 import org.junit.jupiter.api.Test;
 
 import java.sql.ResultSet;
@@ -15,7 +16,11 @@ public class LocalTesteUnitario {
     public void testeCadastrarLocalNull() throws SQLException, ClassNotFoundException {
         boolean sucesso = true;
         try {
-            LocalMT.cadastrarLocal("teste2", "", "");
+            try {
+                LocalMT.cadastrarLocal("teste2", "", "");
+            } catch (JaExisteException e) {
+                sucesso = false;
+            }
         }catch (ExceptionDadosIncompletos exceptionDadosIncompletos) {
             sucesso = false;
         }
@@ -25,7 +30,11 @@ public class LocalTesteUnitario {
     public void testeCadastrarLocal() throws SQLException, ClassNotFoundException {
         boolean sucesso = false;
         try {
-            LocalMT.cadastrarLocal("testeLocal", "testeLocal", "50");
+            try {
+                LocalMT.cadastrarLocal("testeLocal", "testeLocal", "50");
+            } catch (JaExisteException e) {
+                sucesso = false;
+            }
         }catch (ExceptionDadosIncompletos exceptionDadosIncompletos) {
             sucesso = false;
         }

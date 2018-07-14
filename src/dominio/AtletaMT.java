@@ -18,10 +18,11 @@ import java.io.IOException;
 
 @WebServlet(name = "AtletaMT", urlPatterns = {"/dominio/AtletaMT"})
 public class AtletaMT extends HttpServlet {
-
+    static AtletaPA GatewayAtleta = new AtletaPA();
+    static AssociacaoPA GatwayAssociacao= new AssociacaoPA();
     public static ResultSet listarAtletas() {
         try {
-            return AtletaPA.buscarTodosAtletas();
+            return GatewayAtleta.buscarTodosAtletas();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
@@ -36,40 +37,40 @@ public class AtletaMT extends HttpServlet {
         if(nome.isEmpty() | numero.isEmpty() | data_entrada.isEmpty() | data_oficio.isEmpty() | matricula.isEmpty()){
             throw new ExceptionDadosIncompletos();
         }else {
-            AtletaPA.update(nome, numero, data_entrada, data_oficio, matricula);
+            GatewayAtleta.update(nome, numero, data_entrada, data_oficio, matricula);
         }
     }
 
     public static void transferirAtleta(String numero, String data_oficio, String comprovante, String data_entrada, String matricula, String matricula_associacao) throws ExceptionDadosIncompletos, SQLException, ClassNotFoundException, MatriculaInvalidaException {
-        if(AssociacaoPA.buscarAssociacao(matricula_associacao).next() == false){
+        if(GatwayAssociacao.buscarAssociacao(matricula_associacao).next() == false){
             throw new MatriculaInvalidaException();
         }
         if(comprovante.isEmpty() | numero.isEmpty() | data_entrada.isEmpty() | data_oficio.isEmpty() | matricula.isEmpty() | matricula_associacao.isEmpty() ){
             throw new ExceptionDadosIncompletos();
         }else {
-            AtletaPA.transferir(numero, data_oficio, comprovante, data_entrada, matricula_associacao, matricula);
+            GatewayAtleta.transferir(numero, data_oficio, comprovante, data_entrada, matricula_associacao, matricula);
         }
     }
 
     public static ResultSet getDadosAtleta(String matricula) throws SQLException, ClassNotFoundException, DadoNaoExisteException {
-        if(AtletaPA.buscarAtleta(matricula).next() == false){
+        if(GatewayAtleta.buscarAtleta(matricula).next() == false){
             throw new DadoNaoExisteException();
         }
         else {
-            return AtletaPA.buscarAtletaDados(matricula);
+            return GatewayAtleta.buscarAtletaDados(matricula);
         }
     }
 
     public static void cadastrarAtleta(String nome, String numero, String data_entrada, String data_oficio, String data_nascimento, String comprovante, String matricula_associacao) throws SQLException, ClassNotFoundException, ExceptionDadosIncompletos, MatriculaInvalidaException {
         if(nome.isEmpty() | numero.isEmpty() | data_entrada.isEmpty() | data_oficio.isEmpty() | data_nascimento.isEmpty() | comprovante.isEmpty() | matricula_associacao.isEmpty()){
             throw new ExceptionDadosIncompletos();
-        }else if(AssociacaoPA.buscarAssociacao(matricula_associacao).next() == false){
+        }else if(GatwayAssociacao.buscarAssociacao(matricula_associacao).next() == false){
             throw new MatriculaInvalidaException();
         }else {
             String matricula;
-            while(AtletaPA.buscarAtleta(matricula = Integer.toString(new Random().nextInt(999999999) + 1)).next()){}
+            while(GatewayAtleta.buscarAtleta(matricula = Integer.toString(new Random().nextInt(999999999) + 1)).next()){}
             System.out.println(matricula);
-            AtletaPA.inserir(nome, numero, data_entrada, data_oficio, data_nascimento, comprovante, matricula_associacao, matricula);
+            GatewayAtleta.inserir(nome, numero, data_entrada, data_oficio, data_nascimento, comprovante, matricula_associacao, matricula);
         }
     }
 

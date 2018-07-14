@@ -19,18 +19,18 @@ import java.sql.SQLException;
 
 @WebServlet(name = "AtletaProvaMT", urlPatterns = {"/dominio/AtletaProvaMT"})
 public class AtletaProvaMT extends HttpServlet {
-
+    static AtletaProvaPA GatewayAtletaProva = new AtletaProvaPA();
     public static ResultSet getAtletasProva(String nome_prova) throws DadoNaoExisteException, SQLException, ClassNotFoundException {
-        if(AtletaProvaPA.findAtletasProva(nome_prova).next() == false){
+        if(GatewayAtletaProva.findAtletasProva(nome_prova).next() == false){
             throw new DadoNaoExisteException();
         }
         else
-            return AtletaProvaPA.findAtletasProva(nome_prova);
+            return GatewayAtletaProva.findAtletasProva(nome_prova);
     }
 
 
     public static void pontuarAtleta(String nome_prova,String matricula_atleta, String tempo) throws ExceptionDadosIncompletos, DadoNaoExisteException, SQLException, ClassNotFoundException {
-        if(AtletaProvaPA.findAtletaProva(matricula_atleta,nome_prova).next() == false){
+        if(GatewayAtletaProva.findAtletaProva(matricula_atleta,nome_prova).next() == false){
             throw new DadoNaoExisteException();
         }
         if(matricula_atleta.isEmpty() | tempo.isEmpty()){
@@ -39,27 +39,27 @@ public class AtletaProvaMT extends HttpServlet {
         else if(tempo.equals("00:00.00")){
             tempo = "WO";
         }
-        AtletaProvaPA.inserirTempo(nome_prova,matricula_atleta,tempo);
-        ResultSet res = AtletaProvaPA.findPosicoes(nome_prova);
+        GatewayAtletaProva.inserirTempo(nome_prova,matricula_atleta,tempo);
+        ResultSet res = GatewayAtletaProva.findPosicoes(nome_prova);
         for(int i = 1; res.next() != false; i++) {
             if(!res.getString("tempo").equals("WO") | !res.getString("tempo").isEmpty()){
-                if(i == 1) AtletaProvaPA.inserirPonto(nome_prova,res.getString("matricula_atleta"), "28");
-                if(i == 2) AtletaProvaPA.inserirPonto(nome_prova,res.getString("matricula_atleta"), "24");
-                if(i == 3) AtletaProvaPA.inserirPonto(nome_prova,res.getString("matricula_atleta"), "20");
-                if(i == 4) AtletaProvaPA.inserirPonto(nome_prova,res.getString("matricula_atleta"), "16");
-                if(i == 5) AtletaProvaPA.inserirPonto(nome_prova,res.getString("matricula_atleta"), "15");
-                if(i == 6) AtletaProvaPA.inserirPonto(nome_prova,res.getString("matricula_atleta"), "14");
-                if(i == 7) AtletaProvaPA.inserirPonto(nome_prova,res.getString("matricula_atleta"), "13");
-                if(i == 8) AtletaProvaPA.inserirPonto(nome_prova,res.getString("matricula_atleta"), "12");
-                if(i == 9) AtletaProvaPA.inserirPonto(nome_prova,res.getString("matricula_atleta"), "09");
-                if(i == 10) AtletaProvaPA.inserirPonto(nome_prova,res.getString("matricula_atleta"), "07");
-                if(i == 11) AtletaProvaPA.inserirPonto(nome_prova,res.getString("matricula_atleta"), "06");
-                if(i == 12) AtletaProvaPA.inserirPonto(nome_prova,res.getString("matricula_atleta"), "05");
-                if(i == 13) AtletaProvaPA.inserirPonto(nome_prova,res.getString("matricula_atleta"), "04");
-                if(i == 14) AtletaProvaPA.inserirPonto(nome_prova,res.getString("matricula_atleta"), "03");
-                if(i == 15) AtletaProvaPA.inserirPonto(nome_prova,res.getString("matricula_atleta"), "02");
-                if(i == 16) AtletaProvaPA.inserirPonto(nome_prova,res.getString("matricula_atleta"), "01");
-                if(i > 16) AtletaProvaPA.inserirPonto(nome_prova,res.getString("matricula_atleta"), "00");
+                if(i == 1) GatewayAtletaProva.inserirPonto(nome_prova,res.getString("matricula_atleta"), "28");
+                if(i == 2) GatewayAtletaProva.inserirPonto(nome_prova,res.getString("matricula_atleta"), "24");
+                if(i == 3) GatewayAtletaProva.inserirPonto(nome_prova,res.getString("matricula_atleta"), "20");
+                if(i == 4) GatewayAtletaProva.inserirPonto(nome_prova,res.getString("matricula_atleta"), "16");
+                if(i == 5) GatewayAtletaProva.inserirPonto(nome_prova,res.getString("matricula_atleta"), "15");
+                if(i == 6) GatewayAtletaProva.inserirPonto(nome_prova,res.getString("matricula_atleta"), "14");
+                if(i == 7) GatewayAtletaProva.inserirPonto(nome_prova,res.getString("matricula_atleta"), "13");
+                if(i == 8) GatewayAtletaProva.inserirPonto(nome_prova,res.getString("matricula_atleta"), "12");
+                if(i == 9) GatewayAtletaProva.inserirPonto(nome_prova,res.getString("matricula_atleta"), "09");
+                if(i == 10) GatewayAtletaProva.inserirPonto(nome_prova,res.getString("matricula_atleta"), "07");
+                if(i == 11) GatewayAtletaProva.inserirPonto(nome_prova,res.getString("matricula_atleta"), "06");
+                if(i == 12) GatewayAtletaProva.inserirPonto(nome_prova,res.getString("matricula_atleta"), "05");
+                if(i == 13) GatewayAtletaProva.inserirPonto(nome_prova,res.getString("matricula_atleta"), "04");
+                if(i == 14) GatewayAtletaProva.inserirPonto(nome_prova,res.getString("matricula_atleta"), "03");
+                if(i == 15) GatewayAtletaProva.inserirPonto(nome_prova,res.getString("matricula_atleta"), "02");
+                if(i == 16) GatewayAtletaProva.inserirPonto(nome_prova,res.getString("matricula_atleta"), "01");
+                if(i > 16) GatewayAtletaProva.inserirPonto(nome_prova,res.getString("matricula_atleta"), "00");
                 }
             }
     }

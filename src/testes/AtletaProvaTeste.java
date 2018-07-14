@@ -1,6 +1,7 @@
 package testes;
 
 import dominio.AtletaProvaMT;
+import exceptions.DadoNaoExisteException;
 import exceptions.ExceptionDadosIncompletos;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AtletaProvaTeste {
     @Test
-    public void testePontuarAtletaNull() throws ExceptionDadosIncompletos {
+    public void testePontuarAtletaNull() throws ExceptionDadosIncompletos, SQLException, DadoNaoExisteException, ClassNotFoundException {
         boolean sucesso = true;
         try {
             AtletaProvaMT.pontuarAtleta("","835066250","");
@@ -22,7 +23,7 @@ public class AtletaProvaTeste {
         assertFalse(sucesso);
     }
     @Test
-    public void testePontuarAtleta() throws SQLException {
+    public void testePontuarAtleta() throws SQLException, DadoNaoExisteException, ClassNotFoundException {
         boolean sucesso = false;
         try {
             AtletaProvaMT.pontuarAtleta("testeProva", "teste", "00:02.00");
