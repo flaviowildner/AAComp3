@@ -2,6 +2,8 @@ package testes.Mocks;
 
 import dominio.AtletaMT;
 
+import java.sql.ResultSet;
+
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -61,6 +63,15 @@ public class MockAtleta extends AtletaMT {
             MockAtleta.associacao = associacao;
             processCalled = true;
         }
+    }
+    public static ResultSet getDadosAtleta(String matricula){
+        if(matricula != MockAtleta.matricula){
+            processCalled = false;
+        }
+        else {
+            processCalled = true;
+        }
+        return null;
     }
     public String getMatricula() {
         return matricula;

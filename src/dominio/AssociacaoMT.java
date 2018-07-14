@@ -4,6 +4,7 @@ import dados.AssociacaoPA;
 import dados.UsuarioPA;
 import exceptions.DadoNaoExisteException;
 import exceptions.ExceptionDadosIncompletos;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,7 +19,8 @@ import java.util.Random;
 public class AssociacaoMT extends HttpServlet {
 
     private static AssociacaoPA GatewayAssociacao = new AssociacaoPA();
-    private static UsuarioPA GatewayUsuario = new UsuarioPA();
+    private static UsuarioPA GatewayUsuario= new UsuarioPA();
+
 
     public static ResultSet listarAssociacao() {
         try {

@@ -40,4 +40,10 @@ public class AtletaTesteUnitario{
         atletaTeste.transferirAtleta("testeAtleta", "testeAtleta", "testeAtleta", "testeAtleta", "testeAtleta", associacaoMock);
         atletaTeste.validateFail();
     }
+    @Test
+    public void testeGetDadosAtleta(){
+        MockAtleta atletaTeste = new MockAtleta();
+        atletaTeste.getDadosAtleta("matriculaInvalida");
+        atletaTeste.validateFail();
+    }
 }

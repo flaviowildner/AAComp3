@@ -1,34 +1,21 @@
 package testes.testesUnitarios;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import org.junit.jupiter.api.Test;
+import testes.Mocks.MockAtletaProva;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AtletaProvaTesteUnitario {
-//    @Test
-//    public void testePontuarAtletaNull() throws ExceptionDadosIncompletos {
-//        boolean sucesso = true;
-//        try {
-//            AtletaProvaMT.pontuarAtleta("","682705664","");
-//        } catch (ExceptionDadosIncompletos exceptionDadosIncompletos) {
-//            sucesso = false;
-//        }
-//        assertFalse(sucesso);
-//    }
-//    @Test
-//    public void testePontuarAtleta() throws SQLException {
-//        boolean sucesso = false;
-//        try {
-//            AtletaProvaMT.pontuarAtleta("testeProva", "682705664", "1");
-//        } catch (ExceptionDadosIncompletos exceptionDadosIncompletos) {
-//            sucesso = false;
-//        }
-//        ResultSet res = AtletaProvaMT.getAtletasProva("testeProva");
-//        while (res.next()) {
-//            if (res.getString("matricula").equals("682705664")) {
-//                sucesso = true;
-//                break;
-//            }
-//        }
-//        assertTrue(sucesso);
-//    }
+    @Test
+    public void testePontuarAtletaNull() {
+        MockAtletaProva atletaProvateste = new MockAtletaProva();
+        atletaProvateste.pontuarAtleta("testeAtletaProva", "teste", "");
+        atletaProvateste.validateFail();
+    }
+    @Test
+    public void testeGetAtletaProvaNull(){
+        MockAtletaProva atletaProvateste = new MockAtletaProva();
+        atletaProvateste.getAtletasProva("");
+        atletaProvateste.validateFail();
+    }
 }

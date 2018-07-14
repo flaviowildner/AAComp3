@@ -1,77 +1,42 @@
 package testes.testesUnitarios;
 
-import dominio.LocalMT;
 import exceptions.ExceptionDadosIncompletos;
-import exceptions.JaExisteException;
 import org.junit.jupiter.api.Test;
+import testes.Mocks.MockLocal;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 public class LocalTesteUnitario {
     @Test
     public void testeCadastrarLocalNull() throws SQLException, ClassNotFoundException {
-        boolean sucesso = true;
-        try {
-            try {
-                LocalMT.cadastrarLocal("teste2", "", "");
-            } catch (JaExisteException e) {
-                sucesso = false;
-            }
-        }catch (ExceptionDadosIncompletos exceptionDadosIncompletos) {
-            sucesso = false;
-        }
-        assertFalse(sucesso);
+        MockLocal testeLocal = new MockLocal();
+        testeLocal.cadastrarLocal("testeLocal", "testeLocal", "");
+        testeLocal.validateFail();
     }
     @Test
     public void testeCadastrarLocal() throws SQLException, ClassNotFoundException {
-        boolean sucesso = false;
-        try {
-            try {
-                LocalMT.cadastrarLocal("testeLocal", "testeLocal", "50");
-            } catch (JaExisteException e) {
-                sucesso = false;
-            }
-        }catch (ExceptionDadosIncompletos exceptionDadosIncompletos) {
-            sucesso = false;
-        }
-        ResultSet res = LocalMT.listarLocais();
-        while(res.next()){
-            if(res.getString("nomeLocal").equals("testeLocal")) {
-                sucesso = true;
-                break;
-            }
-        }
-        assertTrue(sucesso);
+        MockLocal testeLocal = new MockLocal();
+        testeLocal.cadastrarLocal("testeLocal", "testeLocal", "testeLocal");
+        testeLocal.validateFail();
     }
     @Test
-    public void testeSetNewLocalDataNull() throws SQLException, ClassNotFoundException {
-        boolean sucesso = true;
-        try {
-            LocalMT.setNewLocalData("","","");
-        } catch (ExceptionDadosIncompletos exceptionDadosIncompletos) {
-            sucesso = false;
-        }
-        assertFalse(sucesso);
+    public void testeSetNewLocalDataNull(){
+        MockLocal testeLocal = new MockLocal();
+        testeLocal.setNewLocalData("testeLocal", "testeLocal", "");
+        testeLocal.validateFail();
     }
     @Test
-    public void testeSetNewLocalData() throws SQLException, ClassNotFoundException {
-        boolean sucesso = false;
-        try {
-            LocalMT.setNewLocalData("testeLocal", "SetNewLocalData", "50");
-        }catch (ExceptionDadosIncompletos exceptionDadosIncompletos) {
-            sucesso = false;
-        }
-        ResultSet res = LocalMT.listarLocais();
-        while(res.next()){
-            if(res.getString("logradouro").equals("SetNewLocalData")) {
-                sucesso = true;
-                break;
-            }
-        }
-        assertTrue(sucesso);
+    public void testeGetDadosLocalNull() throws SQLException, ClassNotFoundException {
+        MockLocal testeLocal = new MockLocal();
+        testeLocal.getDadosLocal("");
+        testeLocal.validateFail();
+    }
+    @Test
+    public void testeListarLocais() throws SQLException {
+        MockLocal testeLocal = new MockLocal();
+        testeLocal.listarLocais();
+        testeLocal.validateSuccess();
     }
 }
