@@ -1,4 +1,4 @@
-package testes;
+package testes.testesUnitarios;
 
 import dominio.LocalMT;
 import exceptions.ExceptionDadosIncompletos;

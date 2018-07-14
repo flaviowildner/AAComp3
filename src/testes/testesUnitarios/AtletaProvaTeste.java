@@ -1,11 +1,4 @@
-package testes;
-
-import dominio.AtletaProvaMT;
-import exceptions.ExceptionDadosIncompletos;
-import org.junit.jupiter.api.Test;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
+package testes.testesUnitarios;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;

@@ -1,4 +1,4 @@
-package testes;
+package testes.testesUnitarios;
 
 import dados.CompeticaoPA;
 import dominio.CompeticaoMT;

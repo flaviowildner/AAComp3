@@ -1,17 +1,13 @@
-package testes;
+package testes.testesUnitarios;
 
 import dominio.AtletaMT;
 import exceptions.ExceptionDadosIncompletos;
 import exceptions.MatriculaInvalidaException;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static dominio.AtletaMT.cadastrarAtleta;
-import static dominio.AtletaMT.listarAtletas;
-import static dominio.AtletaMT.transferirAtleta;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
