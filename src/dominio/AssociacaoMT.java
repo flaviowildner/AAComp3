@@ -4,8 +4,6 @@ import dados.AssociacaoPA;
 import dados.UsuarioPA;
 import exceptions.DadoNaoExisteException;
 import exceptions.ExceptionDadosIncompletos;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,20 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
 
 @WebServlet(name = "AssociacaoMT", urlPatterns = {"/dominio/AssociacaoMT"})
 public class AssociacaoMT extends HttpServlet {
 
     private static AssociacaoPA GatewayAssociacao = new AssociacaoPA();
-    private static UsuarioPA GatewayUsuario= new UsuarioPA();
+    private static UsuarioPA GatewayUsuario = new UsuarioPA();
 
     public static ResultSet listarAssociacao() {
         try {

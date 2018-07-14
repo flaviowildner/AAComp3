@@ -1,15 +1,11 @@
 package dominio;
 
-import dados.AssociacaoPA;
-import dados.AtletaPA;
 import exceptions.DadoNaoExisteException;
 import exceptions.ExceptionDadosIncompletos;
 import dados.CompeticaoPA;
 import dados.LocalPA;
 import exceptions.JaExisteException;
-
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

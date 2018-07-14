@@ -1,6 +1,7 @@
 <%@ page import="dominio.UsuarioMT" %><% UsuarioMT.idenficarUsuario(request, response); %>
 <%@ page import="java.sql.ResultSet" %>
 <%@ page import="dados.AssociacaoPA" %>
+<%@ page import="dados.AtletaPA" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -9,6 +10,8 @@
 <body>
 <h2 style="text-align: center">Sistema SISFARJ</h2>
 <b>Lista de Atletas da prova escolhida</b><br><br>
+<%if(request.getAttribute("id") == null)
+        request.setAttribute("id","5"); %>
 <table border="1px">
     <thead>
     <tr>
@@ -27,7 +30,13 @@
     </thead>
     <tbody>
     <%
-        ResultSet res = (ResultSet)request.getAttribute("atleta");
+        ResultSet res = null;
+        if(request.getAttribute("id").equals("5")){
+            AtletaPA GatewayAtleta = new AtletaPA();
+            res = GatewayAtleta.buscarTodosAtletas();
+        }else {
+            res = (ResultSet) request.getAttribute("atleta");
+        }
         if(!res.isClosed()){
             while(res.next()){
     %>
@@ -54,7 +63,7 @@
     %>
     </tbody>
 </table>
-<% if(request.getAttribute("id").equals("3") | request.getAttribute("id").equals("4")){
+<% if(request.getAttribute("id").equals("3") | request.getAttribute("id").equals("4") | request.getAttribute("id").equals("5")){
 %>
 <br>
 <% } else {%>
@@ -62,7 +71,7 @@
     <br>
      Matrícula do Atleta:<br>
     <input type="text" name="matricula_atleta"><br>
-     Tempo do Atleta na Prova:<br>
+     Tempo do Atleta na Prova: (HH:MM.SS)<br>
     <input type="text" name="tempo">
     <input type="hidden" name="nome_prova" value="<%=request.getAttribute("nome_prova")%>"><br>
     <input type="submit" value="Enviar">

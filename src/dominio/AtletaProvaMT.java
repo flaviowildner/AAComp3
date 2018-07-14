@@ -1,12 +1,7 @@
 package dominio;
 
-import dados.AtletaPA;
 import dados.AtletaProvaPA;
-import dados.ProvaPA;
-import exceptions.AtletaJaInscritoEmProvaException;
-import exceptions.DadoNaoExisteException;
-import exceptions.ExceptionDadosIncompletos;
-import exceptions.MatriculaInvalidaException;
+import exceptions.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,12 +25,15 @@ public class AtletaProvaMT extends HttpServlet {
             return GatewayAtletaProva.findAtletasProva(nome_prova);
     }
 
-    public static void pontuarAtleta(String nome_prova,String matricula_atleta, String tempo) throws ExceptionDadosIncompletos, DadoNaoExisteException, SQLException, ClassNotFoundException {
+    public static void pontuarAtleta(String nome_prova,String matricula_atleta, String tempo) throws ExceptionDadosIncompletos, DadoNaoExisteException, SQLException, ClassNotFoundException, TempoInvalidoException {
         if(GatewayAtletaProva.findAtletaProva(matricula_atleta,nome_prova).next() == false){
             throw new DadoNaoExisteException();
         }
-        if(matricula_atleta.isEmpty() | tempo.isEmpty()){
+        else if(matricula_atleta.isEmpty() | tempo.isEmpty()){
             throw new ExceptionDadosIncompletos();
+        }
+        else if(!tempo.matches("\\d{2}:\\d{2}.\\d{2}")){
+            throw new TempoInvalidoException();
         }
         else if(tempo.equals("00:00.00")){
             tempo = "WO";
@@ -106,6 +104,8 @@ public class AtletaProvaMT extends HttpServlet {
                     request.getRequestDispatcher("/ExcecaoDadoNaoExiste.jsp").forward(request, response);
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
+                } catch (TempoInvalidoException e) {
+                    request.getRequestDispatcher("/ExcecaoTempoInvalido.jsp").forward(request, response);
                 }
                 request.getRequestDispatcher("/DadosLancadosSucesso.jsp").forward(request, response);
             case 3:
