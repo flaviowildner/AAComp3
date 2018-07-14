@@ -14,7 +14,9 @@ import java.sql.SQLException;
 
 @WebServlet(name = "UsuarioMT", urlPatterns = {"/dominio/UsuarioMT"})
 public class UsuarioMT extends HttpServlet {
-    static UsuarioPA GatewayUsuario = new UsuarioPA();
+
+    private static UsuarioPA GatewayUsuario= new UsuarioPA();
+
     public static int idenficarUsuario(HttpServletRequest request, HttpServletResponse response) throws SQLException, ClassNotFoundException, ServletException, IOException {
         Cookie cookies[] = request.getCookies();
 

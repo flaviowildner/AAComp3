@@ -19,7 +19,9 @@ import java.sql.SQLException;
 
 @WebServlet(name = "AtletaProvaMT", urlPatterns = {"/dominio/AtletaProvaMT"})
 public class AtletaProvaMT extends HttpServlet {
-    static AtletaProvaPA GatewayAtletaProva = new AtletaProvaPA();
+
+    private static AtletaProvaPA GatewayAtletaProva= new AtletaProvaPA();
+
     public static ResultSet getAtletasProva(String nome_prova) throws DadoNaoExisteException, SQLException, ClassNotFoundException {
         if(GatewayAtletaProva.findAtletasProva(nome_prova).next() == false){
             throw new DadoNaoExisteException();
@@ -27,7 +29,6 @@ public class AtletaProvaMT extends HttpServlet {
         else
             return GatewayAtletaProva.findAtletasProva(nome_prova);
     }
-
 
     public static void pontuarAtleta(String nome_prova,String matricula_atleta, String tempo) throws ExceptionDadosIncompletos, DadoNaoExisteException, SQLException, ClassNotFoundException {
         if(GatewayAtletaProva.findAtletaProva(matricula_atleta,nome_prova).next() == false){

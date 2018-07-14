@@ -18,8 +18,10 @@ import java.io.IOException;
 
 @WebServlet(name = "AtletaMT", urlPatterns = {"/dominio/AtletaMT"})
 public class AtletaMT extends HttpServlet {
-    static AtletaPA GatewayAtleta = new AtletaPA();
-    static AssociacaoPA GatwayAssociacao= new AssociacaoPA();
+
+    private static AtletaPA GatewayAtleta= new AtletaPA();
+    private static AssociacaoPA GatewayAssociacao= new AssociacaoPA();
+
     public static ResultSet listarAtletas() {
         try {
             return GatewayAtleta.buscarTodosAtletas();
@@ -42,7 +44,7 @@ public class AtletaMT extends HttpServlet {
     }
 
     public static void transferirAtleta(String numero, String data_oficio, String comprovante, String data_entrada, String matricula, String matricula_associacao) throws ExceptionDadosIncompletos, SQLException, ClassNotFoundException, MatriculaInvalidaException {
-        if(GatwayAssociacao.buscarAssociacao(matricula_associacao).next() == false){
+        if(GatewayAssociacao.buscarAssociacao(matricula_associacao).next() == false){
             throw new MatriculaInvalidaException();
         }
         if(comprovante.isEmpty() | numero.isEmpty() | data_entrada.isEmpty() | data_oficio.isEmpty() | matricula.isEmpty() | matricula_associacao.isEmpty() ){
@@ -64,7 +66,7 @@ public class AtletaMT extends HttpServlet {
     public static void cadastrarAtleta(String nome, String numero, String data_entrada, String data_oficio, String data_nascimento, String comprovante, String matricula_associacao) throws SQLException, ClassNotFoundException, ExceptionDadosIncompletos, MatriculaInvalidaException {
         if(nome.isEmpty() | numero.isEmpty() | data_entrada.isEmpty() | data_oficio.isEmpty() | data_nascimento.isEmpty() | comprovante.isEmpty() | matricula_associacao.isEmpty()){
             throw new ExceptionDadosIncompletos();
-        }else if(GatwayAssociacao.buscarAssociacao(matricula_associacao).next() == false){
+        }else if(GatewayAssociacao.buscarAssociacao(matricula_associacao).next() == false){
             throw new MatriculaInvalidaException();
         }else {
             String matricula;
@@ -102,7 +104,7 @@ public class AtletaMT extends HttpServlet {
                 } catch (MatriculaInvalidaException e) {
                     request.getRequestDispatcher("/ExcecaoMatriculaInvalida.jsp").forward(request, response);
                 }
-                request.getRequestDispatcher("/PaginaInicial.jsp").forward(request, response);
+                request.getRequestDispatcher("/AcaoConcluida.jsp").forward(request, response);
             case 2:
                 try {
                     resultSet = getDadosAtleta(request.getParameter("matricula"));
@@ -130,7 +132,7 @@ public class AtletaMT extends HttpServlet {
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 }
-                request.getRequestDispatcher("/PaginaInicial.jsp").forward(request, response);
+                request.getRequestDispatcher("/AcaoConcluida.jsp").forward(request, response);
             case 4:
                 try {
                     resultSet = getDadosAtleta(request.getParameter("matricula"));
@@ -161,7 +163,7 @@ public class AtletaMT extends HttpServlet {
                 } catch (MatriculaInvalidaException e){
                     request.getRequestDispatcher("/ExcecaoMatriculaInvalida.jsp").forward(request, response);
                 }
-                request.getRequestDispatcher("/PaginaInicial.jsp").forward(request, response);
+                request.getRequestDispatcher("/AcaoConcluida.jsp").forward(request, response);
         }
     }
 

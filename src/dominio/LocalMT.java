@@ -24,7 +24,9 @@ import java.util.concurrent.ThreadLocalRandom;
 
 @WebServlet(name = "LocalMT", urlPatterns = {"/dominio/LocalMT"})
 public class LocalMT extends HttpServlet {
-    static LocalPA GatewayLocal = new LocalPA();
+
+    private static LocalPA GatewayLocal= new LocalPA();
+
     public static ResultSet listarLocais(){
         try{
             return GatewayLocal.buscarTodosLocais();
@@ -87,7 +89,7 @@ public class LocalMT extends HttpServlet {
                     request.setAttribute("dado", "Nome de local");
                     request.getRequestDispatcher("/ExcecaoJaExiste.jsp").forward(request, response);
                 }
-                request.getRequestDispatcher("/PaginaInicial.jsp").forward(request, response);
+                request.getRequestDispatcher("/AcaoConcluida.jsp").forward(request, response);
                 break;
             case 2:
                 ResultSet res = null;
@@ -116,7 +118,7 @@ public class LocalMT extends HttpServlet {
                 } catch(ExceptionDadosIncompletos exceptionDadosIncompletos){
                     request.getRequestDispatcher("/ExcecaoDadosIncompletos.jsp").forward(request, response);
                 }
-                request.getRequestDispatcher("/PaginaInicial.jsp").forward(request, response);
+                request.getRequestDispatcher("/AcaoConcluida.jsp").forward(request, response);
         }
     }
 

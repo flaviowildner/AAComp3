@@ -19,10 +19,12 @@ import java.io.IOException;
 
 @WebServlet(name = "ProvaMT", urlPatterns = {"/dominio/ProvaMT"})
 public class ProvaMT extends HttpServlet {
-    static ProvaPA GatewayProva = new ProvaPA();
-    static CompeticaoPA GatewayCompeticao = new CompeticaoPA();
-    static  AtletaPA GatewayAtleta = new AtletaPA();
-    static AtletaProvaPA GatewayAtletaProva = new AtletaProvaPA();
+
+    private static CompeticaoPA GatewayCompeticao= new CompeticaoPA();
+    private static ProvaPA GatewayProva= new ProvaPA();
+    private static AtletaProvaPA GatewayAtletaProva= new AtletaProvaPA();
+    private static AtletaPA GatewayAtleta= new AtletaPA();
+
     public static ResultSet getProvasCompeticao(String nome) throws DadoNaoExisteException, SQLException, ClassNotFoundException {
         if(GatewayCompeticao.buscarCompeticaoDados(nome).next() == false){
             throw new DadoNaoExisteException();

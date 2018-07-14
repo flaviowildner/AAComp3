@@ -40,7 +40,8 @@
         <% }if(request.getAttribute("id").equals("4")){%>
         <td><%=res.getString("ponto") %></td>
         <%
-            ResultSet res2 = AssociacaoPA.buscarSigla(res.getString("matricula"));
+            AssociacaoPA GatewayAssociacao= new AssociacaoPA();
+            ResultSet res2 = GatewayAssociacao.buscarSigla(res.getString("matricula"));
             while(res2.next()){
             %>
         <td><%=res2.getString("sigla") %></td>

@@ -5,6 +5,7 @@ import dados.UsuarioPA;
 import exceptions.DadoNaoExisteException;
 import exceptions.ExceptionDadosIncompletos;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,13 +13,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 @WebServlet(name = "AssociacaoMT", urlPatterns = {"/dominio/AssociacaoMT"})
 public class AssociacaoMT extends HttpServlet {
-    static AssociacaoPA GatewayAssociacao = new AssociacaoPA();
-    static UsuarioPA GatwayUsuario = new UsuarioPA();
+
+    private static AssociacaoPA GatewayAssociacao = new AssociacaoPA();
+    private static UsuarioPA GatewayUsuario= new UsuarioPA();
+
     public static ResultSet listarAssociacao() {
         try {
             return GatewayAssociacao.buscarTodasAssociacoes();
@@ -39,7 +48,7 @@ public class AssociacaoMT extends HttpServlet {
             senha = Integer.toString(new Random().nextInt(999999999) + 10000000);
             while(GatewayAssociacao.buscarAssociacao(matricula = Integer.toString(new Random().nextInt(999999999) + 1)).next()){}
             GatewayAssociacao.inserir(numero_oficio, data, nome, sigla, endereco, telefone, comprovante_pagamento, matricula, senha);
-            GatwayUsuario.inserir(matricula, senha, "1");
+            GatewayUsuario.inserir(matricula, senha, "1");
         }
     }
 
@@ -88,7 +97,7 @@ public class AssociacaoMT extends HttpServlet {
                 } catch (ExceptionDadosIncompletos exceptionDadosIncompletos) {
                     request.getRequestDispatcher("/ExcecaoDadosIncompletos.jsp").forward(request, response);
                 }
-                request.getRequestDispatcher("/PaginaInicial.jsp").forward(request, response);
+                request.getRequestDispatcher("/AcaoConcluida.jsp").forward(request, response);
             case 2:
                 ResultSet resultSet = null;
                 try {
@@ -122,7 +131,7 @@ public class AssociacaoMT extends HttpServlet {
                 } catch (DadoNaoExisteException e) {
                     request.getRequestDispatcher("/ExcecaoDadoNaoExiste.jsp").forward(request, response);
                 }
-                request.getRequestDispatcher("/PaginaInicial.jsp").forward(request, response);
+                request.getRequestDispatcher("/AcaoConcluida.jsp").forward(request, response);
         }
     }
 

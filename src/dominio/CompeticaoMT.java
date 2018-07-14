@@ -1,5 +1,7 @@
 package dominio;
 
+import dados.AssociacaoPA;
+import dados.AtletaPA;
 import exceptions.DadoNaoExisteException;
 import exceptions.ExceptionDadosIncompletos;
 import dados.CompeticaoPA;
@@ -18,8 +20,10 @@ import java.io.IOException;
 
 @WebServlet(name = "CompeticaoMT", urlPatterns = {"/dominio/CompeticaoMT"})
 public class CompeticaoMT extends HttpServlet {
-    static CompeticaoPA GatewayCompeticao = new CompeticaoPA();
-    static LocalPA GatewayLocal = new LocalPA();
+
+    private static CompeticaoPA GatewayCompeticao= new CompeticaoPA();
+    private static LocalPA GatewayLocal= new LocalPA();
+
     public static ResultSet listarCompeticoes(){
         try{
             return GatewayCompeticao.buscarTodasCompeticoes();
@@ -118,7 +122,7 @@ public class CompeticaoMT extends HttpServlet {
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 }
-                request.getRequestDispatcher("/PaginaInicial.jsp").forward(request, response);
+                request.getRequestDispatcher("/AcaoConcluida.jsp").forward(request, response);
         }
     }
 
