@@ -20,11 +20,14 @@ public class UsuarioMT extends HttpServlet {
     public static int idenficarUsuario(HttpServletRequest request, HttpServletResponse response) throws SQLException, ClassNotFoundException, ServletException, IOException {
         Cookie cookies[] = request.getCookies();
 
-        for(int i=0;i<cookies.length;i++){
-            if(cookies[i].getName().equals("nivel_acesso")){
-                return Integer.parseInt(cookies[i].getValue());
+        if(cookies != null) {
+            for (int i = 0; i < cookies.length; i++) {
+                if (cookies[i].getName().equals("nivel_acesso")) {
+                    return Integer.parseInt(cookies[i].getValue());
+                }
             }
         }
+
         request.getRequestDispatcher("/Login.jsp").forward(request, response);
         return 0;
     }
