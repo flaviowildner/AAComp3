@@ -29,7 +29,7 @@ public class MockCompeticao {
     }
 
     public static void cadastrarCompeticao(String nome, String data) throws SQLException, ClassNotFoundException{
-        if(GatewayCompeticao.buscarCompeticaoDados(nome).next() == true){
+        if(GatewayCompeticao.buscarCompeticaoDados(nome).next()){
             processCalled = false;
         } else if(nome.isEmpty() | data.isEmpty()){
             processCalled = false;
@@ -38,7 +38,7 @@ public class MockCompeticao {
     }
 
     public static void updateLocal(String nome, String local) throws SQLException, ClassNotFoundException {
-        if(GatewayLocal.buscarLocal(local).next() == false){
+        if(!GatewayLocal.buscarLocal(local).next()){
             processCalled = false;
         } else if(nome.isEmpty() | local.isEmpty()){
             processCalled = false;
@@ -47,7 +47,7 @@ public class MockCompeticao {
     }
 
     public static ResultSet getDadosCompeticao(String nome) throws SQLException, ClassNotFoundException {
-        if(GatewayCompeticao.buscarCompeticaoDados(nome).next() == false){
+        if(!GatewayCompeticao.buscarCompeticaoDados(nome).next()){
             processCalled = false;
         }
         else if(nome.isEmpty())
