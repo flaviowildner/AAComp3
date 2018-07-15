@@ -4,6 +4,7 @@ import dominio.AtletaMT;
 import exceptions.DadoNaoExisteException;
 import exceptions.ExceptionDadosIncompletos;
 import exceptions.MatriculaInvalidaException;
+import exceptions.MesmaMatriculaException;
 import org.junit.jupiter.api.Test;
 import testes.Mocks.MockAssociacao;
 
@@ -42,6 +43,8 @@ public class AtletaTesteFuncional {
         } catch (ExceptionDadosIncompletos exceptionDadosIncompletos) {
             sucesso = false;
         } catch (MatriculaInvalidaException e) {
+            sucesso = false;
+        } catch (MesmaMatriculaException e) {
             sucesso = false;
         }
         ResultSet res = AtletaMT.getDadosAtleta("teste");

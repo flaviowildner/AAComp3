@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import exceptions.DadoNaoExisteException;
 import exceptions.ExceptionDadosIncompletos;
 import exceptions.MatriculaInvalidaException;
+import exceptions.MesmaMatriculaException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -42,11 +44,16 @@ public class AtletaMT extends HttpServlet {
         }
     }
 
-    public static void transferirAtleta(String numero, String data_oficio, String comprovante, String data_entrada, String matricula, String matricula_associacao) throws ExceptionDadosIncompletos, SQLException, ClassNotFoundException, MatriculaInvalidaException {
+    public static void transferirAtleta(String numero, String data_oficio, String comprovante, String data_entrada, String matricula, String matricula_associacao) throws ExceptionDadosIncompletos, SQLException, ClassNotFoundException, MatriculaInvalidaException, MesmaMatriculaException {
+        ResultSet result = GatewayAtleta.buscarAtleta(matricula);
+        result.next();
         if(GatewayAssociacao.buscarAssociacao(matricula_associacao).next() == false){
             throw new MatriculaInvalidaException();
         }
-        if(comprovante.isEmpty() | numero.isEmpty() | data_entrada.isEmpty() | data_oficio.isEmpty() | matricula.isEmpty() | matricula_associacao.isEmpty() ){
+        else if(result.getString("matricula_associacao").equals(matricula_associacao)){
+            throw new MesmaMatriculaException();
+        }
+        else if(comprovante.isEmpty() | numero.isEmpty() | data_entrada.isEmpty() | data_oficio.isEmpty() | matricula.isEmpty() | matricula_associacao.isEmpty() ){
             throw new ExceptionDadosIncompletos();
         }else {
             GatewayAtleta.transferir(numero, data_oficio, comprovante, data_entrada, matricula_associacao, matricula);
@@ -161,6 +168,8 @@ public class AtletaMT extends HttpServlet {
                     e.printStackTrace();
                 } catch (MatriculaInvalidaException e){
                     request.getRequestDispatcher("/ExcecaoMatriculaInvalida.jsp").forward(request, response);
+                } catch (MesmaMatriculaException e) {
+                    request.getRequestDispatcher("/ExcecaoMesmaMatricula.jsp").forward(request, response);
                 }
                 request.getRequestDispatcher("/AcaoConcluida.jsp").forward(request, response);
         }
