@@ -1,19 +1,12 @@
 package testes.testesUnitarios;
 
-import dados.CompeticaoPA;
-import dominio.CompeticaoMT;
-import exceptions.DadoNaoExisteException;
-import exceptions.ExceptionDadosIncompletos;
-import exceptions.JaExisteException;
 import org.junit.jupiter.api.Test;
 import testes.Mocks.MockCompeticao;
 
 import java.sql.SQLException;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class CompeticaoTesteUnitario {
-    CompeticaoPA GatewayCompeticao = new CompeticaoPA();
     @Test
     public void testeCadastrarCompeticaoNull() throws SQLException, ClassNotFoundException {
         MockCompeticao competicaoTeste = new MockCompeticao();
@@ -28,7 +21,7 @@ public class CompeticaoTesteUnitario {
     }
 
     @Test
-    public void testeAlterarCompeticaoDadosNull() throws SQLException, ClassNotFoundException {
+    public void testeAlterarCompeticaoDadosNull() {
         MockCompeticao competicaoTeste = new MockCompeticao();
         competicaoTeste.alterarCompeticaoDados("testeCompeticao", "", "");
         competicaoTeste.validateFail();
