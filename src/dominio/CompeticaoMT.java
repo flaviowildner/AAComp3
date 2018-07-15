@@ -58,6 +58,13 @@ public class CompeticaoMT extends HttpServlet {
         return GatewayCompeticao.buscarCompeticaoDados(nome);
     }
 
+    public static ResultSet getPontucaoFinal(String nome) throws DadoNaoExisteException, SQLException, ClassNotFoundException {
+        if(GatewayCompeticao.buscarCompeticaoDados(nome).next() == false){
+            throw new DadoNaoExisteException();
+        }
+        return GatewayCompeticao.buscarPontuacaoFinal(nome);
+    }
+
     public static void alterarCompeticaoDados(String nome, String data, String nome_antigo) throws ExceptionDadosIncompletos, SQLException, ClassNotFoundException {
         if(nome.isEmpty() | data.isEmpty()){
             throw new ExceptionDadosIncompletos();
@@ -69,6 +76,7 @@ public class CompeticaoMT extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int acao;
+        ResultSet resultSet = null;
         try{
             acao = Integer.parseInt(request.getParameter("acao"));
         } catch (NumberFormatException e){
@@ -93,7 +101,6 @@ public class CompeticaoMT extends HttpServlet {
                 request.setAttribute("nome_competicao", request.getParameter("nome"));
                 request.getRequestDispatcher("/ListarLocaisCadastroCompeticao.jsp").forward(request, response);
             case 2:
-                ResultSet resultSet = null;
                 try {
                     resultSet = getDadosCompeticao(request.getParameter("nome"));
                 } catch (DadoNaoExisteException e) {
@@ -119,6 +126,19 @@ public class CompeticaoMT extends HttpServlet {
                     e.printStackTrace();
                 }
                 request.getRequestDispatcher("/AcaoConcluida.jsp").forward(request, response);
+            case 4:
+                try {
+                    resultSet = getPontucaoFinal(request.getParameter("nome"));
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                } catch (DadoNaoExisteException e) {
+                    request.setAttribute("dado", "Competição informada");
+                    request.getRequestDispatcher("/ExcecaoDadoNaoExiste.jsp").forward(request, response);
+                }
+                request.setAttribute("pontuacao", resultSet);
+                request.getRequestDispatcher("/ListaPontuacaoFinal.jsp").forward(request, response);
         }
     }
 

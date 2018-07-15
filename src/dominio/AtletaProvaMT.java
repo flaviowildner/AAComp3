@@ -87,9 +87,8 @@ public class AtletaProvaMT extends HttpServlet {
         switch(acao) {
             case 1:
                 request.setAttribute("nome_prova", request.getParameter("nome"));
-                request.setAttribute("id", "1");
                 request.setAttribute("atleta", resultSet);
-                request.getRequestDispatcher("/ListaAtletas.jsp").forward(request, response);
+                request.getRequestDispatcher("/ListaAtletas.jsp?id=1").forward(request, response);
             case 2:
                 try {
                     pontuarAtleta(request.getParameter("nome_prova"),
@@ -110,13 +109,11 @@ public class AtletaProvaMT extends HttpServlet {
                 request.getRequestDispatcher("/DadosLancadosSucesso.jsp").forward(request, response);
             case 3:
                 request.setAttribute("nome_prova", request.getParameter("nome"));
-                request.setAttribute("id", "3");
                 request.setAttribute("atleta", resultSet);
-                request.getRequestDispatcher("/ListaAtletas.jsp").forward(request, response);
+                request.getRequestDispatcher("/ListaAtletas.jsp?id=3").forward(request, response);
             case 4:
-                request.setAttribute("id", "4");
                 request.setAttribute("atleta", resultSet);
-                request.getRequestDispatcher("/ListaAtletas.jsp").forward(request, response);
+                request.getRequestDispatcher("/ListaAtletas.jsp?id=4").forward(request, response);
         }
     }
 

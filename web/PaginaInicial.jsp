@@ -33,16 +33,16 @@
                 }
             }
         %>
-            <tr><td><a href="">Listar balizamento competição</a></td></tr>
+            <tr><td> Listar balizamento competição </td></tr>
             <tr><td><a class="feito" href="/ListaCompeticao.jsp?id=3">Listar pontuação competição</a></td></tr>
-            <tr><td><a href="">Listar pontuação final</a></td></tr>
+            <tr><td><a class="feito" href="/ListaCompeticao.jsp?id=4">Listar pontuação final</a></td></tr>
         <% if (nivel_acesso >= 2){ %>
             <tr><td><a class="feito" href="/FiliarAssociacao.jsp">Filiar Associação</a></td></tr>
             <tr><td><a class="feito" href="/AlterarAssociacaoLista.jsp">Alterar filiação de associação</a></td></tr>
             <tr><td><a class="feito" href="/ListarAssociacao.jsp">Listar associação</a></td></tr>
             <tr><td><a class="feito" href="/CadastrarAtleta.jsp">Cadastrar atleta</a></td></tr>
             <tr><td><a class="feito" href="/ListaAtletas.jsp?id=5">Listar atletas</a></td></tr>
-            <tr><td><a class="feito" href="/AlterarAtletaLista.jsp">Alterar cadastro de atleta</a></td></tr>
+            <tr><td><a class="feito" href="/ListaAtletas.jsp?id=6">Alterar cadastro de atleta</a></td></tr>
             <tr><td><a class="feito" href="/TransferirAtletaLista.jsp">Transferir atleta</a></td></tr>
         <% } %>
         <% if (nivel_acesso >= 3) {%>
@@ -50,7 +50,7 @@
             <tr><td><a class="feito" href="/AlterarLocal.jsp">Alterar locais de competição</a></td></tr>
             <tr><td><a class="feito" href="/ListarLocais.jsp">Listar locais de competição</a></td></tr>
             <tr><td><a class="feito" href="/CriarCompeticao.jsp">Criar competição</a></td></tr>
-            <tr><td><a class="feito" href="/AlterarCompeticaoLista.jsp">Alterar competição</a></td></tr>
+            <tr><td><a class="feito" href="/ListaCompeticao.jsp?id=5">Alterar competição</a></td></tr>
             <tr><td><a class="feito" href="/ListaCompeticao.jsp?id=1">Inserir resultado do atleta</a></td></tr>
             <tr><td><a class="feito" href="/ListaCompeticao.jsp?id=2">Listar competição</a></td></tr>
         <% } %>
