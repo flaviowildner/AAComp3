@@ -1,4 +1,4 @@
-<%@ page import="dominio.UsuarioMT" %><%@ page import="dominio.UsuarioMT" %><% UsuarioMT.idenficarUsuario(request, response); %>
+<%@ page import="dominio.UsuarioMT" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>

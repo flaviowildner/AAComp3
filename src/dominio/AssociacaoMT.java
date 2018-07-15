@@ -50,18 +50,19 @@ public class AssociacaoMT extends HttpServlet {
         if(GatewayAssociacao.buscarAssociacao(matricula).next() == false)
             throw new DadoNaoExisteException();
         else {
-            return GatewayAssociacao.buscarAssociacaoDados(matricula);
+            return GatewayAssociacao.buscarAssociacao(matricula);
         }
     }
 
-    public static void alterarAssociacaoDados(String numero_oficio, String data, String nome, String sigla, String endereco, String telefone, String comprovante_pagamento, String matricula) throws ExceptionDadosIncompletos, DadoNaoExisteException,SQLException, ClassNotFoundException {
+    public static void alterarAssociacaoDados(String numero_oficio, String data, String nome, String sigla, String senha, String matricula) throws ExceptionDadosIncompletos, DadoNaoExisteException,SQLException, ClassNotFoundException {
         if(GatewayAssociacao.buscarAssociacao(matricula).next() == false){
             throw new DadoNaoExisteException();
         }
-        else if(numero_oficio.isEmpty() | data.isEmpty() | nome.isEmpty() | sigla.isEmpty() | endereco.isEmpty() | telefone.isEmpty() | comprovante_pagamento.isEmpty() | matricula.isEmpty()){
+        else if(numero_oficio.isEmpty() | data.isEmpty() | nome.isEmpty() | sigla.isEmpty() | senha.isEmpty() | matricula.isEmpty()){
             throw new ExceptionDadosIncompletos();
         }else {
-            GatewayAssociacao.update(numero_oficio, data, nome, sigla, endereco, telefone, comprovante_pagamento, matricula);
+            GatewayAssociacao.update(numero_oficio, data, nome, sigla, senha, matricula);
+            GatewayUsuario.updateSenha(matricula,senha);
         }
     }
 
@@ -112,9 +113,7 @@ public class AssociacaoMT extends HttpServlet {
                             request.getParameter("data_oficio"),
                             request.getParameter("nome"),
                             request.getParameter("sigla"),
-                            request.getParameter("endereco"),
-                            request.getParameter("telefone"),
-                            request.getParameter("comprovante_pagamento"),
+                            request.getParameter("senha"),
                             request.getParameter("matricula"));
                 } catch (ExceptionDadosIncompletos exceptionDadosIncompletos) {
                     request.getRequestDispatcher("/ExcecaoDadosIncompletos.jsp").forward(request, response);

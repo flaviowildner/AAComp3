@@ -55,7 +55,7 @@ public class AssociacaoTesteFuncional {
     public void testeAlterarAssociacaoDados() throws ClassNotFoundException, SQLException {
         boolean sucesso = false;
         try {
-            AssociacaoMT.alterarAssociacaoDados("testeAssociacaoAlterar","testeAssociacaoAlterar", "testeAssociacaoAlterar", "testeAssociacaoAlterar", "testeAssociacaoAlterar", "testeAssociacaoAlterar", "testeAssociacaoAlterar","teste");
+            AssociacaoMT.alterarAssociacaoDados("testeAssociacaoAlterar","testeAssociacaoAlterar", "testeAssociacaoAlterar", "testeAssociacaoAlterar", "testeAssociacaoAlterar", "teste");
         } catch (ExceptionDadosIncompletos exceptionDadosIncompletos) {
             sucesso = false;
         }catch (DadoNaoExisteException DadoNaoExisteException){

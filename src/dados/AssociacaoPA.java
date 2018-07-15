@@ -4,9 +4,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class AssociacaoPA extends Banco{
-    public void update(String numero_oficio, String data_oficio, String nome, String sigla, String endereco, String telefone, String comprovante_pagamento, String matricula) throws SQLException, ClassNotFoundException {
-        super.execute("UPDATE associacao SET numero_oficio = '" + numero_oficio + "', data_oficio = '" + data_oficio + "', nome = '" + nome + "', sigla = '" + sigla + "', endereco = '" +
-                endereco + "', telefone = '" + telefone + "', comprovante_pagamento = '" + comprovante_pagamento + "' WHERE matricula = '" + matricula + "';");
+    public void update(String numero_oficio, String data_oficio, String nome, String sigla, String senha,  String matricula) throws SQLException, ClassNotFoundException {
+        super.execute("UPDATE associacao SET numero_oficio = '" + numero_oficio + "', data_oficio = '" + data_oficio + "', nome = '" + nome + "', sigla = '" + sigla + "', senha = '" +
+                senha + "' WHERE matricula = '" + matricula + "';");
     }
 
     public void inserir(String numero_oficio, String data_oficio, String nome, String sigla, String endereco, String telefone, String comprovante_pagamento, String matricula, String senha) throws SQLException, ClassNotFoundException {
@@ -26,7 +26,4 @@ public class AssociacaoPA extends Banco{
         return super.executeReturn("SELECT * FROM associacao WHERE matricula = '" + matricula + "';");
     }
 
-    public ResultSet buscarAssociacaoDados(String matricula) throws SQLException, ClassNotFoundException{
-        return super.executeReturn("SELECT numero_oficio, data_oficio, nome, sigla, endereco, telefone, comprovante_pagamento, matricula FROM associacao WHERE matricula = '" + matricula + "';");
-    }
 }

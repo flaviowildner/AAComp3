@@ -27,10 +27,10 @@
         <% if(meta.getColumnName(i).equals("MATRICULA")){%>
         <%=meta.getColumnName(i)%><br>
         <input type="input" name="<%=meta.getColumnName(i).toLowerCase()%>" value="<%=value.toString()%>" disabled="true"><br>
-        <input type="hidden" name="<%=meta.getColumnName(i).toLowerCase()%>" value="<%=value.toString()%>"> <br>
+        <input type="hidden" name="<%=meta.getColumnName(i).toLowerCase()%>" value="<%=value.toString()%>">
         <%
                     }
-                    else{ %>
+                    else if(meta.getColumnName(i).equals("NOME") | meta.getColumnName(i).equals("DATA_OFICIO") | meta.getColumnName(i).equals("NUMERO_OFICIO") | meta.getColumnName(i).equals("SIGLA") | meta.getColumnName(i).equals("SENHA") ){ %>
         <%=meta.getColumnName(i)%><br>
         <input type="input" name="<%=meta.getColumnName(i).toLowerCase()%>" value="<%=value.toString()%>"><br>
         <%

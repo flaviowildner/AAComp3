@@ -10,6 +10,10 @@ public class UsuarioPA extends Banco {
                 " VALUES('" + matricula + "', '" + senha + "', '" + nivel_acesso + "');");
     }
 
+    public void updateSenha(String matricula, String senha) throws SQLException, ClassNotFoundException {
+        super.execute("UPDATE usuario set senha = '"  + senha + "' WHERE matricula = '" + matricula +"';");
+    }
+
     public ResultSet getDadosUsuario(String matricula, String senha) throws SQLException, ClassNotFoundException {
         return super.executeReturn("SELECT nivel_acesso FROM usuario WHERE matricula = '" + matricula + "' AND senha = '" + senha + "';");
     }
