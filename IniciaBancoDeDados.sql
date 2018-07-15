@@ -57,4 +57,4 @@ ponto INT,
 tempo VARCHAR(255),
 primary key (matricula_atleta, nome_prova),
 foreign key (nome_prova) references prova(nome));
-insert into atletaprova(nome_prova, matricula_atleta, ponto, tempo) values('testeProva', 'teste', '26', '02:00:00');
+insert into atletaprova(nome_prova, matricula_atleta, ponto, tempo) values('testeProva', 'teste', '26', '02:00.00');
