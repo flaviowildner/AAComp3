@@ -14,12 +14,11 @@ import java.sql.SQLException;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AtletaProvaTesteFuncional {
-    private static AtletaProvaPA GatewayAtletaProva= new AtletaProvaPA();
     @Test
     public void testePontuarAtleta() throws SQLException, ClassNotFoundException, TempoInvalidoException {
         boolean sucesso = false;
         try {
-            AtletaProvaMT.pontuarAtleta("testeProva", "teste", "1");
+            AtletaProvaMT.pontuarAtleta("testeProva", "teste", "00:01.01");
         } catch (ExceptionDadosIncompletos exceptionDadosIncompletos) {
             sucesso = false;
         }catch(DadoNaoExisteException DadoNaoExisteException){

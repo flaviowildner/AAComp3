@@ -1,15 +1,14 @@
 package testes.Mocks;
 
 import dados.LocalPA;
-import exceptions.ExceptionDadosIncompletos;
-
+import dominio.LocalMT;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class MockLocal {
+public class MockLocal extends LocalMT {
     private static boolean processCalled;
     static String nomelocal;
     static String logradouro;
@@ -49,6 +48,9 @@ public class MockLocal {
         } else if(nomeLocal.isEmpty() | logradouro.isEmpty() | piscina == null){
             processCalled = false;
         } else{
+            MockLocal.nomelocal = nomeLocal;
+            MockLocal.logradouro = logradouro;
+            MockLocal.piscina = piscina;
             processCalled = true;
         }
     }

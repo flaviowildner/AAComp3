@@ -2,6 +2,8 @@ package testes.Mocks;
 
 import dados.CompeticaoPA;
 import dados.LocalPA;
+import dominio.CompeticaoMT;
+import dominio.LocalMT;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,7 +11,7 @@ import java.sql.SQLException;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class MockCompeticao {
+public class MockCompeticao extends CompeticaoMT {
     private static boolean processCalled;
     static String nome;
     static String data;
@@ -18,7 +20,7 @@ public class MockCompeticao {
     static CompeticaoPA GatewayCompeticao = new CompeticaoPA();
     static LocalPA GatewayLocal = new LocalPA();
 
-    public static ResultSet listarCompeticoes() throws SQLException{
+    public static ResultSet listarCompeticoes() throws SQLException {
         try {
             GatewayCompeticao.buscarCompeticaoDados(nome).next();
             processCalled = true;
@@ -33,8 +35,12 @@ public class MockCompeticao {
             processCalled = false;
         } else if(nome.isEmpty() | data.isEmpty()){
             processCalled = false;
-        }else
+        }else {
+            MockCompeticao.nome = nome;
+            MockCompeticao.data = data;
+            MockCompeticao.nomelocal = "teste";
             processCalled = true;
+        }
     }
 
     public static void updateLocal(String nome, String local) throws SQLException, ClassNotFoundException {
@@ -64,6 +70,11 @@ public class MockCompeticao {
             processCalled = true;
         }
     }
+
+    public static String getNome() {
+        return nome;
+    }
+
     public void validateSuccess(){
         assertTrue(processCalled);
     }

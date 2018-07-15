@@ -13,7 +13,6 @@ import java.sql.SQLException;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AtletaTesteFuncional {
-
     @Test
     public void testeCadastrarAtleta() throws SQLException, MatriculaInvalidaException, ClassNotFoundException {
         MockAssociacao associacaoMock = new MockAssociacao();

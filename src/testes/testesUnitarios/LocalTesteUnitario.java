@@ -1,6 +1,5 @@
 package testes.testesUnitarios;
 
-import exceptions.ExceptionDadosIncompletos;
 import org.junit.jupiter.api.Test;
 import testes.Mocks.MockLocal;
 

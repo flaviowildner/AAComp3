@@ -4,6 +4,7 @@ import dados.AtletaPA;
 import dados.AtletaProvaPA;
 import dados.CompeticaoPA;
 import dados.ProvaPA;
+import dominio.ProvaMT;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,7 +12,7 @@ import java.sql.SQLException;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class MockProva {
+public class MockProva extends ProvaMT {
     private static boolean processCalled;
     static String nome;
     static String categoria;
@@ -38,6 +39,10 @@ public class MockProva {
         } else if(nome.isEmpty() | classe.isEmpty() | categoria.isEmpty()){
             processCalled = false;
         } else{
+            MockProva.nome = nome;
+            MockProva.categoria = categoria;
+            MockProva.classe = classe;
+            MockProva.nome_competicao = nome_competicao;
             processCalled = true;
         }
     }

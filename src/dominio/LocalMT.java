@@ -27,7 +27,7 @@ public class LocalMT extends HttpServlet {
 
     private static LocalPA GatewayLocal= new LocalPA();
 
-    public static ResultSet listarLocais(){
+    public static ResultSet listarLocais() throws SQLException {
         try{
             return GatewayLocal.buscarTodosLocais();
         } catch(SQLException e){

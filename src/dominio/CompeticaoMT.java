@@ -20,7 +20,7 @@ public class CompeticaoMT extends HttpServlet {
     private static CompeticaoPA GatewayCompeticao= new CompeticaoPA();
     private static LocalPA GatewayLocal= new LocalPA();
 
-    public static ResultSet listarCompeticoes(){
+    public static ResultSet listarCompeticoes() throws SQLException {
         try{
             return GatewayCompeticao.buscarTodasCompeticoes();
         } catch(SQLException e){

@@ -12,25 +12,25 @@ import java.sql.SQLException;
 
 public class ProvaTesteUnitario {
     @Test
-    public void testeCadastrarProvaNull() throws ClassNotFoundException, SQLException, JaExisteException {
+    public void testeCadastrarProvaNull() throws ClassNotFoundException, SQLException{
         MockProva testeProva = new MockProva();
         testeProva.cadastrarProva("testeProva","testeProva","", "testeProva");
         testeProva.validateFail();
     }
     @Test
-    public void testeInscreverAtletaProvaMatNull() throws ClassNotFoundException, SQLException, AtletaJaInscritoEmProvaException, ExceptionDadosIncompletos {
+    public void testeInscreverAtletaProvaMatNull() throws ClassNotFoundException, SQLException{
         MockProva testeProva = new MockProva();
         testeProva.inscreverAtletaProva("","testeProva");
         testeProva.validateFail();
     }
     @Test
-    public void testeInscreverAtletaProvaMatInvalida() throws ClassNotFoundException, SQLException, AtletaJaInscritoEmProvaException, ExceptionDadosIncompletos {
+    public void testeInscreverAtletaProvaMatInvalida() throws ClassNotFoundException, SQLException{
         MockProva testeProva = new MockProva();
         testeProva.inscreverAtletaProva("matriculaInvalida","testeProva");
         testeProva.validateFail();
     }
     @Test
-    public void testeInscreverAtletaProvaNull() throws ClassNotFoundException, SQLException, AtletaJaInscritoEmProvaException, MatriculaInvalidaException {
+    public void testeInscreverAtletaProvaNull() throws ClassNotFoundException, SQLException{
         MockProva testeProva = new MockProva();
         testeProva.inscreverAtletaProva("testeProva","");
         testeProva.validateFail();
